@@ -1,0 +1,4 @@
+[0m[[0mdebug[0m] [0mCopy resource mappings: [0m
+[0m[[0mdebug[0m] [0m	(/home/knoldus-pallavi/play2Rough/conf/logback.xml,/home/knoldus-pallavi/play2Rough/target/scala-2.11/classes/logback.xml)[0m
+[0m[[0mdebug[0m] [0m	(/home/knoldus-pallavi/play2Rough/conf/application.conf,/home/knoldus-pallavi/play2Rough/target/scala-2.11/classes/application.conf)[0m
+[0m[[0mdebug[0m] [0m	(/home/knoldus-pallavi/play2Rough/conf/routes,/home/knoldus-pallavi/play2Rough/target/scala-2.11/classes/routes)[0m

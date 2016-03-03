@@ -1,0 +1,2908 @@
+<html>
+      <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title id="title">
+          controllers/DashBoardController.scala.html
+        </title>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.20.1/css/theme.default.min.css" type="text/css"/><script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.20.1/js/jquery.tablesorter.min.js"></script><link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" type="text/css"/><script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script><script type="text/javascript">
+        $(document).ready(function() {$(".tablesorter").tablesorter();});
+      </script>
+        <style>
+          table.codegrid { font-family: monospace; font-size: 12px; width: auto!important; }table.statementlist { width: auto!important; font-size: 13px; } table.codegrid td { padding: 0!important; border: 0!important } table td.linenumber { width: 40px!important; } 
+        </style>
+      </head>
+      <body style="font-family: monospace;">
+        <ul class="nav nav-tabs">
+          <li>
+            <a href="#codegrid" data-toggle="tab">Codegrid</a>
+          </li>
+          <li>
+            <a href="#statementlist" data-toggle="tab">Statement List</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="codegrid">
+            <pre style='font-size: 12pt; font-family: courier;'>1 <span style=''>package controllers
+</span>2 <span style=''>
+</span>3 <span style=''>import java.text.SimpleDateFormat
+</span>4 <span style=''>
+</span>5 <span style=''>import com.google.inject.Inject
+</span>6 <span style=''>import models.EmployeeModel
+</span>7 <span style=''>import play.api.data.Form
+</span>8 <span style=''>import play.api.data.Forms._
+</span>9 <span style=''>import play.api.mvc.{Action, Controller}
+</span>10 <span style=''>import play.api.libs.concurrent.Execution.Implicits.defaultContext
+</span>11 <span style=''>import play.api.i18n.Messages.Implicits._
+</span>12 <span style=''>import play.api.Play.current
+</span>13 <span style=''>import java.util.Date
+</span>14 <span style=''>
+</span>15 <span style=''>
+</span>16 <span style=''>import scala.concurrent.Future
+</span>17 <span style=''>
+</span>18 <span style=''>/**
+</span>19 <span style=''>  * Defined a case class for Form mapping with following parameters:
+</span>20 <span style=''>  * @param name: Employee name
+</span>21 <span style=''>  * @param address:Employee address
+</span>22 <span style=''>  * @param dob:Date of Birth
+</span>23 <span style=''>  * @param doj:Date of Joing
+</span>24 <span style=''>  * @param designation: Postion held in the organization
+</span>25 <span style=''>  */
+</span>26 <span style=''>case class AddEmployee(name:String,address:String,dob:Date,doj:Date,designation:String)
+</span>27 <span style=''>
+</span>28 <span style=''>/**
+</span>29 <span style=''>  * Class contains the group of Controllers and Form Mapping for the Employee
+</span>30 <span style=''>  * @param emp: Dependency Injected using Google Guice
+</span>31 <span style=''>  */
+</span>32 <span style=''>class DashBoardController @Inject()(emp: EmployeeModel) extends Controller{
+</span>33 <span style=''>
+</span>34 <span style=''>  /**
+</span>35 <span style=''>    * Form Mapping for a form used for deletion and updation
+</span>36 <span style=''>    */
+</span>37 <span style=''>  val filterForm=</span><span style='background: #AEF1AE'>Form(
+</span>38 <span style=''></span><span style='background: #AEF1AE'>    single(
+</span>39 <span style=''></span><span style='background: #AEF1AE'>      "name"->text
+</span>40 <span style=''></span><span style='background: #AEF1AE'>    )
+</span>41 <span style=''></span><span style='background: #AEF1AE'>  )</span><span style=''>
+</span>42 <span style=''>
+</span>43 <span style=''>  /**
+</span>44 <span style=''>    * Mapping of Employee Data of Case Class AddEmployee to UI
+</span>45 <span style=''>    */
+</span>46 <span style=''>  val addForm=</span><span style='background: #AEF1AE'>Form(
+</span>47 <span style=''></span><span style='background: #AEF1AE'>    mapping (
+</span>48 <span style=''></span><span style='background: #AEF1AE'>      "name"->nonEmptyText,
+</span>49 <span style=''></span><span style='background: #AEF1AE'>      "address"->nonEmptyText,
+</span>50 <span style=''></span><span style='background: #AEF1AE'>      "dob"->date,
+</span>51 <span style=''></span><span style='background: #AEF1AE'>      "doj"->date,
+</span>52 <span style=''></span><span style='background: #AEF1AE'>      "designation"->nonEmptyText
+</span>53 <span style=''></span><span style='background: #AEF1AE'>    )(</span><span style='background: #F0ADAD'>AddEmployee.apply</span><span style='background: #AEF1AE'>)(AddEmployee.unapply)
+</span>54 <span style=''></span><span style='background: #AEF1AE'>  )</span><span style=''>
+</span>55 <span style=''>
+</span>56 <span style=''>  /**
+</span>57 <span style=''>    * Action for displaying the Dashboard populated with the list of Employeed
+</span>58 <span style=''>    * @return
+</span>59 <span style=''>    */
+</span>60 <span style=''>  def getList=</span><span style='background: #AEF1AE'>Action.async{implicit request=>
+</span>61 <span style=''></span><span style='background: #AEF1AE'>    val list=emp.getAllEmployee
+</span>62 <span style=''></span><span style='background: #AEF1AE'>    list.map{values=>Ok(views.html.dashBoard(values.toList,filterForm))}
+</span>63 <span style=''></span><span style='background: #AEF1AE'>
+</span>64 <span style=''></span><span style='background: #AEF1AE'>  }</span><span style=''>
+</span>65 <span style=''>
+</span>66 <span style=''>  /**
+</span>67 <span style=''>    * Action for filtering the Employees on basis of their Names and displaying the Result,
+</span>68 <span style=''>    *
+</span>69 <span style=''>    * @return on Success redirected to DashBoard else Dashboard
+</span>70 <span style=''>    */
+</span>71 <span style=''>
+</span>72 <span style=''>  def getByName=</span><span style='background: #AEF1AE'>Action.async{implicit request=>
+</span>73 <span style=''></span><span style='background: #AEF1AE'>    filterForm.bindFromRequest.fold(
+</span>74 <span style=''></span><span style='background: #AEF1AE'>      fomWithErrors=>{
+</span>75 <span style=''></span><span style='background: #AEF1AE'>        Future {
+</span>76 <span style=''></span><span style='background: #AEF1AE'>          Redirect(routes.DashBoardController.getList).flashing("error"->"Unsuccessfull !")
+</span>77 <span style=''></span><span style='background: #AEF1AE'>        }
+</span>78 <span style=''></span><span style='background: #AEF1AE'>      },
+</span>79 <span style=''></span><span style='background: #AEF1AE'>      formData=>{
+</span>80 <span style=''></span><span style='background: #AEF1AE'>          val nameOfEmp=</span><span style='background: #F0ADAD'>emp.getEmployeeName(formData)</span><span style='background: #AEF1AE'>
+</span>81 <span style=''></span><span style='background: #AEF1AE'>          </span><span style='background: #F0ADAD'>nameOfEmp.map{values=>Ok(views.html.dashBoard(values.toList,filterForm))}</span><span style='background: #AEF1AE'>
+</span>82 <span style=''></span><span style='background: #AEF1AE'>      }
+</span>83 <span style=''></span><span style='background: #AEF1AE'>    )
+</span>84 <span style=''></span><span style='background: #AEF1AE'>
+</span>85 <span style=''></span><span style='background: #AEF1AE'>}</span><span style=''>
+</span>86 <span style=''>  /**
+</span>87 <span style=''>    * Action to Render an empty Employee form
+</span>88 <span style=''>   */
+</span>89 <span style=''>   def renderEmployeeForm=</span><span style='background: #AEF1AE'>Action{implicit request=>
+</span>90 <span style=''></span><span style='background: #AEF1AE'>     Ok(views.html.addEmployeeView(addForm))
+</span>91 <span style=''></span><span style='background: #AEF1AE'>   }</span><span style=''>
+</span>92 <span style=''>
+</span>93 <span style=''>  /**
+</span>94 <span style=''>    * Action to Add Employee
+</span>95 <span style=''>    * @return On success redirected to dashboard, else redirected back on Add Employee
+</span>96 <span style=''>    */
+</span>97 <span style=''>
+</span>98 <span style=''>   def addEmp=</span><span style='background: #AEF1AE'>Action.async{implicit request=>
+</span>99 <span style=''></span><span style='background: #AEF1AE'>     addForm.bindFromRequest.fold(
+</span>100 <span style=''></span><span style='background: #AEF1AE'>       formWithErrors=>{
+</span>101 <span style=''></span><span style='background: #AEF1AE'>         Future{
+</span>102 <span style=''></span><span style='background: #AEF1AE'>           Redirect(routes.DashBoardController.renderEmployeeForm)
+</span>103 <span style=''></span><span style='background: #AEF1AE'>         }
+</span>104 <span style=''></span><span style='background: #AEF1AE'>       },
+</span>105 <span style=''></span><span style='background: #AEF1AE'>       formData=>{
+</span>106 <span style=''></span><span style='background: #AEF1AE'>         val nameOfEmp=</span><span style='background: #F0ADAD'>emp.addEmployee(formData.name,formData.address,formData.dob,formData.doj,formData.designation)</span><span style='background: #AEF1AE'>
+</span>107 <span style=''></span><span style='background: #AEF1AE'>         </span><span style='background: #F0ADAD'>nameOfEmp.map{values=>Redirect(routes.DashBoardController.getList)}</span><span style='background: #AEF1AE'>
+</span>108 <span style=''></span><span style='background: #AEF1AE'>       }
+</span>109 <span style=''></span><span style='background: #AEF1AE'>     )
+</span>110 <span style=''></span><span style='background: #AEF1AE'>
+</span>111 <span style=''></span><span style='background: #AEF1AE'>   }</span><span style=''>
+</span>112 <span style=''>  /**
+</span>113 <span style=''>    * Action to Update Employee
+</span>114 <span style=''>    * @return On success redirected to dashboard, else redirected back on Dashboard
+</span>115 <span style=''>    */
+</span>116 <span style=''>
+</span>117 <span style=''>
+</span>118 <span style=''>  def updateEmp=</span><span style='background: #AEF1AE'>Action{implicit request=>
+</span>119 <span style=''></span><span style='background: #AEF1AE'>    addForm.bindFromRequest.fold(
+</span>120 <span style=''></span><span style='background: #AEF1AE'>      Errors=>{
+</span>121 <span style=''></span><span style='background: #AEF1AE'>        Redirect(routes.DashBoardController.getList)
+</span>122 <span style=''></span><span style='background: #AEF1AE'>      },
+</span>123 <span style=''></span><span style='background: #AEF1AE'>      userData=>{
+</span>124 <span style=''></span><span style='background: #AEF1AE'>        </span><span style='background: #F0ADAD'>emp.updateEmployee(userData.name,userData.address,userData.dob,userData.doj,userData.designation)</span><span style='background: #AEF1AE'>
+</span>125 <span style=''></span><span style='background: #AEF1AE'>        </span><span style='background: #F0ADAD'>Redirect(routes.DashBoardController.getList)</span><span style='background: #AEF1AE'>
+</span>126 <span style=''></span><span style='background: #AEF1AE'>       // Ok(views.html.dashBoard(userData,addForm))
+</span>127 <span style=''></span><span style='background: #AEF1AE'>      }
+</span>128 <span style=''></span><span style='background: #AEF1AE'>    )
+</span>129 <span style=''></span><span style='background: #AEF1AE'>
+</span>130 <span style=''></span><span style='background: #AEF1AE'>  }</span><span style=''>
+</span>131 <span style=''>  /**
+</span>132 <span style=''>    * Action to Populate Edit Employee Form with pre-filled-Data
+</span>133 <span style=''>    * @return
+</span>134 <span style=''>    */
+</span>135 <span style=''>
+</span>136 <span style=''>  def editEmployee(name:String)=</span><span style='background: #AEF1AE'>Action.async{
+</span>137 <span style=''></span><span style='background: #AEF1AE'>    val nameOfEmp=emp.getEmployeeName(name)
+</span>138 <span style=''></span><span style='background: #AEF1AE'>    nameOfEmp.map{values=>
+</span>139 <span style=''></span><span style='background: #AEF1AE'>      val empp = values.head
+</span>140 <span style=''></span><span style='background: #AEF1AE'>      val v = AddEmployee(empp.name,empp.address, empp.dob, empp.doj, empp.designation)
+</span>141 <span style=''></span><span style='background: #AEF1AE'>      Ok(views.html.editEmployeeView(addForm.fill(v)))
+</span>142 <span style=''></span><span style='background: #AEF1AE'>    }
+</span>143 <span style=''></span><span style='background: #AEF1AE'>
+</span>144 <span style=''></span><span style='background: #AEF1AE'>  }</span><span style=''>
+</span>145 <span style=''>  /**
+</span>146 <span style=''>    * Action to Delete Employee
+</span>147 <span style=''>    * @return On success redirected to dashboard, else redirected back on Dashboard
+</span>148 <span style=''>    */
+</span>149 <span style=''>
+</span>150 <span style=''>  def deleteEmployee=</span><span style='background: #AEF1AE'>Action{implicit request=>
+</span>151 <span style=''></span><span style='background: #AEF1AE'>    val st=request.session.get("name").get
+</span>152 <span style=''></span><span style='background: #AEF1AE'>    </span><span style='background: #F0ADAD'>emp.deleteEmployee(st)</span><span style='background: #AEF1AE'>
+</span>153 <span style=''></span><span style='background: #AEF1AE'>    </span><span style='background: #F0ADAD'>Redirect(routes.DashBoardController.getList)</span><span style='background: #AEF1AE'>
+</span>154 <span style=''></span><span style='background: #AEF1AE'>  }</span><span style=''>
+</span>155 <span style=''>
+</span>156 <span style=''>}
+</span></pre>
+          </div>
+          <div class="tab-pane" id="statementlist">
+            <table cellspacing="0" cellpadding="0" class="table statementlist">
+      <tr>
+        <th>Line</th>
+        <th>Stmt Id</th>
+        <th>Pos</th>
+        <th>Tree</th>
+        <th>Symbol</th>
+        <th>Code</th>
+      </tr><tr>
+        <td>
+          37
+        </td>
+        <td>
+          12
+        </td>
+        <td>
+          1065
+          -
+          1111
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.api.data.Form.apply
+        </td>
+        <td style="background: #AEF1AE">
+          play.api.data.Form.apply[String](play.api.data.Forms.single[String](scala.this.Predef.ArrowAssoc[String](&quot;name&quot;).-&gt;[play.api.data.Mapping[String]](play.api.data.Forms.text)))
+        </td>
+      </tr><tr>
+        <td>
+          38
+        </td>
+        <td>
+          11
+        </td>
+        <td>
+          1075
+          -
+          1107
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.api.data.Forms.single
+        </td>
+        <td style="background: #AEF1AE">
+          play.api.data.Forms.single[String](scala.this.Predef.ArrowAssoc[String](&quot;name&quot;).-&gt;[play.api.data.Mapping[String]](play.api.data.Forms.text))
+        </td>
+      </tr><tr>
+        <td>
+          39
+        </td>
+        <td>
+          8
+        </td>
+        <td>
+          1089
+          -
+          1095
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;name&quot;
+        </td>
+      </tr><tr>
+        <td>
+          39
+        </td>
+        <td>
+          10
+        </td>
+        <td>
+          1089
+          -
+          1101
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.this.Predef.ArrowAssoc[String](&quot;name&quot;).-&gt;[play.api.data.Mapping[String]](play.api.data.Forms.text)
+        </td>
+      </tr><tr>
+        <td>
+          39
+        </td>
+        <td>
+          9
+        </td>
+        <td>
+          1097
+          -
+          1101
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          play.api.data.Forms.text
+        </td>
+        <td style="background: #AEF1AE">
+          play.api.data.Forms.text
+        </td>
+      </tr><tr>
+        <td>
+          46
+        </td>
+        <td>
+          31
+        </td>
+        <td>
+          1203
+          -
+          1403
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.api.data.Form.apply
+        </td>
+        <td style="background: #AEF1AE">
+          play.api.data.Form.apply[controllers.AddEmployee](play.api.data.Forms.mapping[controllers.AddEmployee, String, String, java.util.Date, java.util.Date, String](scala.this.Predef.ArrowAssoc[String](&quot;name&quot;).-&gt;[play.api.data.Mapping[String]](play.api.data.Forms.nonEmptyText), scala.this.Predef.ArrowAssoc[String](&quot;address&quot;).-&gt;[play.api.data.Mapping[String]](play.api.data.Forms.nonEmptyText), scala.this.Predef.ArrowAssoc[String](&quot;dob&quot;).-&gt;[play.api.data.Mapping[java.util.Date]](play.api.data.Forms.date), scala.this.Predef.ArrowAssoc[String](&quot;doj&quot;).-&gt;[play.api.data.Mapping[java.util.Date]](play.api.data.Forms.date), scala.this.Predef.ArrowAssoc[String](&quot;designation&quot;).-&gt;[play.api.data.Mapping[String]](play.api.data.Forms.nonEmptyText))({
+  ((name: String, address: String, dob: java.util.Date, doj: java.util.Date, designation: String) =&gt; AddEmployee.apply(name, address, dob, doj, designation))
+})({
+  ((x$0: controllers.AddEmployee) =&gt; AddEmployee.unapply(x$0))
+}))
+        </td>
+      </tr><tr>
+        <td>
+          48
+        </td>
+        <td>
+          14
+        </td>
+        <td>
+          1237
+          -
+          1249
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          play.api.data.Forms.nonEmptyText
+        </td>
+        <td style="background: #AEF1AE">
+          play.api.data.Forms.nonEmptyText
+        </td>
+      </tr><tr>
+        <td>
+          48
+        </td>
+        <td>
+          13
+        </td>
+        <td>
+          1229
+          -
+          1235
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;name&quot;
+        </td>
+      </tr><tr>
+        <td>
+          48
+        </td>
+        <td>
+          15
+        </td>
+        <td>
+          1229
+          -
+          1249
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.this.Predef.ArrowAssoc[String](&quot;name&quot;).-&gt;[play.api.data.Mapping[String]](play.api.data.Forms.nonEmptyText)
+        </td>
+      </tr><tr>
+        <td>
+          49
+        </td>
+        <td>
+          17
+        </td>
+        <td>
+          1268
+          -
+          1280
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          play.api.data.Forms.nonEmptyText
+        </td>
+        <td style="background: #AEF1AE">
+          play.api.data.Forms.nonEmptyText
+        </td>
+      </tr><tr>
+        <td>
+          49
+        </td>
+        <td>
+          16
+        </td>
+        <td>
+          1257
+          -
+          1266
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;address&quot;
+        </td>
+      </tr><tr>
+        <td>
+          49
+        </td>
+        <td>
+          18
+        </td>
+        <td>
+          1257
+          -
+          1280
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.this.Predef.ArrowAssoc[String](&quot;address&quot;).-&gt;[play.api.data.Mapping[String]](play.api.data.Forms.nonEmptyText)
+        </td>
+      </tr><tr>
+        <td>
+          50
+        </td>
+        <td>
+          20
+        </td>
+        <td>
+          1295
+          -
+          1299
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          play.api.data.Forms.date
+        </td>
+        <td style="background: #AEF1AE">
+          play.api.data.Forms.date
+        </td>
+      </tr><tr>
+        <td>
+          50
+        </td>
+        <td>
+          19
+        </td>
+        <td>
+          1288
+          -
+          1293
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;dob&quot;
+        </td>
+      </tr><tr>
+        <td>
+          50
+        </td>
+        <td>
+          21
+        </td>
+        <td>
+          1288
+          -
+          1299
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.this.Predef.ArrowAssoc[String](&quot;dob&quot;).-&gt;[play.api.data.Mapping[java.util.Date]](play.api.data.Forms.date)
+        </td>
+      </tr><tr>
+        <td>
+          51
+        </td>
+        <td>
+          23
+        </td>
+        <td>
+          1314
+          -
+          1318
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          play.api.data.Forms.date
+        </td>
+        <td style="background: #AEF1AE">
+          play.api.data.Forms.date
+        </td>
+      </tr><tr>
+        <td>
+          51
+        </td>
+        <td>
+          22
+        </td>
+        <td>
+          1307
+          -
+          1312
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;doj&quot;
+        </td>
+      </tr><tr>
+        <td>
+          51
+        </td>
+        <td>
+          24
+        </td>
+        <td>
+          1307
+          -
+          1318
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.this.Predef.ArrowAssoc[String](&quot;doj&quot;).-&gt;[play.api.data.Mapping[java.util.Date]](play.api.data.Forms.date)
+        </td>
+      </tr><tr>
+        <td>
+          52
+        </td>
+        <td>
+          26
+        </td>
+        <td>
+          1341
+          -
+          1353
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          play.api.data.Forms.nonEmptyText
+        </td>
+        <td style="background: #AEF1AE">
+          play.api.data.Forms.nonEmptyText
+        </td>
+      </tr><tr>
+        <td>
+          52
+        </td>
+        <td>
+          25
+        </td>
+        <td>
+          1326
+          -
+          1339
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;designation&quot;
+        </td>
+      </tr><tr>
+        <td>
+          52
+        </td>
+        <td>
+          27
+        </td>
+        <td>
+          1326
+          -
+          1353
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.this.Predef.ArrowAssoc[String](&quot;designation&quot;).-&gt;[play.api.data.Mapping[String]](play.api.data.Forms.nonEmptyText)
+        </td>
+      </tr><tr>
+        <td>
+          53
+        </td>
+        <td>
+          29
+        </td>
+        <td>
+          1379
+          -
+          1398
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          controllers.AddEmployee.unapply
+        </td>
+        <td style="background: #AEF1AE">
+          AddEmployee.unapply(x$0)
+        </td>
+      </tr><tr>
+        <td>
+          53
+        </td>
+        <td>
+          28
+        </td>
+        <td>
+          1360
+          -
+          1377
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          controllers.AddEmployee.apply
+        </td>
+        <td style="background: #F0ADAD">
+          AddEmployee.apply(name, address, dob, doj, designation)
+        </td>
+      </tr><tr>
+        <td>
+          53
+        </td>
+        <td>
+          30
+        </td>
+        <td>
+          1213
+          -
+          1399
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.api.data.Forms.mapping
+        </td>
+        <td style="background: #AEF1AE">
+          play.api.data.Forms.mapping[controllers.AddEmployee, String, String, java.util.Date, java.util.Date, String](scala.this.Predef.ArrowAssoc[String](&quot;name&quot;).-&gt;[play.api.data.Mapping[String]](play.api.data.Forms.nonEmptyText), scala.this.Predef.ArrowAssoc[String](&quot;address&quot;).-&gt;[play.api.data.Mapping[String]](play.api.data.Forms.nonEmptyText), scala.this.Predef.ArrowAssoc[String](&quot;dob&quot;).-&gt;[play.api.data.Mapping[java.util.Date]](play.api.data.Forms.date), scala.this.Predef.ArrowAssoc[String](&quot;doj&quot;).-&gt;[play.api.data.Mapping[java.util.Date]](play.api.data.Forms.date), scala.this.Predef.ArrowAssoc[String](&quot;designation&quot;).-&gt;[play.api.data.Mapping[String]](play.api.data.Forms.nonEmptyText))({
+  ((name: String, address: String, dob: java.util.Date, doj: java.util.Date, designation: String) =&gt; AddEmployee.apply(name, address, dob, doj, designation))
+})({
+  ((x$0: controllers.AddEmployee) =&gt; AddEmployee.unapply(x$0))
+})
+        </td>
+      </tr><tr>
+        <td>
+          60
+        </td>
+        <td>
+          47
+        </td>
+        <td>
+          1525
+          -
+          1666
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.api.mvc.ActionBuilder.async
+        </td>
+        <td style="background: #AEF1AE">
+          play.api.mvc.Action.async(((implicit request: play.api.mvc.Request[play.api.mvc.AnyContent]) =&gt; {
+  val list: scala.concurrent.Future[scala.collection.mutable.ListBuffer[models.Employee]] = DashBoardController.this.emp.getAllEmployee;
+  list.map[play.api.mvc.Result](((values: scala.collection.mutable.ListBuffer[models.Employee]) =&gt; DashBoardController.this.Ok.apply[play.twirl.api.HtmlFormat.Appendable](views.html.dashBoard.apply(values.toList, DashBoardController.this.filterForm)(play.api.i18n.Messages.Implicits.applicationMessages(DashBoardController.this.request2lang(request), play.api.Play.current), DashBoardController.this.request2flash(request)))(http.this.Writeable.writeableOf_Content[play.twirl.api.HtmlFormat.Appendable](mvc.this.Codec.utf_8, http.this.ContentTypeOf.contentTypeOf_Html(mvc.this.Codec.utf_8)))))(play.api.libs.concurrent.Execution.Implicits.defaultContext)
+}))
+        </td>
+      </tr><tr>
+        <td>
+          61
+        </td>
+        <td>
+          32
+        </td>
+        <td>
+          1570
+          -
+          1588
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          models.EmployeeModel.getAllEmployee
+        </td>
+        <td style="background: #AEF1AE">
+          DashBoardController.this.emp.getAllEmployee
+        </td>
+      </tr><tr>
+        <td>
+          62
+        </td>
+        <td>
+          41
+        </td>
+        <td>
+          1612
+          -
+          1612
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          play.api.mvc.Codec.utf_8
+        </td>
+        <td style="background: #AEF1AE">
+          mvc.this.Codec.utf_8
+        </td>
+      </tr><tr>
+        <td>
+          62
+        </td>
+        <td>
+          35
+        </td>
+        <td>
+          1633
+          -
+          1633
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.api.mvc.Controller.request2lang
+        </td>
+        <td style="background: #AEF1AE">
+          DashBoardController.this.request2lang(request)
+        </td>
+      </tr><tr>
+        <td>
+          62
+        </td>
+        <td>
+          44
+        </td>
+        <td>
+          1610
+          -
+          1660
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.api.mvc.Results.Status.apply
+        </td>
+        <td style="background: #AEF1AE">
+          DashBoardController.this.Ok.apply[play.twirl.api.HtmlFormat.Appendable](views.html.dashBoard.apply(values.toList, DashBoardController.this.filterForm)(play.api.i18n.Messages.Implicits.applicationMessages(DashBoardController.this.request2lang(request), play.api.Play.current), DashBoardController.this.request2flash(request)))(http.this.Writeable.writeableOf_Content[play.twirl.api.HtmlFormat.Appendable](mvc.this.Codec.utf_8, http.this.ContentTypeOf.contentTypeOf_Html(mvc.this.Codec.utf_8)))
+        </td>
+      </tr><tr>
+        <td>
+          62
+        </td>
+        <td>
+          38
+        </td>
+        <td>
+          1633
+          -
+          1633
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.api.mvc.Controller.request2flash
+        </td>
+        <td style="background: #AEF1AE">
+          DashBoardController.this.request2flash(request)
+        </td>
+      </tr><tr>
+        <td>
+          62
+        </td>
+        <td>
+          46
+        </td>
+        <td>
+          1593
+          -
+          1661
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          scala.concurrent.Future.map
+        </td>
+        <td style="background: #AEF1AE">
+          list.map[play.api.mvc.Result](((values: scala.collection.mutable.ListBuffer[models.Employee]) =&gt; DashBoardController.this.Ok.apply[play.twirl.api.HtmlFormat.Appendable](views.html.dashBoard.apply(values.toList, DashBoardController.this.filterForm)(play.api.i18n.Messages.Implicits.applicationMessages(DashBoardController.this.request2lang(request), play.api.Play.current), DashBoardController.this.request2flash(request)))(http.this.Writeable.writeableOf_Content[play.twirl.api.HtmlFormat.Appendable](mvc.this.Codec.utf_8, http.this.ContentTypeOf.contentTypeOf_Html(mvc.this.Codec.utf_8)))))(play.api.libs.concurrent.Execution.Implicits.defaultContext)
+        </td>
+      </tr><tr>
+        <td>
+          62
+        </td>
+        <td>
+          40
+        </td>
+        <td>
+          1612
+          -
+          1612
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          play.api.mvc.Codec.utf_8
+        </td>
+        <td style="background: #AEF1AE">
+          mvc.this.Codec.utf_8
+        </td>
+      </tr><tr>
+        <td>
+          62
+        </td>
+        <td>
+          43
+        </td>
+        <td>
+          1612
+          -
+          1612
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.api.http.LowPriorityWriteables.writeableOf_Content
+        </td>
+        <td style="background: #AEF1AE">
+          http.this.Writeable.writeableOf_Content[play.twirl.api.HtmlFormat.Appendable](mvc.this.Codec.utf_8, http.this.ContentTypeOf.contentTypeOf_Html(mvc.this.Codec.utf_8))
+        </td>
+      </tr><tr>
+        <td>
+          62
+        </td>
+        <td>
+          34
+        </td>
+        <td>
+          1648
+          -
+          1658
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          controllers.DashBoardController.filterForm
+        </td>
+        <td style="background: #AEF1AE">
+          DashBoardController.this.filterForm
+        </td>
+      </tr><tr>
+        <td>
+          62
+        </td>
+        <td>
+          37
+        </td>
+        <td>
+          1633
+          -
+          1633
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.api.i18n.Messages.Implicits.applicationMessages
+        </td>
+        <td style="background: #AEF1AE">
+          play.api.i18n.Messages.Implicits.applicationMessages(DashBoardController.this.request2lang(request), play.api.Play.current)
+        </td>
+      </tr><tr>
+        <td>
+          62
+        </td>
+        <td>
+          45
+        </td>
+        <td>
+          1601
+          -
+          1601
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          play.api.libs.concurrent.Execution.Implicits.defaultContext
+        </td>
+        <td style="background: #AEF1AE">
+          play.api.libs.concurrent.Execution.Implicits.defaultContext
+        </td>
+      </tr><tr>
+        <td>
+          62
+        </td>
+        <td>
+          36
+        </td>
+        <td>
+          1633
+          -
+          1633
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          play.api.Play.current
+        </td>
+        <td style="background: #AEF1AE">
+          play.api.Play.current
+        </td>
+      </tr><tr>
+        <td>
+          62
+        </td>
+        <td>
+          39
+        </td>
+        <td>
+          1613
+          -
+          1659
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          views.html.dashBoard_Scope0.dashBoard.apply
+        </td>
+        <td style="background: #AEF1AE">
+          views.html.dashBoard.apply(values.toList, DashBoardController.this.filterForm)(play.api.i18n.Messages.Implicits.applicationMessages(DashBoardController.this.request2lang(request), play.api.Play.current), DashBoardController.this.request2flash(request))
+        </td>
+      </tr><tr>
+        <td>
+          62
+        </td>
+        <td>
+          42
+        </td>
+        <td>
+          1612
+          -
+          1612
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.api.http.DefaultContentTypeOfs.contentTypeOf_Html
+        </td>
+        <td style="background: #AEF1AE">
+          http.this.ContentTypeOf.contentTypeOf_Html(mvc.this.Codec.utf_8)
+        </td>
+      </tr><tr>
+        <td>
+          62
+        </td>
+        <td>
+          33
+        </td>
+        <td>
+          1634
+          -
+          1647
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.collection.mutable.ListBuffer.toList
+        </td>
+        <td style="background: #AEF1AE">
+          values.toList
+        </td>
+      </tr><tr>
+        <td>
+          72
+        </td>
+        <td>
+          69
+        </td>
+        <td>
+          1860
+          -
+          2252
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.api.mvc.ActionBuilder.async
+        </td>
+        <td style="background: #AEF1AE">
+          play.api.mvc.Action.async(((implicit request: play.api.mvc.Request[play.api.mvc.AnyContent]) =&gt; DashBoardController.this.filterForm.bindFromRequest()(request).fold[scala.concurrent.Future[play.api.mvc.Result]](((fomWithErrors: play.api.data.Form[String]) =&gt; scala.concurrent.Future.apply[play.api.mvc.Result](DashBoardController.this.Redirect(routes.DashBoardController.getList()).flashing(scala.this.Predef.ArrowAssoc[String](&quot;error&quot;).-&gt;[String](&quot;Unsuccessfull !&quot;)))(play.api.libs.concurrent.Execution.Implicits.defaultContext)), ((formData: String) =&gt; {
+  val nameOfEmp: scala.concurrent.Future[scala.collection.mutable.ListBuffer[models.Employee]] = DashBoardController.this.emp.getEmployeeName(formData);
+  nameOfEmp.map[play.api.mvc.Result](((values: scala.collection.mutable.ListBuffer[models.Employee]) =&gt; DashBoardController.this.Ok.apply[play.twirl.api.HtmlFormat.Appendable](views.html.dashBoard.apply(values.toList, DashBoardController.this.filterForm)(play.api.i18n.Messages.Implicits.applicationMessages(DashBoardController.this.request2lang(request), play.api.Play.current), DashBoardController.this.request2flash(request)))(http.this.Writeable.writeableOf_Content[play.twirl.api.HtmlFormat.Appendable](mvc.this.Codec.utf_8, http.this.ContentTypeOf.contentTypeOf_Html(mvc.this.Codec.utf_8)))))(play.api.libs.concurrent.Execution.Implicits.defaultContext)
+}))))
+        </td>
+      </tr><tr>
+        <td>
+          73
+        </td>
+        <td>
+          68
+        </td>
+        <td>
+          1896
+          -
+          2249
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.api.data.Form.fold
+        </td>
+        <td style="background: #AEF1AE">
+          DashBoardController.this.filterForm.bindFromRequest()(request).fold[scala.concurrent.Future[play.api.mvc.Result]](((fomWithErrors: play.api.data.Form[String]) =&gt; scala.concurrent.Future.apply[play.api.mvc.Result](DashBoardController.this.Redirect(routes.DashBoardController.getList()).flashing(scala.this.Predef.ArrowAssoc[String](&quot;error&quot;).-&gt;[String](&quot;Unsuccessfull !&quot;)))(play.api.libs.concurrent.Execution.Implicits.defaultContext)), ((formData: String) =&gt; {
+  val nameOfEmp: scala.concurrent.Future[scala.collection.mutable.ListBuffer[models.Employee]] = DashBoardController.this.emp.getEmployeeName(formData);
+  nameOfEmp.map[play.api.mvc.Result](((values: scala.collection.mutable.ListBuffer[models.Employee]) =&gt; DashBoardController.this.Ok.apply[play.twirl.api.HtmlFormat.Appendable](views.html.dashBoard.apply(values.toList, DashBoardController.this.filterForm)(play.api.i18n.Messages.Implicits.applicationMessages(DashBoardController.this.request2lang(request), play.api.Play.current), DashBoardController.this.request2flash(request)))(http.this.Writeable.writeableOf_Content[play.twirl.api.HtmlFormat.Appendable](mvc.this.Codec.utf_8, http.this.ContentTypeOf.contentTypeOf_Html(mvc.this.Codec.utf_8)))))(play.api.libs.concurrent.Execution.Implicits.defaultContext)
+}))
+        </td>
+      </tr><tr>
+        <td>
+          75
+        </td>
+        <td>
+          52
+        </td>
+        <td>
+          1960
+          -
+          2070
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          scala.concurrent.Future.apply
+        </td>
+        <td style="background: #AEF1AE">
+          scala.concurrent.Future.apply[play.api.mvc.Result](DashBoardController.this.Redirect(routes.DashBoardController.getList()).flashing(scala.this.Predef.ArrowAssoc[String](&quot;error&quot;).-&gt;[String](&quot;Unsuccessfull !&quot;)))(play.api.libs.concurrent.Execution.Implicits.defaultContext)
+        </td>
+      </tr><tr>
+        <td>
+          75
+        </td>
+        <td>
+          51
+        </td>
+        <td>
+          1967
+          -
+          1967
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          play.api.libs.concurrent.Execution.Implicits.defaultContext
+        </td>
+        <td style="background: #AEF1AE">
+          play.api.libs.concurrent.Execution.Implicits.defaultContext
+        </td>
+      </tr><tr>
+        <td>
+          76
+        </td>
+        <td>
+          50
+        </td>
+        <td>
+          1979
+          -
+          2060
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.api.mvc.Result.flashing
+        </td>
+        <td style="background: #AEF1AE">
+          DashBoardController.this.Redirect(routes.DashBoardController.getList()).flashing(scala.this.Predef.ArrowAssoc[String](&quot;error&quot;).-&gt;[String](&quot;Unsuccessfull !&quot;))
+        </td>
+      </tr><tr>
+        <td>
+          76
+        </td>
+        <td>
+          49
+        </td>
+        <td>
+          2033
+          -
+          2059
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.this.Predef.ArrowAssoc[String](&quot;error&quot;).-&gt;[String](&quot;Unsuccessfull !&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          76
+        </td>
+        <td>
+          48
+        </td>
+        <td>
+          1988
+          -
+          2022
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          controllers.ReverseDashBoardController.getList
+        </td>
+        <td style="background: #AEF1AE">
+          routes.DashBoardController.getList()
+        </td>
+      </tr><tr>
+        <td>
+          80
+        </td>
+        <td>
+          53
+        </td>
+        <td>
+          2122
+          -
+          2151
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          models.EmployeeModel.getEmployeeName
+        </td>
+        <td style="background: #F0ADAD">
+          DashBoardController.this.emp.getEmployeeName(formData)
+        </td>
+      </tr><tr>
+        <td>
+          81
+        </td>
+        <td>
+          59
+        </td>
+        <td>
+          2207
+          -
+          2207
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.api.mvc.Controller.request2flash
+        </td>
+        <td style="background: #F0ADAD">
+          DashBoardController.this.request2flash(request)
+        </td>
+      </tr><tr>
+        <td>
+          81
+        </td>
+        <td>
+          62
+        </td>
+        <td>
+          2186
+          -
+          2186
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          play.api.mvc.Codec.utf_8
+        </td>
+        <td style="background: #F0ADAD">
+          mvc.this.Codec.utf_8
+        </td>
+      </tr><tr>
+        <td>
+          81
+        </td>
+        <td>
+          56
+        </td>
+        <td>
+          2207
+          -
+          2207
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.api.mvc.Controller.request2lang
+        </td>
+        <td style="background: #F0ADAD">
+          DashBoardController.this.request2lang(request)
+        </td>
+      </tr><tr>
+        <td>
+          81
+        </td>
+        <td>
+          65
+        </td>
+        <td>
+          2184
+          -
+          2234
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.api.mvc.Results.Status.apply
+        </td>
+        <td style="background: #F0ADAD">
+          DashBoardController.this.Ok.apply[play.twirl.api.HtmlFormat.Appendable](views.html.dashBoard.apply(values.toList, DashBoardController.this.filterForm)(play.api.i18n.Messages.Implicits.applicationMessages(DashBoardController.this.request2lang(request), play.api.Play.current), DashBoardController.this.request2flash(request)))(http.this.Writeable.writeableOf_Content[play.twirl.api.HtmlFormat.Appendable](mvc.this.Codec.utf_8, http.this.ContentTypeOf.contentTypeOf_Html(mvc.this.Codec.utf_8)))
+        </td>
+      </tr><tr>
+        <td>
+          81
+        </td>
+        <td>
+          55
+        </td>
+        <td>
+          2222
+          -
+          2232
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          controllers.DashBoardController.filterForm
+        </td>
+        <td style="background: #F0ADAD">
+          DashBoardController.this.filterForm
+        </td>
+      </tr><tr>
+        <td>
+          81
+        </td>
+        <td>
+          64
+        </td>
+        <td>
+          2186
+          -
+          2186
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.api.http.LowPriorityWriteables.writeableOf_Content
+        </td>
+        <td style="background: #F0ADAD">
+          http.this.Writeable.writeableOf_Content[play.twirl.api.HtmlFormat.Appendable](mvc.this.Codec.utf_8, http.this.ContentTypeOf.contentTypeOf_Html(mvc.this.Codec.utf_8))
+        </td>
+      </tr><tr>
+        <td>
+          81
+        </td>
+        <td>
+          58
+        </td>
+        <td>
+          2207
+          -
+          2207
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.api.i18n.Messages.Implicits.applicationMessages
+        </td>
+        <td style="background: #F0ADAD">
+          play.api.i18n.Messages.Implicits.applicationMessages(DashBoardController.this.request2lang(request), play.api.Play.current)
+        </td>
+      </tr><tr>
+        <td>
+          81
+        </td>
+        <td>
+          67
+        </td>
+        <td>
+          2162
+          -
+          2235
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          scala.concurrent.Future.map
+        </td>
+        <td style="background: #F0ADAD">
+          nameOfEmp.map[play.api.mvc.Result](((values: scala.collection.mutable.ListBuffer[models.Employee]) =&gt; DashBoardController.this.Ok.apply[play.twirl.api.HtmlFormat.Appendable](views.html.dashBoard.apply(values.toList, DashBoardController.this.filterForm)(play.api.i18n.Messages.Implicits.applicationMessages(DashBoardController.this.request2lang(request), play.api.Play.current), DashBoardController.this.request2flash(request)))(http.this.Writeable.writeableOf_Content[play.twirl.api.HtmlFormat.Appendable](mvc.this.Codec.utf_8, http.this.ContentTypeOf.contentTypeOf_Html(mvc.this.Codec.utf_8)))))(play.api.libs.concurrent.Execution.Implicits.defaultContext)
+        </td>
+      </tr><tr>
+        <td>
+          81
+        </td>
+        <td>
+          61
+        </td>
+        <td>
+          2186
+          -
+          2186
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          play.api.mvc.Codec.utf_8
+        </td>
+        <td style="background: #F0ADAD">
+          mvc.this.Codec.utf_8
+        </td>
+      </tr><tr>
+        <td>
+          81
+        </td>
+        <td>
+          60
+        </td>
+        <td>
+          2187
+          -
+          2233
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          views.html.dashBoard_Scope0.dashBoard.apply
+        </td>
+        <td style="background: #F0ADAD">
+          views.html.dashBoard.apply(values.toList, DashBoardController.this.filterForm)(play.api.i18n.Messages.Implicits.applicationMessages(DashBoardController.this.request2lang(request), play.api.Play.current), DashBoardController.this.request2flash(request))
+        </td>
+      </tr><tr>
+        <td>
+          81
+        </td>
+        <td>
+          63
+        </td>
+        <td>
+          2186
+          -
+          2186
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.api.http.DefaultContentTypeOfs.contentTypeOf_Html
+        </td>
+        <td style="background: #F0ADAD">
+          http.this.ContentTypeOf.contentTypeOf_Html(mvc.this.Codec.utf_8)
+        </td>
+      </tr><tr>
+        <td>
+          81
+        </td>
+        <td>
+          54
+        </td>
+        <td>
+          2208
+          -
+          2221
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.collection.mutable.ListBuffer.toList
+        </td>
+        <td style="background: #F0ADAD">
+          values.toList
+        </td>
+      </tr><tr>
+        <td>
+          81
+        </td>
+        <td>
+          57
+        </td>
+        <td>
+          2207
+          -
+          2207
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          play.api.Play.current
+        </td>
+        <td style="background: #F0ADAD">
+          play.api.Play.current
+        </td>
+      </tr><tr>
+        <td>
+          81
+        </td>
+        <td>
+          66
+        </td>
+        <td>
+          2175
+          -
+          2175
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          play.api.libs.concurrent.Execution.Implicits.defaultContext
+        </td>
+        <td style="background: #F0ADAD">
+          play.api.libs.concurrent.Execution.Implicits.defaultContext
+        </td>
+      </tr><tr>
+        <td>
+          89
+        </td>
+        <td>
+          80
+        </td>
+        <td>
+          2337
+          -
+          2412
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.api.mvc.ActionBuilder.apply
+        </td>
+        <td style="background: #AEF1AE">
+          play.api.mvc.Action.apply(((implicit request: play.api.mvc.Request[play.api.mvc.AnyContent]) =&gt; DashBoardController.this.Ok.apply[play.twirl.api.HtmlFormat.Appendable](views.html.addEmployeeView.apply(DashBoardController.this.addForm)(play.api.i18n.Messages.Implicits.applicationMessages(DashBoardController.this.request2lang(request), play.api.Play.current)))(http.this.Writeable.writeableOf_Content[play.twirl.api.HtmlFormat.Appendable](mvc.this.Codec.utf_8, http.this.ContentTypeOf.contentTypeOf_Html(mvc.this.Codec.utf_8)))))
+        </td>
+      </tr><tr>
+        <td>
+          90
+        </td>
+        <td>
+          77
+        </td>
+        <td>
+          2370
+          -
+          2370
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.api.http.DefaultContentTypeOfs.contentTypeOf_Html
+        </td>
+        <td style="background: #AEF1AE">
+          http.this.ContentTypeOf.contentTypeOf_Html(mvc.this.Codec.utf_8)
+        </td>
+      </tr><tr>
+        <td>
+          90
+        </td>
+        <td>
+          71
+        </td>
+        <td>
+          2397
+          -
+          2397
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.api.mvc.Controller.request2lang
+        </td>
+        <td style="background: #AEF1AE">
+          DashBoardController.this.request2lang(request)
+        </td>
+      </tr><tr>
+        <td>
+          90
+        </td>
+        <td>
+          74
+        </td>
+        <td>
+          2371
+          -
+          2406
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          views.html.addEmployeeView_Scope0.addEmployeeView_Scope1.addEmployeeView.apply
+        </td>
+        <td style="background: #AEF1AE">
+          views.html.addEmployeeView.apply(DashBoardController.this.addForm)(play.api.i18n.Messages.Implicits.applicationMessages(DashBoardController.this.request2lang(request), play.api.Play.current))
+        </td>
+      </tr><tr>
+        <td>
+          90
+        </td>
+        <td>
+          73
+        </td>
+        <td>
+          2397
+          -
+          2397
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.api.i18n.Messages.Implicits.applicationMessages
+        </td>
+        <td style="background: #AEF1AE">
+          play.api.i18n.Messages.Implicits.applicationMessages(DashBoardController.this.request2lang(request), play.api.Play.current)
+        </td>
+      </tr><tr>
+        <td>
+          90
+        </td>
+        <td>
+          76
+        </td>
+        <td>
+          2370
+          -
+          2370
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          play.api.mvc.Codec.utf_8
+        </td>
+        <td style="background: #AEF1AE">
+          mvc.this.Codec.utf_8
+        </td>
+      </tr><tr>
+        <td>
+          90
+        </td>
+        <td>
+          79
+        </td>
+        <td>
+          2368
+          -
+          2407
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.api.mvc.Results.Status.apply
+        </td>
+        <td style="background: #AEF1AE">
+          DashBoardController.this.Ok.apply[play.twirl.api.HtmlFormat.Appendable](views.html.addEmployeeView.apply(DashBoardController.this.addForm)(play.api.i18n.Messages.Implicits.applicationMessages(DashBoardController.this.request2lang(request), play.api.Play.current)))(http.this.Writeable.writeableOf_Content[play.twirl.api.HtmlFormat.Appendable](mvc.this.Codec.utf_8, http.this.ContentTypeOf.contentTypeOf_Html(mvc.this.Codec.utf_8)))
+        </td>
+      </tr><tr>
+        <td>
+          90
+        </td>
+        <td>
+          70
+        </td>
+        <td>
+          2398
+          -
+          2405
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          controllers.DashBoardController.addForm
+        </td>
+        <td style="background: #AEF1AE">
+          DashBoardController.this.addForm
+        </td>
+      </tr><tr>
+        <td>
+          90
+        </td>
+        <td>
+          78
+        </td>
+        <td>
+          2370
+          -
+          2370
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.api.http.LowPriorityWriteables.writeableOf_Content
+        </td>
+        <td style="background: #AEF1AE">
+          http.this.Writeable.writeableOf_Content[play.twirl.api.HtmlFormat.Appendable](mvc.this.Codec.utf_8, http.this.ContentTypeOf.contentTypeOf_Html(mvc.this.Codec.utf_8))
+        </td>
+      </tr><tr>
+        <td>
+          90
+        </td>
+        <td>
+          72
+        </td>
+        <td>
+          2397
+          -
+          2397
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          play.api.Play.current
+        </td>
+        <td style="background: #AEF1AE">
+          play.api.Play.current
+        </td>
+      </tr><tr>
+        <td>
+          90
+        </td>
+        <td>
+          75
+        </td>
+        <td>
+          2370
+          -
+          2370
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          play.api.mvc.Codec.utf_8
+        </td>
+        <td style="background: #AEF1AE">
+          mvc.this.Codec.utf_8
+        </td>
+      </tr><tr>
+        <td>
+          98
+        </td>
+        <td>
+          96
+        </td>
+        <td>
+          2558
+          -
+          2990
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.api.mvc.ActionBuilder.async
+        </td>
+        <td style="background: #AEF1AE">
+          play.api.mvc.Action.async(((implicit request: play.api.mvc.Request[play.api.mvc.AnyContent]) =&gt; DashBoardController.this.addForm.bindFromRequest()(request).fold[scala.concurrent.Future[play.api.mvc.Result]](((formWithErrors: play.api.data.Form[controllers.AddEmployee]) =&gt; scala.concurrent.Future.apply[play.api.mvc.Result](DashBoardController.this.Redirect(routes.DashBoardController.renderEmployeeForm()))(play.api.libs.concurrent.Execution.Implicits.defaultContext)), ((formData: controllers.AddEmployee) =&gt; {
+  val nameOfEmp: scala.concurrent.Future[Boolean] = DashBoardController.this.emp.addEmployee(formData.name, formData.address, formData.dob, formData.doj, formData.designation);
+  nameOfEmp.map[play.api.mvc.Result](((values: Boolean) =&gt; DashBoardController.this.Redirect(routes.DashBoardController.getList())))(play.api.libs.concurrent.Execution.Implicits.defaultContext)
+}))))
+        </td>
+      </tr><tr>
+        <td>
+          99
+        </td>
+        <td>
+          95
+        </td>
+        <td>
+          2595
+          -
+          2984
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.api.data.Form.fold
+        </td>
+        <td style="background: #AEF1AE">
+          DashBoardController.this.addForm.bindFromRequest()(request).fold[scala.concurrent.Future[play.api.mvc.Result]](((formWithErrors: play.api.data.Form[controllers.AddEmployee]) =&gt; scala.concurrent.Future.apply[play.api.mvc.Result](DashBoardController.this.Redirect(routes.DashBoardController.renderEmployeeForm()))(play.api.libs.concurrent.Execution.Implicits.defaultContext)), ((formData: controllers.AddEmployee) =&gt; {
+  val nameOfEmp: scala.concurrent.Future[Boolean] = DashBoardController.this.emp.addEmployee(formData.name, formData.address, formData.dob, formData.doj, formData.designation);
+  nameOfEmp.map[play.api.mvc.Result](((values: Boolean) =&gt; DashBoardController.this.Redirect(routes.DashBoardController.getList())))(play.api.libs.concurrent.Execution.Implicits.defaultContext)
+}))
+        </td>
+      </tr><tr>
+        <td>
+          101
+        </td>
+        <td>
+          83
+        </td>
+        <td>
+          2665
+          -
+          2665
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          play.api.libs.concurrent.Execution.Implicits.defaultContext
+        </td>
+        <td style="background: #AEF1AE">
+          play.api.libs.concurrent.Execution.Implicits.defaultContext
+        </td>
+      </tr><tr>
+        <td>
+          101
+        </td>
+        <td>
+          84
+        </td>
+        <td>
+          2659
+          -
+          2744
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          scala.concurrent.Future.apply
+        </td>
+        <td style="background: #AEF1AE">
+          scala.concurrent.Future.apply[play.api.mvc.Result](DashBoardController.this.Redirect(routes.DashBoardController.renderEmployeeForm()))(play.api.libs.concurrent.Execution.Implicits.defaultContext)
+        </td>
+      </tr><tr>
+        <td>
+          102
+        </td>
+        <td>
+          82
+        </td>
+        <td>
+          2678
+          -
+          2733
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.api.mvc.Results.Redirect
+        </td>
+        <td style="background: #AEF1AE">
+          DashBoardController.this.Redirect(routes.DashBoardController.renderEmployeeForm())
+        </td>
+      </tr><tr>
+        <td>
+          102
+        </td>
+        <td>
+          81
+        </td>
+        <td>
+          2687
+          -
+          2732
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          controllers.ReverseDashBoardController.renderEmployeeForm
+        </td>
+        <td style="background: #AEF1AE">
+          routes.DashBoardController.renderEmployeeForm()
+        </td>
+      </tr><tr>
+        <td>
+          106
+        </td>
+        <td>
+          86
+        </td>
+        <td>
+          2827
+          -
+          2843
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          controllers.AddEmployee.address
+        </td>
+        <td style="background: #F0ADAD">
+          formData.address
+        </td>
+      </tr><tr>
+        <td>
+          106
+        </td>
+        <td>
+          89
+        </td>
+        <td>
+          2870
+          -
+          2890
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          controllers.AddEmployee.designation
+        </td>
+        <td style="background: #F0ADAD">
+          formData.designation
+        </td>
+      </tr><tr>
+        <td>
+          106
+        </td>
+        <td>
+          85
+        </td>
+        <td>
+          2813
+          -
+          2826
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          controllers.AddEmployee.name
+        </td>
+        <td style="background: #F0ADAD">
+          formData.name
+        </td>
+      </tr><tr>
+        <td>
+          106
+        </td>
+        <td>
+          88
+        </td>
+        <td>
+          2857
+          -
+          2869
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          controllers.AddEmployee.doj
+        </td>
+        <td style="background: #F0ADAD">
+          formData.doj
+        </td>
+      </tr><tr>
+        <td>
+          106
+        </td>
+        <td>
+          87
+        </td>
+        <td>
+          2844
+          -
+          2856
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          controllers.AddEmployee.dob
+        </td>
+        <td style="background: #F0ADAD">
+          formData.dob
+        </td>
+      </tr><tr>
+        <td>
+          106
+        </td>
+        <td>
+          90
+        </td>
+        <td>
+          2797
+          -
+          2891
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          models.EmployeeModel.addEmployee
+        </td>
+        <td style="background: #F0ADAD">
+          DashBoardController.this.emp.addEmployee(formData.name, formData.address, formData.dob, formData.doj, formData.designation)
+        </td>
+      </tr><tr>
+        <td>
+          107
+        </td>
+        <td>
+          92
+        </td>
+        <td>
+          2923
+          -
+          2967
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.api.mvc.Results.Redirect
+        </td>
+        <td style="background: #F0ADAD">
+          DashBoardController.this.Redirect(routes.DashBoardController.getList())
+        </td>
+      </tr><tr>
+        <td>
+          107
+        </td>
+        <td>
+          91
+        </td>
+        <td>
+          2932
+          -
+          2966
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          controllers.ReverseDashBoardController.getList
+        </td>
+        <td style="background: #F0ADAD">
+          routes.DashBoardController.getList()
+        </td>
+      </tr><tr>
+        <td>
+          107
+        </td>
+        <td>
+          94
+        </td>
+        <td>
+          2901
+          -
+          2968
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          scala.concurrent.Future.map
+        </td>
+        <td style="background: #F0ADAD">
+          nameOfEmp.map[play.api.mvc.Result](((values: Boolean) =&gt; DashBoardController.this.Redirect(routes.DashBoardController.getList())))(play.api.libs.concurrent.Execution.Implicits.defaultContext)
+        </td>
+      </tr><tr>
+        <td>
+          107
+        </td>
+        <td>
+          93
+        </td>
+        <td>
+          2914
+          -
+          2914
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          play.api.libs.concurrent.Execution.Implicits.defaultContext
+        </td>
+        <td style="background: #F0ADAD">
+          play.api.libs.concurrent.Execution.Implicits.defaultContext
+        </td>
+      </tr><tr>
+        <td>
+          118
+        </td>
+        <td>
+          108
+        </td>
+        <td>
+          3138
+          -
+          3524
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.api.mvc.ActionBuilder.apply
+        </td>
+        <td style="background: #AEF1AE">
+          play.api.mvc.Action.apply(((implicit request: play.api.mvc.Request[play.api.mvc.AnyContent]) =&gt; DashBoardController.this.addForm.bindFromRequest()(request).fold[play.api.mvc.Result](((Errors: play.api.data.Form[controllers.AddEmployee]) =&gt; DashBoardController.this.Redirect(routes.DashBoardController.getList())), ((userData: controllers.AddEmployee) =&gt; {
+  DashBoardController.this.emp.updateEmployee(userData.name, userData.address, userData.dob, userData.doj, userData.designation);
+  DashBoardController.this.Redirect(routes.DashBoardController.getList())
+}))))
+        </td>
+      </tr><tr>
+        <td>
+          119
+        </td>
+        <td>
+          107
+        </td>
+        <td>
+          3168
+          -
+          3519
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.api.data.Form.fold
+        </td>
+        <td style="background: #AEF1AE">
+          DashBoardController.this.addForm.bindFromRequest()(request).fold[play.api.mvc.Result](((Errors: play.api.data.Form[controllers.AddEmployee]) =&gt; DashBoardController.this.Redirect(routes.DashBoardController.getList())), ((userData: controllers.AddEmployee) =&gt; {
+  DashBoardController.this.emp.updateEmployee(userData.name, userData.address, userData.dob, userData.doj, userData.designation);
+  DashBoardController.this.Redirect(routes.DashBoardController.getList())
+}))
+        </td>
+      </tr><tr>
+        <td>
+          121
+        </td>
+        <td>
+          98
+        </td>
+        <td>
+          3222
+          -
+          3266
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.api.mvc.Results.Redirect
+        </td>
+        <td style="background: #AEF1AE">
+          DashBoardController.this.Redirect(routes.DashBoardController.getList())
+        </td>
+      </tr><tr>
+        <td>
+          121
+        </td>
+        <td>
+          97
+        </td>
+        <td>
+          3231
+          -
+          3265
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          controllers.ReverseDashBoardController.getList
+        </td>
+        <td style="background: #AEF1AE">
+          routes.DashBoardController.getList()
+        </td>
+      </tr><tr>
+        <td>
+          124
+        </td>
+        <td>
+          101
+        </td>
+        <td>
+          3352
+          -
+          3364
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          controllers.AddEmployee.dob
+        </td>
+        <td style="background: #F0ADAD">
+          userData.dob
+        </td>
+      </tr><tr>
+        <td>
+          124
+        </td>
+        <td>
+          104
+        </td>
+        <td>
+          3302
+          -
+          3399
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          models.EmployeeModel.updateEmployee
+        </td>
+        <td style="background: #F0ADAD">
+          DashBoardController.this.emp.updateEmployee(userData.name, userData.address, userData.dob, userData.doj, userData.designation)
+        </td>
+      </tr><tr>
+        <td>
+          124
+        </td>
+        <td>
+          100
+        </td>
+        <td>
+          3335
+          -
+          3351
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          controllers.AddEmployee.address
+        </td>
+        <td style="background: #F0ADAD">
+          userData.address
+        </td>
+      </tr><tr>
+        <td>
+          124
+        </td>
+        <td>
+          103
+        </td>
+        <td>
+          3378
+          -
+          3398
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          controllers.AddEmployee.designation
+        </td>
+        <td style="background: #F0ADAD">
+          userData.designation
+        </td>
+      </tr><tr>
+        <td>
+          124
+        </td>
+        <td>
+          99
+        </td>
+        <td>
+          3321
+          -
+          3334
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          controllers.AddEmployee.name
+        </td>
+        <td style="background: #F0ADAD">
+          userData.name
+        </td>
+      </tr><tr>
+        <td>
+          124
+        </td>
+        <td>
+          102
+        </td>
+        <td>
+          3365
+          -
+          3377
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          controllers.AddEmployee.doj
+        </td>
+        <td style="background: #F0ADAD">
+          userData.doj
+        </td>
+      </tr><tr>
+        <td>
+          125
+        </td>
+        <td>
+          106
+        </td>
+        <td>
+          3408
+          -
+          3452
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.api.mvc.Results.Redirect
+        </td>
+        <td style="background: #F0ADAD">
+          DashBoardController.this.Redirect(routes.DashBoardController.getList())
+        </td>
+      </tr><tr>
+        <td>
+          125
+        </td>
+        <td>
+          105
+        </td>
+        <td>
+          3417
+          -
+          3451
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          controllers.ReverseDashBoardController.getList
+        </td>
+        <td style="background: #F0ADAD">
+          routes.DashBoardController.getList()
+        </td>
+      </tr><tr>
+        <td>
+          136
+        </td>
+        <td>
+          128
+        </td>
+        <td>
+          3650
+          -
+          3917
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.api.mvc.ActionBuilder.async
+        </td>
+        <td style="background: #AEF1AE">
+          play.api.mvc.Action.async({
+  val nameOfEmp: scala.concurrent.Future[scala.collection.mutable.ListBuffer[models.Employee]] = DashBoardController.this.emp.getEmployeeName(name);
+  nameOfEmp.map[play.api.mvc.Result](((values: scala.collection.mutable.ListBuffer[models.Employee]) =&gt; {
+    val empp: models.Employee = values.head;
+    val v: controllers.AddEmployee = AddEmployee.apply(empp.name, empp.address, empp.dob, empp.doj, empp.designation);
+    DashBoardController.this.Ok.apply[play.twirl.api.HtmlFormat.Appendable](views.html.editEmployeeView.apply(DashBoardController.this.addForm.fill(v))(play.api.i18n.Messages.Implicits.applicationMessages(i18n.this.Lang.defaultLang, play.api.Play.current)))(http.this.Writeable.writeableOf_Content[play.twirl.api.HtmlFormat.Appendable](mvc.this.Codec.utf_8, http.this.ContentTypeOf.contentTypeOf_Html(mvc.this.Codec.utf_8)))
+  }))(play.api.libs.concurrent.Execution.Implicits.defaultContext)
+})
+        </td>
+      </tr><tr>
+        <td>
+          137
+        </td>
+        <td>
+          109
+        </td>
+        <td>
+          3682
+          -
+          3707
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          models.EmployeeModel.getEmployeeName
+        </td>
+        <td style="background: #AEF1AE">
+          DashBoardController.this.emp.getEmployeeName(name)
+        </td>
+      </tr><tr>
+        <td>
+          138
+        </td>
+        <td>
+          127
+        </td>
+        <td>
+          3712
+          -
+          3912
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          scala.concurrent.Future.map
+        </td>
+        <td style="background: #AEF1AE">
+          nameOfEmp.map[play.api.mvc.Result](((values: scala.collection.mutable.ListBuffer[models.Employee]) =&gt; {
+  val empp: models.Employee = values.head;
+  val v: controllers.AddEmployee = AddEmployee.apply(empp.name, empp.address, empp.dob, empp.doj, empp.designation);
+  DashBoardController.this.Ok.apply[play.twirl.api.HtmlFormat.Appendable](views.html.editEmployeeView.apply(DashBoardController.this.addForm.fill(v))(play.api.i18n.Messages.Implicits.applicationMessages(i18n.this.Lang.defaultLang, play.api.Play.current)))(http.this.Writeable.writeableOf_Content[play.twirl.api.HtmlFormat.Appendable](mvc.this.Codec.utf_8, http.this.ContentTypeOf.contentTypeOf_Html(mvc.this.Codec.utf_8)))
+}))(play.api.libs.concurrent.Execution.Implicits.defaultContext)
+        </td>
+      </tr><tr>
+        <td>
+          138
+        </td>
+        <td>
+          126
+        </td>
+        <td>
+          3725
+          -
+          3725
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          play.api.libs.concurrent.Execution.Implicits.defaultContext
+        </td>
+        <td style="background: #AEF1AE">
+          play.api.libs.concurrent.Execution.Implicits.defaultContext
+        </td>
+      </tr><tr>
+        <td>
+          139
+        </td>
+        <td>
+          110
+        </td>
+        <td>
+          3752
+          -
+          3763
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.collection.generic.TraversableForwarder.head
+        </td>
+        <td style="background: #AEF1AE">
+          values.head
+        </td>
+      </tr><tr>
+        <td>
+          140
+        </td>
+        <td>
+          113
+        </td>
+        <td>
+          3814
+          -
+          3822
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          models.Employee.dob
+        </td>
+        <td style="background: #AEF1AE">
+          empp.dob
+        </td>
+      </tr><tr>
+        <td>
+          140
+        </td>
+        <td>
+          116
+        </td>
+        <td>
+          3778
+          -
+          3851
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          controllers.AddEmployee.apply
+        </td>
+        <td style="background: #AEF1AE">
+          AddEmployee.apply(empp.name, empp.address, empp.dob, empp.doj, empp.designation)
+        </td>
+      </tr><tr>
+        <td>
+          140
+        </td>
+        <td>
+          115
+        </td>
+        <td>
+          3834
+          -
+          3850
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          models.Employee.designation
+        </td>
+        <td style="background: #AEF1AE">
+          empp.designation
+        </td>
+      </tr><tr>
+        <td>
+          140
+        </td>
+        <td>
+          112
+        </td>
+        <td>
+          3800
+          -
+          3812
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          models.Employee.address
+        </td>
+        <td style="background: #AEF1AE">
+          empp.address
+        </td>
+      </tr><tr>
+        <td>
+          140
+        </td>
+        <td>
+          114
+        </td>
+        <td>
+          3824
+          -
+          3832
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          models.Employee.doj
+        </td>
+        <td style="background: #AEF1AE">
+          empp.doj
+        </td>
+      </tr><tr>
+        <td>
+          140
+        </td>
+        <td>
+          111
+        </td>
+        <td>
+          3790
+          -
+          3799
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          models.Employee.name
+        </td>
+        <td style="background: #AEF1AE">
+          empp.name
+        </td>
+      </tr><tr>
+        <td>
+          141
+        </td>
+        <td>
+          119
+        </td>
+        <td>
+          3888
+          -
+          3888
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.api.i18n.Messages.Implicits.applicationMessages
+        </td>
+        <td style="background: #AEF1AE">
+          play.api.i18n.Messages.Implicits.applicationMessages(i18n.this.Lang.defaultLang, play.api.Play.current)
+        </td>
+      </tr><tr>
+        <td>
+          141
+        </td>
+        <td>
+          122
+        </td>
+        <td>
+          3860
+          -
+          3860
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          play.api.mvc.Codec.utf_8
+        </td>
+        <td style="background: #AEF1AE">
+          mvc.this.Codec.utf_8
+        </td>
+      </tr><tr>
+        <td>
+          141
+        </td>
+        <td>
+          125
+        </td>
+        <td>
+          3858
+          -
+          3906
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.api.mvc.Results.Status.apply
+        </td>
+        <td style="background: #AEF1AE">
+          DashBoardController.this.Ok.apply[play.twirl.api.HtmlFormat.Appendable](views.html.editEmployeeView.apply(DashBoardController.this.addForm.fill(v))(play.api.i18n.Messages.Implicits.applicationMessages(i18n.this.Lang.defaultLang, play.api.Play.current)))(http.this.Writeable.writeableOf_Content[play.twirl.api.HtmlFormat.Appendable](mvc.this.Codec.utf_8, http.this.ContentTypeOf.contentTypeOf_Html(mvc.this.Codec.utf_8)))
+        </td>
+      </tr><tr>
+        <td>
+          141
+        </td>
+        <td>
+          124
+        </td>
+        <td>
+          3860
+          -
+          3860
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.api.http.LowPriorityWriteables.writeableOf_Content
+        </td>
+        <td style="background: #AEF1AE">
+          http.this.Writeable.writeableOf_Content[play.twirl.api.HtmlFormat.Appendable](mvc.this.Codec.utf_8, http.this.ContentTypeOf.contentTypeOf_Html(mvc.this.Codec.utf_8))
+        </td>
+      </tr><tr>
+        <td>
+          141
+        </td>
+        <td>
+          118
+        </td>
+        <td>
+          3888
+          -
+          3888
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          play.api.Play.current
+        </td>
+        <td style="background: #AEF1AE">
+          play.api.Play.current
+        </td>
+      </tr><tr>
+        <td>
+          141
+        </td>
+        <td>
+          121
+        </td>
+        <td>
+          3860
+          -
+          3860
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          play.api.mvc.Codec.utf_8
+        </td>
+        <td style="background: #AEF1AE">
+          mvc.this.Codec.utf_8
+        </td>
+      </tr><tr>
+        <td>
+          141
+        </td>
+        <td>
+          120
+        </td>
+        <td>
+          3861
+          -
+          3905
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          views.html.editEmployeeView_Scope0.editEmployeeView_Scope1.editEmployeeView.apply
+        </td>
+        <td style="background: #AEF1AE">
+          views.html.editEmployeeView.apply(DashBoardController.this.addForm.fill(v))(play.api.i18n.Messages.Implicits.applicationMessages(i18n.this.Lang.defaultLang, play.api.Play.current))
+        </td>
+      </tr><tr>
+        <td>
+          141
+        </td>
+        <td>
+          123
+        </td>
+        <td>
+          3860
+          -
+          3860
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.api.http.DefaultContentTypeOfs.contentTypeOf_Html
+        </td>
+        <td style="background: #AEF1AE">
+          http.this.ContentTypeOf.contentTypeOf_Html(mvc.this.Codec.utf_8)
+        </td>
+      </tr><tr>
+        <td>
+          141
+        </td>
+        <td>
+          117
+        </td>
+        <td>
+          3889
+          -
+          3904
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.api.data.Form.fill
+        </td>
+        <td style="background: #AEF1AE">
+          DashBoardController.this.addForm.fill(v)
+        </td>
+      </tr><tr>
+        <td>
+          150
+        </td>
+        <td>
+          134
+        </td>
+        <td>
+          4069
+          -
+          4217
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.api.mvc.ActionBuilder.apply
+        </td>
+        <td style="background: #AEF1AE">
+          play.api.mvc.Action.apply(((implicit request: play.api.mvc.Request[play.api.mvc.AnyContent]) =&gt; {
+  val st: String = request.session.get(&quot;name&quot;).get;
+  DashBoardController.this.emp.deleteEmployee(st);
+  DashBoardController.this.Redirect(routes.DashBoardController.getList())
+}))
+        </td>
+      </tr><tr>
+        <td>
+          151
+        </td>
+        <td>
+          130
+        </td>
+        <td>
+          4106
+          -
+          4137
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.Option.get
+        </td>
+        <td style="background: #AEF1AE">
+          request.session.get(&quot;name&quot;).get
+        </td>
+      </tr><tr>
+        <td>
+          151
+        </td>
+        <td>
+          129
+        </td>
+        <td>
+          4126
+          -
+          4132
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;name&quot;
+        </td>
+      </tr><tr>
+        <td>
+          152
+        </td>
+        <td>
+          131
+        </td>
+        <td>
+          4142
+          -
+          4164
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          models.EmployeeModel.deleteEmployee
+        </td>
+        <td style="background: #F0ADAD">
+          DashBoardController.this.emp.deleteEmployee(st)
+        </td>
+      </tr><tr>
+        <td>
+          153
+        </td>
+        <td>
+          133
+        </td>
+        <td>
+          4169
+          -
+          4213
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.api.mvc.Results.Redirect
+        </td>
+        <td style="background: #F0ADAD">
+          DashBoardController.this.Redirect(routes.DashBoardController.getList())
+        </td>
+      </tr><tr>
+        <td>
+          153
+        </td>
+        <td>
+          132
+        </td>
+        <td>
+          4178
+          -
+          4212
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          controllers.ReverseDashBoardController.getList
+        </td>
+        <td style="background: #F0ADAD">
+          routes.DashBoardController.getList()
+        </td>
+      </tr>
+    </table>
+          </div>
+        </div>
+      </body>
+    </html>

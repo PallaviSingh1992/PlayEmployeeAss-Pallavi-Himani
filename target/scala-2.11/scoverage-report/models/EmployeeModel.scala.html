@@ -1,0 +1,1096 @@
+<html>
+      <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title id="title">
+          models/EmployeeModel.scala.html
+        </title>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.20.1/css/theme.default.min.css" type="text/css"/><script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.20.1/js/jquery.tablesorter.min.js"></script><link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" type="text/css"/><script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script><script type="text/javascript">
+        $(document).ready(function() {$(".tablesorter").tablesorter();});
+      </script>
+        <style>
+          table.codegrid { font-family: monospace; font-size: 12px; width: auto!important; }table.statementlist { width: auto!important; font-size: 13px; } table.codegrid td { padding: 0!important; border: 0!important } table td.linenumber { width: 40px!important; } 
+        </style>
+      </head>
+      <body style="font-family: monospace;">
+        <ul class="nav nav-tabs">
+          <li>
+            <a href="#codegrid" data-toggle="tab">Codegrid</a>
+          </li>
+          <li>
+            <a href="#statementlist" data-toggle="tab">Statement List</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="codegrid">
+            <pre style='font-size: 12pt; font-family: courier;'>1 <span style=''>package models
+</span>2 <span style=''>
+</span>3 <span style=''>import java.text.{SimpleDateFormat, DateFormat}
+</span>4 <span style=''>import java.util.Date
+</span>5 <span style=''>import com.google.inject.ImplementedBy
+</span>6 <span style=''>import scala.collection.mutable.ListBuffer
+</span>7 <span style=''>import scala.concurrent.Future
+</span>8 <span style=''>import scala.concurrent.ExecutionContext.Implicits.global
+</span>9 <span style=''>
+</span>10 <span style=''>
+</span>11 <span style=''>case class Employee(name:String,address:String,dob:Date,doj:Date,designation:String)
+</span>12 <span style=''>
+</span>13 <span style=''>/**
+</span>14 <span style=''>  *  Trait Employee Model defines a set of Functionality for Employess
+</span>15 <span style=''>  */
+</span>16 <span style=''>@ImplementedBy(classOf[EmployeeService])
+</span>17 <span style=''>trait EmployeeModel {
+</span>18 <span style=''>
+</span>19 <span style=''>  def getAllEmployee:Future[ListBuffer[Employee]]
+</span>20 <span style=''>  def getEmployeeName(ename:String):Future[ListBuffer[Employee]]
+</span>21 <span style=''>  def addEmployee(ename:String,eaddress:String,edob:Date,edoj:Date,edesig:String):Future[Boolean]
+</span>22 <span style=''>  def deleteEmployee(ename:String):Boolean
+</span>23 <span style=''>  def updateEmployee(ename:String,eaddress:String,edob:Date,edoj:Date,edesig:String):Boolean
+</span>24 <span style=''>
+</span>25 <span style=''>}
+</span>26 <span style=''>
+</span>27 <span style=''>/**
+</span>28 <span style=''>    Class implementing EmployeeModel
+</span>29 <span style=''> */
+</span>30 <span style=''>class EmployeeService extends EmployeeModel{
+</span>31 <span style=''>
+</span>32 <span style=''>//  val empList:ListBuffer[Employee]=ListBuffer(Employee("Pallavi","Ashok Vihar",new Date(1992-3-9),new Date(2016-3-9),"Manager"))
+</span>33 <span style=''>val empList:ListBuffer[Employee]=</span><span style='background: #AEF1AE'>ListBuffer(Employee("Seema","Ashok Vihar",new SimpleDateFormat("yyyy-MMM-dd").parse("1992-Mar-09"),new SimpleDateFormat("yyyy-MMM-dd").parse("2016-Jan-21"),"Software Consultant"),Employee("Himani ","Lakshmi Nagar",new SimpleDateFormat("yyyy-MMM-dd").parse("1992-May-09"),new SimpleDateFormat("yyyy-MMM-dd").parse("2016-Jan-21"),"Software Consultant"),Employee("Pallavi","Ashok Vihar",new SimpleDateFormat("yyyy-MMM-dd").parse("1992-Mar-09"),new SimpleDateFormat("yyyy-MMM-dd").parse("2016-Jan-21"),"Software Consultant"))</span><span style=''>
+</span>34 <span style=''>
+</span>35 <span style=''>  /**
+</span>36 <span style=''>    * Function to get list of all employees
+</span>37 <span style=''>    * @return:List of Employees
+</span>38 <span style=''>    */
+</span>39 <span style=''>  def getAllEmployee:Future[ListBuffer[Employee]]=</span><span style='background: #AEF1AE'>Future{
+</span>40 <span style=''></span><span style='background: #AEF1AE'>    empList
+</span>41 <span style=''></span><span style='background: #AEF1AE'>  }</span><span style=''>
+</span>42 <span style=''>
+</span>43 <span style=''>  /**
+</span>44 <span style=''>    * Function to return Employee searched by Name
+</span>45 <span style=''>    * @param ename
+</span>46 <span style=''>    * @return list of single or multiple Employees with same name
+</span>47 <span style=''>    */
+</span>48 <span style=''>  def getEmployeeName(ename:String):Future[ListBuffer[Employee]]=</span><span style='background: #F0ADAD'>Future{
+</span>49 <span style=''></span><span style='background: #F0ADAD'>    empList.filter(emp=>emp.name==ename)
+</span>50 <span style=''></span><span style='background: #F0ADAD'>  }</span><span style=''>
+</span>51 <span style=''>
+</span>52 <span style=''>  /**
+</span>53 <span style=''>    * Function to add a new Employee
+</span>54 <span style=''>    * @param ename
+</span>55 <span style=''>    * @param eaddress
+</span>56 <span style=''>    * @param edob
+</span>57 <span style=''>    * @param edoj
+</span>58 <span style=''>    * @param edesig
+</span>59 <span style=''>    * @return
+</span>60 <span style=''>    */
+</span>61 <span style=''>
+</span>62 <span style=''>  def addEmployee(ename:String,eaddress:String,edob:Date,edoj:Date,edesig:String):Future[Boolean] =</span><span style='background: #AEF1AE'>Future {
+</span>63 <span style=''></span><span style='background: #AEF1AE'>    empList.append(Employee(ename,eaddress,edob,edoj,edesig))
+</span>64 <span style=''></span><span style='background: #AEF1AE'>    true
+</span>65 <span style=''></span><span style='background: #AEF1AE'>  }</span><span style=''>
+</span>66 <span style=''>
+</span>67 <span style=''>  /**
+</span>68 <span style=''>    * Function to delete an Employee
+</span>69 <span style=''>    * @param ename
+</span>70 <span style=''>    * @return
+</span>71 <span style=''>    */
+</span>72 <span style=''>  def deleteEmployee(ename:String):Boolean={
+</span>73 <span style=''>    if(</span><span style='background: #F0ADAD'>empList.map(_.name).contains(ename)</span><span style=''>) </span><span style='background: #F0ADAD'>{
+</span>74 <span style=''></span><span style='background: #F0ADAD'>      //println(""+ename+eaddress+edob)
+</span>75 <span style=''></span><span style='background: #F0ADAD'>      empList.remove(empList.map(_.name).indexOf(ename))
+</span>76 <span style=''></span><span style='background: #F0ADAD'>      true
+</span>77 <span style=''></span><span style='background: #F0ADAD'>    }</span><span style=''>
+</span>78 <span style=''>    </span><span style='background: #F0ADAD'>false</span><span style=''>
+</span>79 <span style=''>  }
+</span>80 <span style=''>
+</span>81 <span style=''>  /**
+</span>82 <span style=''>    * Function to update an existing Employee records
+</span>83 <span style=''>    * @param ename
+</span>84 <span style=''>    * @param eaddress
+</span>85 <span style=''>    * @param edob
+</span>86 <span style=''>    * @param edoj
+</span>87 <span style=''>    * @param edesig
+</span>88 <span style=''>    * @return
+</span>89 <span style=''>    */
+</span>90 <span style=''>  def updateEmployee(ename:String,eaddress:String,edob:Date,edoj:Date,edesig:String):Boolean={
+</span>91 <span style=''>   // println(""+ename+eaddress+edob)
+</span>92 <span style=''>    if(</span><span style='background: #AEF1AE'>empList.map(_.name).contains(ename)</span><span style=''>) </span><span style='background: #AEF1AE'>{
+</span>93 <span style=''></span><span style='background: #AEF1AE'>  //println(""+ename+eaddress+edob)
+</span>94 <span style=''></span><span style='background: #AEF1AE'>      empList.update(empList.map(_.name).indexOf(ename),Employee(ename,eaddress,edob,edoj,edesig))
+</span>95 <span style=''></span><span style='background: #AEF1AE'>      true
+</span>96 <span style=''></span><span style='background: #AEF1AE'>    }</span><span style=''>
+</span>97 <span style=''>   </span><span style='background: #AEF1AE'>false</span><span style=''>
+</span>98 <span style=''>  }
+</span>99 <span style=''>
+</span>100 <span style=''>
+</span>101 <span style=''>}
+</span></pre>
+          </div>
+          <div class="tab-pane" id="statementlist">
+            <table cellspacing="0" cellpadding="0" class="table statementlist">
+      <tr>
+        <th>Line</th>
+        <th>Stmt Id</th>
+        <th>Pos</th>
+        <th>Tree</th>
+        <th>Symbol</th>
+        <th>Code</th>
+      </tr><tr>
+        <td>
+          33
+        </td>
+        <td>
+          137
+        </td>
+        <td>
+          1139
+          -
+          1195
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.text.DateFormat.parse
+        </td>
+        <td style="background: #AEF1AE">
+          new java.text.SimpleDateFormat(&quot;yyyy-MMM-dd&quot;).parse(&quot;1992-Mar-09&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          33
+        </td>
+        <td>
+          146
+        </td>
+        <td>
+          1276
+          -
+          1447
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          models.Employee.apply
+        </td>
+        <td style="background: #AEF1AE">
+          Employee.apply(&quot;Himani &quot;, &quot;Lakshmi Nagar&quot;, new java.text.SimpleDateFormat(&quot;yyyy-MMM-dd&quot;).parse(&quot;1992-May-09&quot;), new java.text.SimpleDateFormat(&quot;yyyy-MMM-dd&quot;).parse(&quot;2016-Jan-21&quot;), &quot;Software Consultant&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          33
+        </td>
+        <td>
+          140
+        </td>
+        <td>
+          1108
+          -
+          1275
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          models.Employee.apply
+        </td>
+        <td style="background: #AEF1AE">
+          Employee.apply(&quot;Seema&quot;, &quot;Ashok Vihar&quot;, new java.text.SimpleDateFormat(&quot;yyyy-MMM-dd&quot;).parse(&quot;1992-Mar-09&quot;), new java.text.SimpleDateFormat(&quot;yyyy-MMM-dd&quot;).parse(&quot;2016-Jan-21&quot;), &quot;Software Consultant&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          33
+        </td>
+        <td>
+          149
+        </td>
+        <td>
+          1481
+          -
+          1537
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.text.DateFormat.parse
+        </td>
+        <td style="background: #AEF1AE">
+          new java.text.SimpleDateFormat(&quot;yyyy-MMM-dd&quot;).parse(&quot;1992-Mar-09&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          33
+        </td>
+        <td>
+          142
+        </td>
+        <td>
+          1295
+          -
+          1310
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;Lakshmi Nagar&quot;
+        </td>
+      </tr><tr>
+        <td>
+          33
+        </td>
+        <td>
+          151
+        </td>
+        <td>
+          1595
+          -
+          1616
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;Software Consultant&quot;
+        </td>
+      </tr><tr>
+        <td>
+          33
+        </td>
+        <td>
+          136
+        </td>
+        <td>
+          1125
+          -
+          1138
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;Ashok Vihar&quot;
+        </td>
+      </tr><tr>
+        <td>
+          33
+        </td>
+        <td>
+          145
+        </td>
+        <td>
+          1425
+          -
+          1446
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;Software Consultant&quot;
+        </td>
+      </tr><tr>
+        <td>
+          33
+        </td>
+        <td>
+          139
+        </td>
+        <td>
+          1253
+          -
+          1274
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;Software Consultant&quot;
+        </td>
+      </tr><tr>
+        <td>
+          33
+        </td>
+        <td>
+          148
+        </td>
+        <td>
+          1467
+          -
+          1480
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;Ashok Vihar&quot;
+        </td>
+      </tr><tr>
+        <td>
+          33
+        </td>
+        <td>
+          147
+        </td>
+        <td>
+          1457
+          -
+          1466
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;Pallavi&quot;
+        </td>
+      </tr><tr>
+        <td>
+          33
+        </td>
+        <td>
+          138
+        </td>
+        <td>
+          1196
+          -
+          1252
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.text.DateFormat.parse
+        </td>
+        <td style="background: #AEF1AE">
+          new java.text.SimpleDateFormat(&quot;yyyy-MMM-dd&quot;).parse(&quot;2016-Jan-21&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          33
+        </td>
+        <td>
+          150
+        </td>
+        <td>
+          1538
+          -
+          1594
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.text.DateFormat.parse
+        </td>
+        <td style="background: #AEF1AE">
+          new java.text.SimpleDateFormat(&quot;yyyy-MMM-dd&quot;).parse(&quot;2016-Jan-21&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          33
+        </td>
+        <td>
+          141
+        </td>
+        <td>
+          1285
+          -
+          1294
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;Himani &quot;
+        </td>
+      </tr><tr>
+        <td>
+          33
+        </td>
+        <td>
+          144
+        </td>
+        <td>
+          1368
+          -
+          1424
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.text.DateFormat.parse
+        </td>
+        <td style="background: #AEF1AE">
+          new java.text.SimpleDateFormat(&quot;yyyy-MMM-dd&quot;).parse(&quot;2016-Jan-21&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          33
+        </td>
+        <td>
+          153
+        </td>
+        <td>
+          1097
+          -
+          1618
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.generic.GenericCompanion.apply
+        </td>
+        <td style="background: #AEF1AE">
+          scala.collection.mutable.ListBuffer.apply[models.Employee](Employee.apply(&quot;Seema&quot;, &quot;Ashok Vihar&quot;, new java.text.SimpleDateFormat(&quot;yyyy-MMM-dd&quot;).parse(&quot;1992-Mar-09&quot;), new java.text.SimpleDateFormat(&quot;yyyy-MMM-dd&quot;).parse(&quot;2016-Jan-21&quot;), &quot;Software Consultant&quot;), Employee.apply(&quot;Himani &quot;, &quot;Lakshmi Nagar&quot;, new java.text.SimpleDateFormat(&quot;yyyy-MMM-dd&quot;).parse(&quot;1992-May-09&quot;), new java.text.SimpleDateFormat(&quot;yyyy-MMM-dd&quot;).parse(&quot;2016-Jan-21&quot;), &quot;Software Consultant&quot;), Employee.apply(&quot;Pallavi&quot;, &quot;Ashok Vihar&quot;, new java.text.SimpleDateFormat(&quot;yyyy-MMM-dd&quot;).parse(&quot;1992-Mar-09&quot;), new java.text.SimpleDateFormat(&quot;yyyy-MMM-dd&quot;).parse(&quot;2016-Jan-21&quot;), &quot;Software Consultant&quot;))
+        </td>
+      </tr><tr>
+        <td>
+          33
+        </td>
+        <td>
+          135
+        </td>
+        <td>
+          1117
+          -
+          1124
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;Seema&quot;
+        </td>
+      </tr><tr>
+        <td>
+          33
+        </td>
+        <td>
+          152
+        </td>
+        <td>
+          1448
+          -
+          1617
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          models.Employee.apply
+        </td>
+        <td style="background: #AEF1AE">
+          Employee.apply(&quot;Pallavi&quot;, &quot;Ashok Vihar&quot;, new java.text.SimpleDateFormat(&quot;yyyy-MMM-dd&quot;).parse(&quot;1992-Mar-09&quot;), new java.text.SimpleDateFormat(&quot;yyyy-MMM-dd&quot;).parse(&quot;2016-Jan-21&quot;), &quot;Software Consultant&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          33
+        </td>
+        <td>
+          143
+        </td>
+        <td>
+          1311
+          -
+          1367
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.text.DateFormat.parse
+        </td>
+        <td style="background: #AEF1AE">
+          new java.text.SimpleDateFormat(&quot;yyyy-MMM-dd&quot;).parse(&quot;1992-May-09&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          39
+        </td>
+        <td>
+          155
+        </td>
+        <td>
+          1759
+          -
+          1782
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          scala.concurrent.Future.apply
+        </td>
+        <td style="background: #AEF1AE">
+          scala.concurrent.Future.apply[scala.collection.mutable.ListBuffer[models.Employee]](EmployeeService.this.empList)(scala.concurrent.ExecutionContext.Implicits.global)
+        </td>
+      </tr><tr>
+        <td>
+          40
+        </td>
+        <td>
+          154
+        </td>
+        <td>
+          1771
+          -
+          1778
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          models.EmployeeService.empList
+        </td>
+        <td style="background: #AEF1AE">
+          EmployeeService.this.empList
+        </td>
+      </tr><tr>
+        <td>
+          48
+        </td>
+        <td>
+          158
+        </td>
+        <td>
+          1998
+          -
+          2050
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          scala.concurrent.Future.apply
+        </td>
+        <td style="background: #F0ADAD">
+          scala.concurrent.Future.apply[scala.collection.mutable.ListBuffer[models.Employee]](EmployeeService.this.empList.filter(((emp: models.Employee) =&gt; emp.name.==(ename))))(scala.concurrent.ExecutionContext.Implicits.global)
+        </td>
+      </tr><tr>
+        <td>
+          49
+        </td>
+        <td>
+          157
+        </td>
+        <td>
+          2010
+          -
+          2046
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.TraversableLike.filter
+        </td>
+        <td style="background: #F0ADAD">
+          EmployeeService.this.empList.filter(((emp: models.Employee) =&gt; emp.name.==(ename)))
+        </td>
+      </tr><tr>
+        <td>
+          49
+        </td>
+        <td>
+          156
+        </td>
+        <td>
+          2030
+          -
+          2045
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.lang.Object.==
+        </td>
+        <td style="background: #F0ADAD">
+          emp.name.==(ename)
+        </td>
+      </tr><tr>
+        <td>
+          62
+        </td>
+        <td>
+          162
+        </td>
+        <td>
+          2313
+          -
+          2396
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          scala.concurrent.Future.apply
+        </td>
+        <td style="background: #AEF1AE">
+          scala.concurrent.Future.apply[Boolean]({
+  EmployeeService.this.empList.append(Employee.apply(ename, eaddress, edob, edoj, edesig));
+  true
+})(scala.concurrent.ExecutionContext.Implicits.global)
+        </td>
+      </tr><tr>
+        <td>
+          63
+        </td>
+        <td>
+          160
+        </td>
+        <td>
+          2326
+          -
+          2383
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.mutable.BufferLike.append
+        </td>
+        <td style="background: #AEF1AE">
+          EmployeeService.this.empList.append(Employee.apply(ename, eaddress, edob, edoj, edesig))
+        </td>
+      </tr><tr>
+        <td>
+          63
+        </td>
+        <td>
+          159
+        </td>
+        <td>
+          2341
+          -
+          2382
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          models.Employee.apply
+        </td>
+        <td style="background: #AEF1AE">
+          Employee.apply(ename, eaddress, edob, edoj, edesig)
+        </td>
+      </tr><tr>
+        <td>
+          64
+        </td>
+        <td>
+          161
+        </td>
+        <td>
+          2388
+          -
+          2392
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          true
+        </td>
+      </tr><tr>
+        <td>
+          73
+        </td>
+        <td>
+          167
+        </td>
+        <td>
+          2570
+          -
+          2685
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #F0ADAD">
+          {
+  EmployeeService.this.empList.remove(EmployeeService.this.empList.map[String, scala.collection.mutable.ListBuffer[String]](((x$2: models.Employee) =&gt; x$2.name))(mutable.this.ListBuffer.canBuildFrom[String]).indexOf[String](ename));
+  true
+}
+        </td>
+      </tr><tr>
+        <td>
+          73
+        </td>
+        <td>
+          169
+        </td>
+        <td>
+          2530
+          -
+          2530
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #F0ADAD">
+          ()
+        </td>
+      </tr><tr>
+        <td>
+          73
+        </td>
+        <td>
+          163
+        </td>
+        <td>
+          2533
+          -
+          2568
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.generic.SeqForwarder.contains
+        </td>
+        <td style="background: #F0ADAD">
+          EmployeeService.this.empList.map[String, scala.collection.mutable.ListBuffer[String]](((x$1: models.Employee) =&gt; x$1.name))(mutable.this.ListBuffer.canBuildFrom[String]).contains[String](ename)
+        </td>
+      </tr><tr>
+        <td>
+          73
+        </td>
+        <td>
+          168
+        </td>
+        <td>
+          2530
+          -
+          2530
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #F0ADAD">
+          ()
+        </td>
+      </tr><tr>
+        <td>
+          75
+        </td>
+        <td>
+          164
+        </td>
+        <td>
+          2633
+          -
+          2667
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.generic.SeqForwarder.indexOf
+        </td>
+        <td style="background: #F0ADAD">
+          EmployeeService.this.empList.map[String, scala.collection.mutable.ListBuffer[String]](((x$2: models.Employee) =&gt; x$2.name))(mutable.this.ListBuffer.canBuildFrom[String]).indexOf[String](ename)
+        </td>
+      </tr><tr>
+        <td>
+          75
+        </td>
+        <td>
+          165
+        </td>
+        <td>
+          2618
+          -
+          2668
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.mutable.ListBuffer.remove
+        </td>
+        <td style="background: #F0ADAD">
+          EmployeeService.this.empList.remove(EmployeeService.this.empList.map[String, scala.collection.mutable.ListBuffer[String]](((x$2: models.Employee) =&gt; x$2.name))(mutable.this.ListBuffer.canBuildFrom[String]).indexOf[String](ename))
+        </td>
+      </tr><tr>
+        <td>
+          76
+        </td>
+        <td>
+          166
+        </td>
+        <td>
+          2675
+          -
+          2679
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #F0ADAD">
+          true
+        </td>
+      </tr><tr>
+        <td>
+          78
+        </td>
+        <td>
+          170
+        </td>
+        <td>
+          2690
+          -
+          2695
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #F0ADAD">
+          false
+        </td>
+      </tr><tr>
+        <td>
+          92
+        </td>
+        <td>
+          176
+        </td>
+        <td>
+          3056
+          -
+          3209
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          {
+  EmployeeService.this.empList.update(EmployeeService.this.empList.map[String, scala.collection.mutable.ListBuffer[String]](((x$4: models.Employee) =&gt; x$4.name))(mutable.this.ListBuffer.canBuildFrom[String]).indexOf[String](ename), Employee.apply(ename, eaddress, edob, edoj, edesig));
+  true
+}
+        </td>
+      </tr><tr>
+        <td>
+          92
+        </td>
+        <td>
+          178
+        </td>
+        <td>
+          3016
+          -
+          3016
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #F0ADAD">
+          ()
+        </td>
+      </tr><tr>
+        <td>
+          92
+        </td>
+        <td>
+          177
+        </td>
+        <td>
+          3016
+          -
+          3016
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #F0ADAD">
+          ()
+        </td>
+      </tr><tr>
+        <td>
+          92
+        </td>
+        <td>
+          171
+        </td>
+        <td>
+          3019
+          -
+          3054
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.generic.SeqForwarder.contains
+        </td>
+        <td style="background: #AEF1AE">
+          EmployeeService.this.empList.map[String, scala.collection.mutable.ListBuffer[String]](((x$3: models.Employee) =&gt; x$3.name))(mutable.this.ListBuffer.canBuildFrom[String]).contains[String](ename)
+        </td>
+      </tr><tr>
+        <td>
+          94
+        </td>
+        <td>
+          173
+        </td>
+        <td>
+          3150
+          -
+          3191
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          models.Employee.apply
+        </td>
+        <td style="background: #AEF1AE">
+          Employee.apply(ename, eaddress, edob, edoj, edesig)
+        </td>
+      </tr><tr>
+        <td>
+          94
+        </td>
+        <td>
+          172
+        </td>
+        <td>
+          3115
+          -
+          3149
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.generic.SeqForwarder.indexOf
+        </td>
+        <td style="background: #AEF1AE">
+          EmployeeService.this.empList.map[String, scala.collection.mutable.ListBuffer[String]](((x$4: models.Employee) =&gt; x$4.name))(mutable.this.ListBuffer.canBuildFrom[String]).indexOf[String](ename)
+        </td>
+      </tr><tr>
+        <td>
+          94
+        </td>
+        <td>
+          174
+        </td>
+        <td>
+          3100
+          -
+          3192
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.mutable.ListBuffer.update
+        </td>
+        <td style="background: #AEF1AE">
+          EmployeeService.this.empList.update(EmployeeService.this.empList.map[String, scala.collection.mutable.ListBuffer[String]](((x$4: models.Employee) =&gt; x$4.name))(mutable.this.ListBuffer.canBuildFrom[String]).indexOf[String](ename), Employee.apply(ename, eaddress, edob, edoj, edesig))
+        </td>
+      </tr><tr>
+        <td>
+          95
+        </td>
+        <td>
+          175
+        </td>
+        <td>
+          3199
+          -
+          3203
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          true
+        </td>
+      </tr><tr>
+        <td>
+          97
+        </td>
+        <td>
+          179
+        </td>
+        <td>
+          3213
+          -
+          3218
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          false
+        </td>
+      </tr>
+    </table>
+          </div>
+        </div>
+      </body>
+    </html>

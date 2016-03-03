@@ -1,0 +1,1868 @@
+<html>
+      <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title id="title">
+          views/html/editEmployeeView.template.scala.html
+        </title>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.20.1/css/theme.default.min.css" type="text/css"/><script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.20.1/js/jquery.tablesorter.min.js"></script><link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" type="text/css"/><script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script><script type="text/javascript">
+        $(document).ready(function() {$(".tablesorter").tablesorter();});
+      </script>
+        <style>
+          table.codegrid { font-family: monospace; font-size: 12px; width: auto!important; }table.statementlist { width: auto!important; font-size: 13px; } table.codegrid td { padding: 0!important; border: 0!important } table td.linenumber { width: 40px!important; } 
+        </style>
+      </head>
+      <body style="font-family: monospace;">
+        <ul class="nav nav-tabs">
+          <li>
+            <a href="#codegrid" data-toggle="tab">Codegrid</a>
+          </li>
+          <li>
+            <a href="#statementlist" data-toggle="tab">Statement List</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="codegrid">
+            <pre style='font-size: 12pt; font-family: courier;'>1 <span style=''>
+</span>2 <span style=''>package views.html
+</span>3 <span style=''>
+</span>4 <span style=''>import play.twirl.api._
+</span>5 <span style=''>import play.twirl.api.TemplateMagic._
+</span>6 <span style=''>
+</span>7 <span style=''>
+</span>8 <span style=''>     object editEmployeeView_Scope0 {
+</span>9 <span style=''>import models._
+</span>10 <span style=''>import controllers._
+</span>11 <span style=''>import play.api.i18n._
+</span>12 <span style=''>import views.html._
+</span>13 <span style=''>import play.api.templates.PlayMagic._
+</span>14 <span style=''>import play.api.mvc._
+</span>15 <span style=''>import play.api.data._
+</span>16 <span style=''>
+</span>17 <span style=''>     object editEmployeeView_Scope1 {
+</span>18 <span style=''>import b3.vertical.fieldConstructor
+</span>19 <span style=''>
+</span>20 <span style=''>class editEmployeeView extends BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with play.twirl.api.Template2[Form[AddEmployee],Messages,play.twirl.api.HtmlFormat.Appendable] {
+</span>21 <span style=''>
+</span>22 <span style=''>  /**/
+</span>23 <span style=''>  def apply/*2.2*/(addForm:Form[AddEmployee])(implicit messages:Messages):play.twirl.api.HtmlFormat.Appendable = {
+</span>24 <span style=''>    </span><span style='background: #AEF1AE'>_display_ {
+</span>25 <span style=''></span><span style='background: #AEF1AE'>      {
+</span>26 <span style=''></span><span style='background: #AEF1AE'>
+</span>27 <span style=''></span><span style='background: #AEF1AE'>
+</span>28 <span style=''></span><span style='background: #AEF1AE'>Seq[Any](format.raw/*2.57*/("""
+</span>29 <span style=''></span><span style='background: #AEF1AE'>
+</span>30 <span style=''></span><span style='background: #AEF1AE'>"""),_display_(/*4.2*/views/*4.7*/.html.main("Edit Employee")/*4.34*/{_display_(Seq[Any](format.raw/*4.35*/("""
+</span>31 <span style=''></span><span style='background: #AEF1AE'>"""),format.raw/*5.1*/("""<div>
+</span>32 <span style=''></span><span style='background: #AEF1AE'>    <span><h3>Edit Employee</h3>
+</span>33 <span style=''></span><span style='background: #AEF1AE'>          <!--<a href="/renderEmployeeForm " class="btn btn-danger pull-right" role="button">Delete Employee</a>-->
+</span>34 <span style=''></span><span style='background: #AEF1AE'>    </span>
+</span>35 <span style=''></span><span style='background: #AEF1AE'>
+</span>36 <span style=''></span><span style='background: #AEF1AE'>
+</span>37 <span style=''></span><span style='background: #AEF1AE'>    """),_display_(/*11.6*/b3/*11.8*/.form(routes.DashBoardController.updateEmp)/*11.51*/{_display_(Seq[Any](format.raw/*11.52*/("""
+</span>38 <span style=''></span><span style='background: #AEF1AE'>    """),_display_(/*12.6*/b3/*12.8*/.submit('class -> "btn btn-success pull-right" ,'value->"remove")/*12.73*/{_display_(Seq[Any](format.raw/*12.74*/(""" """),format.raw/*12.75*/("""Delete Employee """)))}),format.raw/*12.92*/("""
+</span>39 <span style=''></span><span style='background: #AEF1AE'>    """),_display_(/*13.6*/b3/*13.8*/.text( addForm("name"), '_label -> "Name ", 'required->true ,'disabled->true )),format.raw/*13.86*/("""
+</span>40 <span style=''></span><span style='background: #AEF1AE'>    """),_display_(/*14.6*/b3/*14.8*/.text( addForm("address"), '_label -> "Address", 'required->true )),format.raw/*14.74*/("""
+</span>41 <span style=''></span><span style='background: #AEF1AE'>    """),_display_(/*15.6*/b3/*15.8*/.date(addForm("dob"),'_label -> "Date OF Birth", 'required->true)),format.raw/*15.73*/("""
+</span>42 <span style=''></span><span style='background: #AEF1AE'>    """),_display_(/*16.6*/b3/*16.8*/.date(addForm("doj"),'_label -> "Joining Date", 'required->true)),format.raw/*16.72*/("""
+</span>43 <span style=''></span><span style='background: #AEF1AE'>    """),_display_(/*17.6*/b3/*17.8*/.text( addForm("designation"), '_label -> "Designation", 'required->true )),format.raw/*17.82*/("""
+</span>44 <span style=''></span><span style='background: #AEF1AE'>    """),_display_(/*18.6*/b3/*18.8*/.submit('class -> "btn btn-success", 'value->"update")/*18.62*/{_display_(Seq[Any](format.raw/*18.63*/(""" """),format.raw/*18.64*/("""Update Employee """)))}),format.raw/*18.81*/("""
+</span>45 <span style=''></span><span style='background: #AEF1AE'>
+</span>46 <span style=''></span><span style='background: #AEF1AE'>
+</span>47 <span style=''></span><span style='background: #AEF1AE'>    """)))}),format.raw/*21.6*/("""
+</span>48 <span style=''></span><span style='background: #AEF1AE'>
+</span>49 <span style=''></span><span style='background: #AEF1AE'>
+</span>50 <span style=''></span><span style='background: #AEF1AE'>"""),format.raw/*24.1*/("""</div>
+</span>51 <span style=''></span><span style='background: #AEF1AE'>
+</span>52 <span style=''></span><span style='background: #AEF1AE'>
+</span>53 <span style=''></span><span style='background: #AEF1AE'>
+</span>54 <span style=''></span><span style='background: #AEF1AE'>
+</span>55 <span style=''></span><span style='background: #AEF1AE'>""")))}),format.raw/*29.2*/("""
+</span>56 <span style=''></span><span style='background: #AEF1AE'>"""))
+</span>57 <span style=''></span><span style='background: #AEF1AE'>      }
+</span>58 <span style=''></span><span style='background: #AEF1AE'>    }</span><span style=''>
+</span>59 <span style=''>  }
+</span>60 <span style=''>
+</span>61 <span style=''>  def render(addForm:Form[AddEmployee],messages:Messages): play.twirl.api.HtmlFormat.Appendable = </span><span style='background: #F0ADAD'>apply(addForm)(messages)</span><span style=''>
+</span>62 <span style=''>
+</span>63 <span style=''>  def f:((Form[AddEmployee]) => (Messages) => play.twirl.api.HtmlFormat.Appendable) = (addForm) => (messages) => </span><span style='background: #F0ADAD'>apply(addForm)(messages)</span><span style=''>
+</span>64 <span style=''>
+</span>65 <span style=''>  def ref: this.type = this
+</span>66 <span style=''>
+</span>67 <span style=''>}
+</span>68 <span style=''>
+</span>69 <span style=''>
+</span>70 <span style=''>}
+</span>71 <span style=''>}
+</span>72 <span style=''>
+</span>73 <span style=''>/**/
+</span>74 <span style=''>object editEmployeeView extends editEmployeeView_Scope0.editEmployeeView_Scope1.editEmployeeView
+</span>75 <span style=''>              /*
+</span>76 <span style=''>                  -- GENERATED --
+</span>77 <span style=''>                  DATE: Fri Mar 04 00:21:53 IST 2016
+</span>78 <span style=''>                  SOURCE: /home/knoldus-pallavi/play2Rough/app/views/editEmployeeView.scala.html
+</span>79 <span style=''>                  HASH: 206c26fdc97c4bf016596a109374edc81d5ed8d7
+</span>80 <span style=''>                  MATRIX: 644->38|794->93|822->96|834->101|869->128|907->129|934->130|1134->304|1144->306|1196->349|1235->350|1267->356|1277->358|1351->423|1390->424|1419->425|1467->442|1499->448|1509->450|1608->528|1640->534|1650->536|1737->602|1769->608|1779->610|1865->675|1897->681|1907->683|1992->747|2024->753|2034->755|2129->829|2161->835|2171->837|2234->891|2273->892|2302->893|2350->910|2388->918|2418->921|2460->933
+</span>81 <span style=''>                  LINES: 23->2|28->2|30->4|30->4|30->4|30->4|31->5|37->11|37->11|37->11|37->11|38->12|38->12|38->12|38->12|38->12|38->12|39->13|39->13|39->13|40->14|40->14|40->14|41->15|41->15|41->15|42->16|42->16|42->16|43->17|43->17|43->17|44->18|44->18|44->18|44->18|44->18|44->18|47->21|50->24|55->29
+</span>82 <span style=''>                  -- GENERATED --
+</span>83 <span style=''>              */
+</span>84 <span style=''>          
+</span></pre>
+          </div>
+          <div class="tab-pane" id="statementlist">
+            <table cellspacing="0" cellpadding="0" class="table statementlist">
+      <tr>
+        <th>Line</th>
+        <th>Stmt Id</th>
+        <th>Pos</th>
+        <th>Tree</th>
+        <th>Symbol</th>
+        <th>Code</th>
+      </tr><tr>
+        <td>
+          24
+        </td>
+        <td>
+          824
+        </td>
+        <td>
+          745
+          -
+          2484
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td style="background: #AEF1AE">
+          editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot;\n\n&quot;), editEmployeeView.this._display_(views.html.main.apply(&quot;Edit Employee&quot;)(editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot;\n&quot;), editEmployeeView.this.format.raw(&quot;&lt;div&gt;\n    &lt;span&gt;&lt;h3&gt;Edit Employee&lt;/h3&gt;\n          &lt;!--&lt;a href=\&quot;/renderEmployeeForm \&quot; class=\&quot;btn btn-danger pull-right\&quot; role=\&quot;button\&quot;&gt;Delete Employee&lt;/a&gt;--&gt;\n    &lt;/span&gt;\n\n\n    &quot;), editEmployeeView.this._display_(views.html.b3.form.apply(controllers.routes.DashBoardController.updateEmp())(editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.submit(scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;class&quot;)).-&gt;[String](&quot;btn btn-success pull-right&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;value&quot;)).-&gt;[String](&quot;remove&quot;))(editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot; &quot;), editEmployeeView.this.format.raw(&quot;Delete Employee &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))(views.html.b3.vertical.`package`.fieldConstructor)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.text(addForm.apply(&quot;name&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Name &quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;disabled&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.text(addForm.apply(&quot;address&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Address&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.date(addForm.apply(&quot;dob&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Date OF Birth&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.date(addForm.apply(&quot;doj&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Joining Date&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.text(addForm.apply(&quot;designation&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Designation&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.submit(scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;class&quot;)).-&gt;[String](&quot;btn btn-success&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;value&quot;)).-&gt;[String](&quot;update&quot;))(editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot; &quot;), editEmployeeView.this.format.raw(&quot;Update Employee &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))(views.html.b3.vertical.`package`.fieldConstructor)), editEmployeeView.this.format.raw(&quot;\n\n\n    &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))(views.html.b3.vertical.`package`.fieldConstructor)), editEmployeeView.this.format.raw(&quot;\n\n\n&quot;), editEmployeeView.this.format.raw(&quot;&lt;/div&gt;\n\n\n\n\n&quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))), editEmployeeView.this.format.raw(&quot;\n&quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))
+        </td>
+      </tr><tr>
+        <td>
+          24
+        </td>
+        <td>
+          823
+        </td>
+        <td>
+          755
+          -
+          755
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.reflect.ManifestFactory.classType
+        </td>
+        <td style="background: #AEF1AE">
+          reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])
+        </td>
+      </tr><tr>
+        <td>
+          28
+        </td>
+        <td>
+          822
+        </td>
+        <td>
+          767
+          -
+          2470
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.generic.GenericCompanion.apply
+        </td>
+        <td style="background: #AEF1AE">
+          collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot;\n\n&quot;), editEmployeeView.this._display_(views.html.main.apply(&quot;Edit Employee&quot;)(editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot;\n&quot;), editEmployeeView.this.format.raw(&quot;&lt;div&gt;\n    &lt;span&gt;&lt;h3&gt;Edit Employee&lt;/h3&gt;\n          &lt;!--&lt;a href=\&quot;/renderEmployeeForm \&quot; class=\&quot;btn btn-danger pull-right\&quot; role=\&quot;button\&quot;&gt;Delete Employee&lt;/a&gt;--&gt;\n    &lt;/span&gt;\n\n\n    &quot;), editEmployeeView.this._display_(views.html.b3.form.apply(controllers.routes.DashBoardController.updateEmp())(editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.submit(scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;class&quot;)).-&gt;[String](&quot;btn btn-success pull-right&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;value&quot;)).-&gt;[String](&quot;remove&quot;))(editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot; &quot;), editEmployeeView.this.format.raw(&quot;Delete Employee &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))(views.html.b3.vertical.`package`.fieldConstructor)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.text(addForm.apply(&quot;name&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Name &quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;disabled&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.text(addForm.apply(&quot;address&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Address&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.date(addForm.apply(&quot;dob&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Date OF Birth&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.date(addForm.apply(&quot;doj&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Joining Date&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.text(addForm.apply(&quot;designation&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Designation&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.submit(scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;class&quot;)).-&gt;[String](&quot;btn btn-success&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;value&quot;)).-&gt;[String](&quot;update&quot;))(editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot; &quot;), editEmployeeView.this.format.raw(&quot;Update Employee &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))(views.html.b3.vertical.`package`.fieldConstructor)), editEmployeeView.this.format.raw(&quot;\n\n\n    &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))(views.html.b3.vertical.`package`.fieldConstructor)), editEmployeeView.this.format.raw(&quot;\n\n\n&quot;), editEmployeeView.this.format.raw(&quot;&lt;/div&gt;\n\n\n\n\n&quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))), editEmployeeView.this.format.raw(&quot;\n&quot;))
+        </td>
+      </tr><tr>
+        <td>
+          28
+        </td>
+        <td>
+          744
+        </td>
+        <td>
+          776
+          -
+          804
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          editEmployeeView.this.format.raw(&quot;\n\n&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          30
+        </td>
+        <td>
+          819
+        </td>
+        <td>
+          822
+          -
+          2440
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          views.html.main_Scope0.main.apply
+        </td>
+        <td style="background: #AEF1AE">
+          views.html.main.apply(&quot;Edit Employee&quot;)(editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot;\n&quot;), editEmployeeView.this.format.raw(&quot;&lt;div&gt;\n    &lt;span&gt;&lt;h3&gt;Edit Employee&lt;/h3&gt;\n          &lt;!--&lt;a href=\&quot;/renderEmployeeForm \&quot; class=\&quot;btn btn-danger pull-right\&quot; role=\&quot;button\&quot;&gt;Delete Employee&lt;/a&gt;--&gt;\n    &lt;/span&gt;\n\n\n    &quot;), editEmployeeView.this._display_(views.html.b3.form.apply(controllers.routes.DashBoardController.updateEmp())(editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.submit(scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;class&quot;)).-&gt;[String](&quot;btn btn-success pull-right&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;value&quot;)).-&gt;[String](&quot;remove&quot;))(editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot; &quot;), editEmployeeView.this.format.raw(&quot;Delete Employee &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))(views.html.b3.vertical.`package`.fieldConstructor)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.text(addForm.apply(&quot;name&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Name &quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;disabled&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.text(addForm.apply(&quot;address&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Address&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.date(addForm.apply(&quot;dob&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Date OF Birth&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.date(addForm.apply(&quot;doj&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Joining Date&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.text(addForm.apply(&quot;designation&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Designation&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.submit(scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;class&quot;)).-&gt;[String](&quot;btn btn-success&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;value&quot;)).-&gt;[String](&quot;update&quot;))(editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot; &quot;), editEmployeeView.this.format.raw(&quot;Update Employee &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))(views.html.b3.vertical.`package`.fieldConstructor)), editEmployeeView.this.format.raw(&quot;\n\n\n    &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))(views.html.b3.vertical.`package`.fieldConstructor)), editEmployeeView.this.format.raw(&quot;\n\n\n&quot;), editEmployeeView.this.format.raw(&quot;&lt;/div&gt;\n\n\n\n\n&quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))
+        </td>
+      </tr><tr>
+        <td>
+          30
+        </td>
+        <td>
+          746
+        </td>
+        <td>
+          889
+          -
+          916
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          editEmployeeView.this.format.raw(&quot;\n&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          30
+        </td>
+        <td>
+          818
+        </td>
+        <td>
+          870
+          -
+          2439
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td style="background: #AEF1AE">
+          editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot;\n&quot;), editEmployeeView.this.format.raw(&quot;&lt;div&gt;\n    &lt;span&gt;&lt;h3&gt;Edit Employee&lt;/h3&gt;\n          &lt;!--&lt;a href=\&quot;/renderEmployeeForm \&quot; class=\&quot;btn btn-danger pull-right\&quot; role=\&quot;button\&quot;&gt;Delete Employee&lt;/a&gt;--&gt;\n    &lt;/span&gt;\n\n\n    &quot;), editEmployeeView.this._display_(views.html.b3.form.apply(controllers.routes.DashBoardController.updateEmp())(editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.submit(scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;class&quot;)).-&gt;[String](&quot;btn btn-success pull-right&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;value&quot;)).-&gt;[String](&quot;remove&quot;))(editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot; &quot;), editEmployeeView.this.format.raw(&quot;Delete Employee &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))(views.html.b3.vertical.`package`.fieldConstructor)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.text(addForm.apply(&quot;name&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Name &quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;disabled&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.text(addForm.apply(&quot;address&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Address&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.date(addForm.apply(&quot;dob&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Date OF Birth&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.date(addForm.apply(&quot;doj&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Joining Date&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.text(addForm.apply(&quot;designation&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Designation&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.submit(scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;class&quot;)).-&gt;[String](&quot;btn btn-success&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;value&quot;)).-&gt;[String](&quot;update&quot;))(editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot; &quot;), editEmployeeView.this.format.raw(&quot;Update Employee &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))(views.html.b3.vertical.`package`.fieldConstructor)), editEmployeeView.this.format.raw(&quot;\n\n\n    &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))(views.html.b3.vertical.`package`.fieldConstructor)), editEmployeeView.this.format.raw(&quot;\n\n\n&quot;), editEmployeeView.this.format.raw(&quot;&lt;/div&gt;\n\n\n\n\n&quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))
+        </td>
+      </tr><tr>
+        <td>
+          30
+        </td>
+        <td>
+          817
+        </td>
+        <td>
+          879
+          -
+          879
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.reflect.ManifestFactory.classType
+        </td>
+        <td style="background: #AEF1AE">
+          reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])
+        </td>
+      </tr><tr>
+        <td>
+          30
+        </td>
+        <td>
+          820
+        </td>
+        <td>
+          805
+          -
+          2441
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td style="background: #AEF1AE">
+          editEmployeeView.this._display_(views.html.main.apply(&quot;Edit Employee&quot;)(editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot;\n&quot;), editEmployeeView.this.format.raw(&quot;&lt;div&gt;\n    &lt;span&gt;&lt;h3&gt;Edit Employee&lt;/h3&gt;\n          &lt;!--&lt;a href=\&quot;/renderEmployeeForm \&quot; class=\&quot;btn btn-danger pull-right\&quot; role=\&quot;button\&quot;&gt;Delete Employee&lt;/a&gt;--&gt;\n    &lt;/span&gt;\n\n\n    &quot;), editEmployeeView.this._display_(views.html.b3.form.apply(controllers.routes.DashBoardController.updateEmp())(editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.submit(scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;class&quot;)).-&gt;[String](&quot;btn btn-success pull-right&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;value&quot;)).-&gt;[String](&quot;remove&quot;))(editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot; &quot;), editEmployeeView.this.format.raw(&quot;Delete Employee &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))(views.html.b3.vertical.`package`.fieldConstructor)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.text(addForm.apply(&quot;name&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Name &quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;disabled&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.text(addForm.apply(&quot;address&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Address&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.date(addForm.apply(&quot;dob&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Date OF Birth&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.date(addForm.apply(&quot;doj&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Joining Date&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.text(addForm.apply(&quot;designation&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Designation&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.submit(scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;class&quot;)).-&gt;[String](&quot;btn btn-success&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;value&quot;)).-&gt;[String](&quot;update&quot;))(editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot; &quot;), editEmployeeView.this.format.raw(&quot;Update Employee &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))(views.html.b3.vertical.`package`.fieldConstructor)), editEmployeeView.this.format.raw(&quot;\n\n\n    &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))(views.html.b3.vertical.`package`.fieldConstructor)), editEmployeeView.this.format.raw(&quot;\n\n\n&quot;), editEmployeeView.this.format.raw(&quot;&lt;/div&gt;\n\n\n\n\n&quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))))
+        </td>
+      </tr><tr>
+        <td>
+          30
+        </td>
+        <td>
+          745
+        </td>
+        <td>
+          845
+          -
+          860
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;Edit Employee&quot;
+        </td>
+      </tr><tr>
+        <td>
+          30
+        </td>
+        <td>
+          816
+        </td>
+        <td>
+          880
+          -
+          2438
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.generic.GenericCompanion.apply
+        </td>
+        <td style="background: #AEF1AE">
+          collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot;\n&quot;), editEmployeeView.this.format.raw(&quot;&lt;div&gt;\n    &lt;span&gt;&lt;h3&gt;Edit Employee&lt;/h3&gt;\n          &lt;!--&lt;a href=\&quot;/renderEmployeeForm \&quot; class=\&quot;btn btn-danger pull-right\&quot; role=\&quot;button\&quot;&gt;Delete Employee&lt;/a&gt;--&gt;\n    &lt;/span&gt;\n\n\n    &quot;), editEmployeeView.this._display_(views.html.b3.form.apply(controllers.routes.DashBoardController.updateEmp())(editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.submit(scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;class&quot;)).-&gt;[String](&quot;btn btn-success pull-right&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;value&quot;)).-&gt;[String](&quot;remove&quot;))(editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot; &quot;), editEmployeeView.this.format.raw(&quot;Delete Employee &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))(views.html.b3.vertical.`package`.fieldConstructor)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.text(addForm.apply(&quot;name&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Name &quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;disabled&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.text(addForm.apply(&quot;address&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Address&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.date(addForm.apply(&quot;dob&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Date OF Birth&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.date(addForm.apply(&quot;doj&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Joining Date&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.text(addForm.apply(&quot;designation&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Designation&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.submit(scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;class&quot;)).-&gt;[String](&quot;btn btn-success&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;value&quot;)).-&gt;[String](&quot;update&quot;))(editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot; &quot;), editEmployeeView.this.format.raw(&quot;Update Employee &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))(views.html.b3.vertical.`package`.fieldConstructor)), editEmployeeView.this.format.raw(&quot;\n\n\n    &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))(views.html.b3.vertical.`package`.fieldConstructor)), editEmployeeView.this.format.raw(&quot;\n\n\n&quot;), editEmployeeView.this.format.raw(&quot;&lt;/div&gt;\n\n\n\n\n&quot;))
+        </td>
+      </tr><tr>
+        <td>
+          31
+        </td>
+        <td>
+          747
+        </td>
+        <td>
+          917
+          -
+          1115
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          editEmployeeView.this.format.raw(&quot;&lt;div&gt;\n    &lt;span&gt;&lt;h3&gt;Edit Employee&lt;/h3&gt;\n          &lt;!--&lt;a href=\&quot;/renderEmployeeForm \&quot; class=\&quot;btn btn-danger pull-right\&quot; role=\&quot;button\&quot;&gt;Delete Employee&lt;/a&gt;--&gt;\n    &lt;/span&gt;\n\n\n    &quot;)
+        </td>
+      </tr><tr>
+        <td>
+          37
+        </td>
+        <td>
+          810
+        </td>
+        <td>
+          1197
+          -
+          2367
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td style="background: #AEF1AE">
+          editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.submit(scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;class&quot;)).-&gt;[String](&quot;btn btn-success pull-right&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;value&quot;)).-&gt;[String](&quot;remove&quot;))(editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot; &quot;), editEmployeeView.this.format.raw(&quot;Delete Employee &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))(views.html.b3.vertical.`package`.fieldConstructor)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.text(addForm.apply(&quot;name&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Name &quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;disabled&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.text(addForm.apply(&quot;address&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Address&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.date(addForm.apply(&quot;dob&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Date OF Birth&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.date(addForm.apply(&quot;doj&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Joining Date&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.text(addForm.apply(&quot;designation&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Designation&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.submit(scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;class&quot;)).-&gt;[String](&quot;btn btn-success&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;value&quot;)).-&gt;[String](&quot;update&quot;))(editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot; &quot;), editEmployeeView.this.format.raw(&quot;Update Employee &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))(views.html.b3.vertical.`package`.fieldConstructor)), editEmployeeView.this.format.raw(&quot;\n\n\n    &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))
+        </td>
+      </tr><tr>
+        <td>
+          37
+        </td>
+        <td>
+          813
+        </td>
+        <td>
+          1116
+          -
+          2369
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td style="background: #AEF1AE">
+          editEmployeeView.this._display_(views.html.b3.form.apply(controllers.routes.DashBoardController.updateEmp())(editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.submit(scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;class&quot;)).-&gt;[String](&quot;btn btn-success pull-right&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;value&quot;)).-&gt;[String](&quot;remove&quot;))(editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot; &quot;), editEmployeeView.this.format.raw(&quot;Delete Employee &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))(views.html.b3.vertical.`package`.fieldConstructor)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.text(addForm.apply(&quot;name&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Name &quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;disabled&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.text(addForm.apply(&quot;address&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Address&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.date(addForm.apply(&quot;dob&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Date OF Birth&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.date(addForm.apply(&quot;doj&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Joining Date&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.text(addForm.apply(&quot;designation&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Designation&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.submit(scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;class&quot;)).-&gt;[String](&quot;btn btn-success&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;value&quot;)).-&gt;[String](&quot;update&quot;))(editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot; &quot;), editEmployeeView.this.format.raw(&quot;Update Employee &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))(views.html.b3.vertical.`package`.fieldConstructor)), editEmployeeView.this.format.raw(&quot;\n\n\n    &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))(views.html.b3.vertical.`package`.fieldConstructor))
+        </td>
+      </tr><tr>
+        <td>
+          37
+        </td>
+        <td>
+          812
+        </td>
+        <td>
+          1134
+          -
+          2368
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          views.html.b3.form_Scope0.form.apply
+        </td>
+        <td style="background: #AEF1AE">
+          views.html.b3.form.apply(controllers.routes.DashBoardController.updateEmp())(editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.submit(scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;class&quot;)).-&gt;[String](&quot;btn btn-success pull-right&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;value&quot;)).-&gt;[String](&quot;remove&quot;))(editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot; &quot;), editEmployeeView.this.format.raw(&quot;Delete Employee &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))(views.html.b3.vertical.`package`.fieldConstructor)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.text(addForm.apply(&quot;name&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Name &quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;disabled&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.text(addForm.apply(&quot;address&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Address&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.date(addForm.apply(&quot;dob&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Date OF Birth&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.date(addForm.apply(&quot;doj&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Joining Date&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.text(addForm.apply(&quot;designation&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Designation&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.submit(scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;class&quot;)).-&gt;[String](&quot;btn btn-success&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;value&quot;)).-&gt;[String](&quot;update&quot;))(editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot; &quot;), editEmployeeView.this.format.raw(&quot;Update Employee &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))(views.html.b3.vertical.`package`.fieldConstructor)), editEmployeeView.this.format.raw(&quot;\n\n\n    &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))(views.html.b3.vertical.`package`.fieldConstructor)
+        </td>
+      </tr><tr>
+        <td>
+          37
+        </td>
+        <td>
+          809
+        </td>
+        <td>
+          1206
+          -
+          1206
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.reflect.ManifestFactory.classType
+        </td>
+        <td style="background: #AEF1AE">
+          reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])
+        </td>
+      </tr><tr>
+        <td>
+          37
+        </td>
+        <td>
+          749
+        </td>
+        <td>
+          1216
+          -
+          1248
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          editEmployeeView.this.format.raw(&quot;\n    &quot;)
+        </td>
+      </tr><tr>
+        <td>
+          37
+        </td>
+        <td>
+          811
+        </td>
+        <td>
+          1196
+          -
+          1196
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          views.html.b3.vertical.fieldConstructor
+        </td>
+        <td style="background: #AEF1AE">
+          views.html.b3.vertical.`package`.fieldConstructor
+        </td>
+      </tr><tr>
+        <td>
+          37
+        </td>
+        <td>
+          808
+        </td>
+        <td>
+          1207
+          -
+          2366
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.generic.GenericCompanion.apply
+        </td>
+        <td style="background: #AEF1AE">
+          collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.submit(scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;class&quot;)).-&gt;[String](&quot;btn btn-success pull-right&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;value&quot;)).-&gt;[String](&quot;remove&quot;))(editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot; &quot;), editEmployeeView.this.format.raw(&quot;Delete Employee &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))(views.html.b3.vertical.`package`.fieldConstructor)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.text(addForm.apply(&quot;name&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Name &quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;disabled&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.text(addForm.apply(&quot;address&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Address&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.date(addForm.apply(&quot;dob&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Date OF Birth&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.date(addForm.apply(&quot;doj&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Joining Date&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.text(addForm.apply(&quot;designation&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Designation&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)), editEmployeeView.this.format.raw(&quot;\n    &quot;), editEmployeeView.this._display_(views.html.b3.`package`.submit(scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;class&quot;)).-&gt;[String](&quot;btn btn-success&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;value&quot;)).-&gt;[String](&quot;update&quot;))(editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot; &quot;), editEmployeeView.this.format.raw(&quot;Update Employee &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))(views.html.b3.vertical.`package`.fieldConstructor)), editEmployeeView.this.format.raw(&quot;\n\n\n    &quot;))
+        </td>
+      </tr><tr>
+        <td>
+          37
+        </td>
+        <td>
+          748
+        </td>
+        <td>
+          1150
+          -
+          1186
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          controllers.ReverseDashBoardController.updateEmp
+        </td>
+        <td style="background: #AEF1AE">
+          controllers.routes.DashBoardController.updateEmp()
+        </td>
+      </tr><tr>
+        <td>
+          38
+        </td>
+        <td>
+          756
+        </td>
+        <td>
+          1352
+          -
+          1445
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td style="background: #AEF1AE">
+          editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot; &quot;), editEmployeeView.this.format.raw(&quot;Delete Employee &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))
+        </td>
+      </tr><tr>
+        <td>
+          38
+        </td>
+        <td>
+          750
+        </td>
+        <td>
+          1285
+          -
+          1323
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;class&quot;)).-&gt;[String](&quot;btn btn-success pull-right&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          38
+        </td>
+        <td>
+          759
+        </td>
+        <td>
+          1249
+          -
+          1447
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td style="background: #AEF1AE">
+          editEmployeeView.this._display_(views.html.b3.`package`.submit(scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;class&quot;)).-&gt;[String](&quot;btn btn-success pull-right&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;value&quot;)).-&gt;[String](&quot;remove&quot;))(editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot; &quot;), editEmployeeView.this.format.raw(&quot;Delete Employee &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))(views.html.b3.vertical.`package`.fieldConstructor))
+        </td>
+      </tr><tr>
+        <td>
+          38
+        </td>
+        <td>
+          753
+        </td>
+        <td>
+          1400
+          -
+          1443
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          editEmployeeView.this.format.raw(&quot;Delete Employee &quot;)
+        </td>
+      </tr><tr>
+        <td>
+          38
+        </td>
+        <td>
+          752
+        </td>
+        <td>
+          1371
+          -
+          1399
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          editEmployeeView.this.format.raw(&quot; &quot;)
+        </td>
+      </tr><tr>
+        <td>
+          38
+        </td>
+        <td>
+          755
+        </td>
+        <td>
+          1361
+          -
+          1361
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.reflect.ManifestFactory.classType
+        </td>
+        <td style="background: #AEF1AE">
+          reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])
+        </td>
+      </tr><tr>
+        <td>
+          38
+        </td>
+        <td>
+          758
+        </td>
+        <td>
+          1267
+          -
+          1446
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          views.html.b3.submit
+        </td>
+        <td style="background: #AEF1AE">
+          views.html.b3.`package`.submit(scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;class&quot;)).-&gt;[String](&quot;btn btn-success pull-right&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;value&quot;)).-&gt;[String](&quot;remove&quot;))(editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot; &quot;), editEmployeeView.this.format.raw(&quot;Delete Employee &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))(views.html.b3.vertical.`package`.fieldConstructor)
+        </td>
+      </tr><tr>
+        <td>
+          38
+        </td>
+        <td>
+          757
+        </td>
+        <td>
+          1351
+          -
+          1351
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          views.html.b3.vertical.fieldConstructor
+        </td>
+        <td style="background: #AEF1AE">
+          views.html.b3.vertical.`package`.fieldConstructor
+        </td>
+      </tr><tr>
+        <td>
+          38
+        </td>
+        <td>
+          760
+        </td>
+        <td>
+          1448
+          -
+          1480
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          editEmployeeView.this.format.raw(&quot;\n    &quot;)
+        </td>
+      </tr><tr>
+        <td>
+          38
+        </td>
+        <td>
+          751
+        </td>
+        <td>
+          1325
+          -
+          1341
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;value&quot;)).-&gt;[String](&quot;remove&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          38
+        </td>
+        <td>
+          754
+        </td>
+        <td>
+          1362
+          -
+          1444
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.generic.GenericCompanion.apply
+        </td>
+        <td style="background: #AEF1AE">
+          collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot; &quot;), editEmployeeView.this.format.raw(&quot;Delete Employee &quot;))
+        </td>
+      </tr><tr>
+        <td>
+          39
+        </td>
+        <td>
+          765
+        </td>
+        <td>
+          1514
+          -
+          1514
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          views.html.b3.vertical.fieldConstructor
+        </td>
+        <td style="background: #AEF1AE">
+          views.html.b3.vertical.`package`.fieldConstructor
+        </td>
+      </tr><tr>
+        <td>
+          39
+        </td>
+        <td>
+          768
+        </td>
+        <td>
+          1589
+          -
+          1621
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          editEmployeeView.this.format.raw(&quot;\n    &quot;)
+        </td>
+      </tr><tr>
+        <td>
+          39
+        </td>
+        <td>
+          762
+        </td>
+        <td>
+          1533
+          -
+          1551
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Name &quot;)
+        </td>
+      </tr><tr>
+        <td>
+          39
+        </td>
+        <td>
+          761
+        </td>
+        <td>
+          1516
+          -
+          1531
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.api.data.Form.apply
+        </td>
+        <td style="background: #AEF1AE">
+          addForm.apply(&quot;name&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          39
+        </td>
+        <td>
+          764
+        </td>
+        <td>
+          1570
+          -
+          1585
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;disabled&quot;)).-&gt;[Boolean](true)
+        </td>
+      </tr><tr>
+        <td>
+          39
+        </td>
+        <td>
+          767
+        </td>
+        <td>
+          1481
+          -
+          1588
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td style="background: #AEF1AE">
+          editEmployeeView.this._display_(views.html.b3.`package`.text(addForm.apply(&quot;name&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Name &quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;disabled&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages))
+        </td>
+      </tr><tr>
+        <td>
+          39
+        </td>
+        <td>
+          766
+        </td>
+        <td>
+          1499
+          -
+          1587
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          views.html.b3.text
+        </td>
+        <td style="background: #AEF1AE">
+          views.html.b3.`package`.text(addForm.apply(&quot;name&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Name &quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;disabled&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)
+        </td>
+      </tr><tr>
+        <td>
+          39
+        </td>
+        <td>
+          763
+        </td>
+        <td>
+          1553
+          -
+          1568
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true)
+        </td>
+      </tr><tr>
+        <td>
+          40
+        </td>
+        <td>
+          774
+        </td>
+        <td>
+          1622
+          -
+          1717
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td style="background: #AEF1AE">
+          editEmployeeView.this._display_(views.html.b3.`package`.text(addForm.apply(&quot;address&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Address&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages))
+        </td>
+      </tr><tr>
+        <td>
+          40
+        </td>
+        <td>
+          771
+        </td>
+        <td>
+          1699
+          -
+          1714
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true)
+        </td>
+      </tr><tr>
+        <td>
+          40
+        </td>
+        <td>
+          770
+        </td>
+        <td>
+          1677
+          -
+          1697
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Address&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          40
+        </td>
+        <td>
+          773
+        </td>
+        <td>
+          1640
+          -
+          1716
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          views.html.b3.text
+        </td>
+        <td style="background: #AEF1AE">
+          views.html.b3.`package`.text(addForm.apply(&quot;address&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Address&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)
+        </td>
+      </tr><tr>
+        <td>
+          40
+        </td>
+        <td>
+          775
+        </td>
+        <td>
+          1718
+          -
+          1750
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          editEmployeeView.this.format.raw(&quot;\n    &quot;)
+        </td>
+      </tr><tr>
+        <td>
+          40
+        </td>
+        <td>
+          769
+        </td>
+        <td>
+          1657
+          -
+          1675
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.api.data.Form.apply
+        </td>
+        <td style="background: #AEF1AE">
+          addForm.apply(&quot;address&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          40
+        </td>
+        <td>
+          772
+        </td>
+        <td>
+          1655
+          -
+          1655
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          views.html.b3.vertical.fieldConstructor
+        </td>
+        <td style="background: #AEF1AE">
+          views.html.b3.vertical.`package`.fieldConstructor
+        </td>
+      </tr><tr>
+        <td>
+          41
+        </td>
+        <td>
+          777
+        </td>
+        <td>
+          1800
+          -
+          1826
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Date OF Birth&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          41
+        </td>
+        <td>
+          779
+        </td>
+        <td>
+          1784
+          -
+          1784
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          views.html.b3.vertical.fieldConstructor
+        </td>
+        <td style="background: #AEF1AE">
+          views.html.b3.vertical.`package`.fieldConstructor
+        </td>
+      </tr><tr>
+        <td>
+          41
+        </td>
+        <td>
+          782
+        </td>
+        <td>
+          1846
+          -
+          1878
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          editEmployeeView.this.format.raw(&quot;\n    &quot;)
+        </td>
+      </tr><tr>
+        <td>
+          41
+        </td>
+        <td>
+          776
+        </td>
+        <td>
+          1785
+          -
+          1799
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.api.data.Form.apply
+        </td>
+        <td style="background: #AEF1AE">
+          addForm.apply(&quot;dob&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          41
+        </td>
+        <td>
+          778
+        </td>
+        <td>
+          1828
+          -
+          1843
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true)
+        </td>
+      </tr><tr>
+        <td>
+          41
+        </td>
+        <td>
+          781
+        </td>
+        <td>
+          1751
+          -
+          1845
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td style="background: #AEF1AE">
+          editEmployeeView.this._display_(views.html.b3.`package`.date(addForm.apply(&quot;dob&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Date OF Birth&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages))
+        </td>
+      </tr><tr>
+        <td>
+          41
+        </td>
+        <td>
+          780
+        </td>
+        <td>
+          1769
+          -
+          1844
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          views.html.b3.date
+        </td>
+        <td style="background: #AEF1AE">
+          views.html.b3.`package`.date(addForm.apply(&quot;dob&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Date OF Birth&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)
+        </td>
+      </tr><tr>
+        <td>
+          42
+        </td>
+        <td>
+          783
+        </td>
+        <td>
+          1913
+          -
+          1927
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.api.data.Form.apply
+        </td>
+        <td style="background: #AEF1AE">
+          addForm.apply(&quot;doj&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          42
+        </td>
+        <td>
+          786
+        </td>
+        <td>
+          1912
+          -
+          1912
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          views.html.b3.vertical.fieldConstructor
+        </td>
+        <td style="background: #AEF1AE">
+          views.html.b3.vertical.`package`.fieldConstructor
+        </td>
+      </tr><tr>
+        <td>
+          42
+        </td>
+        <td>
+          788
+        </td>
+        <td>
+          1879
+          -
+          1972
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td style="background: #AEF1AE">
+          editEmployeeView.this._display_(views.html.b3.`package`.date(addForm.apply(&quot;doj&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Joining Date&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages))
+        </td>
+      </tr><tr>
+        <td>
+          42
+        </td>
+        <td>
+          785
+        </td>
+        <td>
+          1955
+          -
+          1970
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true)
+        </td>
+      </tr><tr>
+        <td>
+          42
+        </td>
+        <td>
+          784
+        </td>
+        <td>
+          1928
+          -
+          1953
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Joining Date&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          42
+        </td>
+        <td>
+          787
+        </td>
+        <td>
+          1897
+          -
+          1971
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          views.html.b3.date
+        </td>
+        <td style="background: #AEF1AE">
+          views.html.b3.`package`.date(addForm.apply(&quot;doj&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Joining Date&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)
+        </td>
+      </tr><tr>
+        <td>
+          42
+        </td>
+        <td>
+          789
+        </td>
+        <td>
+          1973
+          -
+          2005
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          editEmployeeView.this.format.raw(&quot;\n    &quot;)
+        </td>
+      </tr><tr>
+        <td>
+          43
+        </td>
+        <td>
+          792
+        </td>
+        <td>
+          2091
+          -
+          2106
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true)
+        </td>
+      </tr><tr>
+        <td>
+          43
+        </td>
+        <td>
+          795
+        </td>
+        <td>
+          2006
+          -
+          2109
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td style="background: #AEF1AE">
+          editEmployeeView.this._display_(views.html.b3.`package`.text(addForm.apply(&quot;designation&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Designation&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages))
+        </td>
+      </tr><tr>
+        <td>
+          43
+        </td>
+        <td>
+          791
+        </td>
+        <td>
+          2065
+          -
+          2089
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Designation&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          43
+        </td>
+        <td>
+          794
+        </td>
+        <td>
+          2024
+          -
+          2108
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          views.html.b3.text
+        </td>
+        <td style="background: #AEF1AE">
+          views.html.b3.`package`.text(addForm.apply(&quot;designation&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;_label&quot;)).-&gt;[String](&quot;Designation&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;required&quot;)).-&gt;[Boolean](true))(views.html.b3.vertical.`package`.fieldConstructor, messages)
+        </td>
+      </tr><tr>
+        <td>
+          43
+        </td>
+        <td>
+          793
+        </td>
+        <td>
+          2039
+          -
+          2039
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          views.html.b3.vertical.fieldConstructor
+        </td>
+        <td style="background: #AEF1AE">
+          views.html.b3.vertical.`package`.fieldConstructor
+        </td>
+      </tr><tr>
+        <td>
+          43
+        </td>
+        <td>
+          796
+        </td>
+        <td>
+          2110
+          -
+          2142
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          editEmployeeView.this.format.raw(&quot;\n    &quot;)
+        </td>
+      </tr><tr>
+        <td>
+          43
+        </td>
+        <td>
+          790
+        </td>
+        <td>
+          2041
+          -
+          2063
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.api.data.Form.apply
+        </td>
+        <td style="background: #AEF1AE">
+          addForm.apply(&quot;designation&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          44
+        </td>
+        <td>
+          801
+        </td>
+        <td>
+          2245
+          -
+          2327
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.generic.GenericCompanion.apply
+        </td>
+        <td style="background: #AEF1AE">
+          collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot; &quot;), editEmployeeView.this.format.raw(&quot;Update Employee &quot;))
+        </td>
+      </tr><tr>
+        <td>
+          44
+        </td>
+        <td>
+          804
+        </td>
+        <td>
+          2234
+          -
+          2234
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          views.html.b3.vertical.fieldConstructor
+        </td>
+        <td style="background: #AEF1AE">
+          views.html.b3.vertical.`package`.fieldConstructor
+        </td>
+      </tr><tr>
+        <td>
+          44
+        </td>
+        <td>
+          803
+        </td>
+        <td>
+          2235
+          -
+          2328
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td style="background: #AEF1AE">
+          editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot; &quot;), editEmployeeView.this.format.raw(&quot;Update Employee &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))
+        </td>
+      </tr><tr>
+        <td>
+          44
+        </td>
+        <td>
+          797
+        </td>
+        <td>
+          2179
+          -
+          2206
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;class&quot;)).-&gt;[String](&quot;btn btn-success&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          44
+        </td>
+        <td>
+          806
+        </td>
+        <td>
+          2143
+          -
+          2330
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td style="background: #AEF1AE">
+          editEmployeeView.this._display_(views.html.b3.`package`.submit(scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;class&quot;)).-&gt;[String](&quot;btn btn-success&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;value&quot;)).-&gt;[String](&quot;update&quot;))(editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot; &quot;), editEmployeeView.this.format.raw(&quot;Update Employee &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))(views.html.b3.vertical.`package`.fieldConstructor))
+        </td>
+      </tr><tr>
+        <td>
+          44
+        </td>
+        <td>
+          800
+        </td>
+        <td>
+          2283
+          -
+          2326
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          editEmployeeView.this.format.raw(&quot;Update Employee &quot;)
+        </td>
+      </tr><tr>
+        <td>
+          44
+        </td>
+        <td>
+          802
+        </td>
+        <td>
+          2244
+          -
+          2244
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.reflect.ManifestFactory.classType
+        </td>
+        <td style="background: #AEF1AE">
+          reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])
+        </td>
+      </tr><tr>
+        <td>
+          44
+        </td>
+        <td>
+          805
+        </td>
+        <td>
+          2161
+          -
+          2329
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          views.html.b3.submit
+        </td>
+        <td style="background: #AEF1AE">
+          views.html.b3.`package`.submit(scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;class&quot;)).-&gt;[String](&quot;btn btn-success&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;value&quot;)).-&gt;[String](&quot;update&quot;))(editEmployeeView.this._display_(collection.this.Seq.apply[Any](editEmployeeView.this.format.raw(&quot; &quot;), editEmployeeView.this.format.raw(&quot;Update Employee &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))(views.html.b3.vertical.`package`.fieldConstructor)
+        </td>
+      </tr><tr>
+        <td>
+          44
+        </td>
+        <td>
+          799
+        </td>
+        <td>
+          2254
+          -
+          2282
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          editEmployeeView.this.format.raw(&quot; &quot;)
+        </td>
+      </tr><tr>
+        <td>
+          44
+        </td>
+        <td>
+          807
+        </td>
+        <td>
+          2331
+          -
+          2365
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          editEmployeeView.this.format.raw(&quot;\n\n\n    &quot;)
+        </td>
+      </tr><tr>
+        <td>
+          44
+        </td>
+        <td>
+          798
+        </td>
+        <td>
+          2208
+          -
+          2224
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;value&quot;)).-&gt;[String](&quot;update&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          47
+        </td>
+        <td>
+          814
+        </td>
+        <td>
+          2370
+          -
+          2399
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          editEmployeeView.this.format.raw(&quot;\n\n\n&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          50
+        </td>
+        <td>
+          815
+        </td>
+        <td>
+          2400
+          -
+          2437
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          editEmployeeView.this.format.raw(&quot;&lt;/div&gt;\n\n\n\n\n&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          55
+        </td>
+        <td>
+          821
+        </td>
+        <td>
+          2442
+          -
+          2469
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          editEmployeeView.this.format.raw(&quot;\n&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          61
+        </td>
+        <td>
+          825
+        </td>
+        <td>
+          2588
+          -
+          2612
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          views.html.editEmployeeView_Scope0.editEmployeeView_Scope1.editEmployeeView.apply
+        </td>
+        <td style="background: #F0ADAD">
+          editEmployeeView.this.apply(addForm)(messages)
+        </td>
+      </tr><tr>
+        <td>
+          63
+        </td>
+        <td>
+          826
+        </td>
+        <td>
+          2727
+          -
+          2751
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          views.html.editEmployeeView_Scope0.editEmployeeView_Scope1.editEmployeeView.apply
+        </td>
+        <td style="background: #F0ADAD">
+          editEmployeeView.this.apply(addForm)(messages)
+        </td>
+      </tr>
+    </table>
+          </div>
+        </div>
+      </body>
+    </html>

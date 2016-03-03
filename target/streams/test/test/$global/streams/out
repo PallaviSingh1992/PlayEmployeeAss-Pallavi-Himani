@@ -1,0 +1,320 @@
+[0m[[0mdebug[0m] [0mForking tests - parallelism = false[0m
+[0m[[0mdebug[0m] [0mCreate a single-thread test executor[0m
+[0m[[0mdebug[0m] [0mRunner for org.specs2.runner.Specs2Framework produced 4 initial tasks for 4 tests.[0m
+[0m[[0mdebug[0m] [0m  Running TaskDef(EmployeeModelSpec, sbt.ForkMain$SubclassFingerscan@5d30c7ca, false, [SuiteSelector])[0m
+[0m[[0minfo[0m] [0mEmployeeModelSpec[0m
+[0m[[0minfo[0m] [0m[0m
+[0m[[0minfo[0m] [0mEmployeeModelSpec should[0m
+[0m[[0minfo[0m] [0m  [32m+[0m add an employee record[0m
+[0m[[31merror[0m] [0m  [33mx[0m Update an employee record [0m
+[0m[[31merror[0m] [0m   the value is not equal to 'true' (EmployeeModelSpec.scala:23)[0m
+[0m[[0minfo[0m] [0m[0m
+[0m[[0minfo[0m] [0m[0m
+[0m[[0minfo[0m] [0mTotal for specification EmployeeModelSpec[0m
+[0m[[0minfo[0m] [0m[36mFinished in 1 second, 782 ms[0m[0m
+[0m[[0minfo[0m] [0m[36m[0m[36m2 examples, 1 failure, 0 error[0m[0m
+[0m[[0minfo[0m] [0m[0m
+[0m[[0mdebug[0m] [0m    Produced 0 nested tasks and 2 events.[0m
+[0m[[0mdebug[0m] [0m  Running TaskDef(ApplicationSpec, sbt.ForkMain$SubclassFingerscan@48f038b6, false, [SuiteSelector])[0m
+[0m[[0minfo[0m] [0mApplicationSpec[0m
+[0m[[0minfo[0m] [0m[0m
+[0m[[0minfo[0m] [0mApplication should[0m
+[0m[[0minfo[0m] [0m  [32m+[0m send 404 on a bad request[0m
+[0m[[31merror[0m] [0m  [33mx[0m render the index page[0m
+[0m[[31merror[0m] [0m   '[0m
+[0m[[31merror[0m] [0m   [0m
+[0m[[31merror[0m] [0m   [0m
+[0m[[31merror[0m] [0m   [0m
+[0m[[31merror[0m] [0m   <!DOCTYPE html>[0m
+[0m[[31merror[0m] [0m   [0m
+[0m[[31merror[0m] [0m   <html lang="en">[0m
+[0m[[31merror[0m] [0m       <head>[0m
+[0m[[31merror[0m] [0m           <title>DashBoard</title>[0m
+[0m[[31merror[0m] [0m           <link rel="stylesheet" media="screen" href="/assets/stylesheets/main.css">[0m
+[0m[[31merror[0m] [0m           <link rel="shortcut icon" type="image/png" href="/assets/images/favicon.png">[0m
+[0m[[31merror[0m] [0m           <script src="/assets/javascripts/hello.js" type="text/javascript"></script>[0m
+[0m[[31merror[0m] [0m            <link rel='stylesheet' href='/webjars/bootstrap/3.3.6/css/bootstrap.min.css'>[0m
+[0m[[31merror[0m] [0m           <script type='text/javascript' src='/webjars/jquery/2.1.4/jquery.min.js'></script>[0m
+[0m[[31merror[0m] [0m           <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>[0m
+[0m[[31merror[0m] [0m           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>[0m
+[0m[[31merror[0m] [0m   [0m
+[0m[[31merror[0m] [0m       </head>[0m
+[0m[[31merror[0m] [0m       <body>[0m
+[0m[[31merror[0m] [0m   [0m
+[0m[[31merror[0m] [0m           <div class="jumbotron" style="background-color:#660066;color:white;height:5%;width:100%">[0m
+[0m[[31merror[0m] [0m               <div class="container-fluid">[0m
+[0m[[31merror[0m] [0m               <h2>PlayFrameWork Assignment</h2>[0m
+[0m[[31merror[0m] [0m               </div>[0m
+[0m[[31merror[0m] [0m           </div><!--Closing of Jumbotron-->[0m
+[0m[[31merror[0m] [0m           <div class="container">[0m
+[0m[[31merror[0m] [0m               <div class="panel panel-default">[0m
+[0m[[31merror[0m] [0m                   <div class="panel-body">[0m
+[0m[[31merror[0m] [0m                       [0m
+[0m[[31merror[0m] [0m   <div>[0m
+[0m[[31merror[0m] [0m       <span><p>[0m
+[0m[[31merror[0m] [0m           [0m
+[0m[[31merror[0m] [0m           [0m
+[0m[[31merror[0m] [0m           [0m
+[0m[[31merror[0m] [0m       </p></span>[0m
+[0m[[31merror[0m] [0m   [0m
+[0m[[31merror[0m] [0m   [0m
+[0m[[31merror[0m] [0m        [0m
+[0m[[31merror[0m] [0m   [0m
+[0m[[31merror[0m] [0m   <form action="/getByName" method="GET" display="inline">[0m
+[0m[[31merror[0m] [0m       [0m
+[0m[[31merror[0m] [0m           [0m
+[0m[[31merror[0m] [0m   [0m
+[0m[[31merror[0m] [0m   [0m
+[0m[[31merror[0m] [0m   [0m
+[0m[[31merror[0m] [0m   [0m
+[0m[[31merror[0m] [0m   [0m
+[0m[[31merror[0m] [0m   [0m
+[0m[[31merror[0m] [0m   [0m
+[0m[[31merror[0m] [0m   [0m
+[0m[[31merror[0m] [0m   [0m
+[0m[[31merror[0m] [0m   <dl class=" " id="name_field">[0m
+[0m[[31merror[0m] [0m       [0m
+[0m[[31merror[0m] [0m       <dt><label for="name">name</label></dt>[0m
+[0m[[31merror[0m] [0m       [0m
+[0m[[31merror[0m] [0m       <dd>[0m
+[0m[[31merror[0m] [0m       <input type="text" id="name" name="name" value="" placeholder="Filter by Employee name"/>[0m
+[0m[[31merror[0m] [0m   </dd>[0m
+[0m[[31merror[0m] [0m       [0m
+[0m[[31merror[0m] [0m       [0m
+[0m[[31merror[0m] [0m   </dl>[0m
+[0m[[31merror[0m] [0m   [0m
+[0m[[31merror[0m] [0m   [0m
+[0m[[31merror[0m] [0m   [0m
+[0m[[31merror[0m] [0m           <button type="submit" class="btn btn-primary" style="background-color:orange;color:white">Filter by Name</button>[0m
+[0m[[31merror[0m] [0m       [0m
+[0m[[31merror[0m] [0m   </form>[0m
+[0m[[31merror[0m] [0m   [0m
+[0m[[31merror[0m] [0m   [0m
+[0m[[31merror[0m] [0m       <a href="/renderEmployeeForm " class="btn btn-success pull-right" role="button">Add An Employee</a>[0m
+[0m[[31merror[0m] [0m   [0m
+[0m[[31merror[0m] [0m        <br><br>[0m
+[0m[[31merror[0m] [0m       <table class="table table-striped">[0m
+[0m[[31merror[0m] [0m           <thead>[0m
+[0m[[31merror[0m] [0m           <tr>[0m
+[0m[[31merror[0m] [0m               <th>Name</th>[0m
+[0m[[31merror[0m] [0m               <th>Address</th>[0m
+[0m[[31merror[0m] [0m               <th>Date Of Birth</th>[0m
+[0m[[31merror[0m] [0m               <th>Joining Date</th>[0m
+[0m[[31merror[0m] [0m               <th>Designation</th>[0m
+[0m[[31merror[0m] [0m           </tr>[0m
+[0m[[31merror[0m] [0m           </thead>[0m
+[0m[[31merror[0m] [0m           <tbody>[0m
+[0m[[31merror[0m] [0m           [0m
+[0m[[31merror[0m] [0m           <tr>[0m
+[0m[[31merror[0m] [0m               <td><a href="/editEmployee/Seema">Seema</a></td>[0m
+[0m[[31merror[0m] [0m               <td>Ashok Vihar</td>[0m
+[0m[[31merror[0m] [0m               <td>Mon Mar 09 00:00:00 IST 1992</td>[0m
+[0m[[31merror[0m] [0m               <td>Thu Jan 21 00:00:00 IST 2016</td>[0m
+[0m[[31merror[0m] [0m               <td>Software Consultant</td>[0m
+[0m[[31merror[0m] [0m           </tr>[0m
+[0m[[31merror[0m] [0m           [0m
+[0m[[31merror[0m] [0m           <tr>[0m
+[0m[[31merror[0m] [0m               <td><a href="/editEmployee/Himani ">Himani </a></td>[0m
+[0m[[31merror[0m] [0m               <td>Lakshmi Nagar</td>[0m
+[0m[[31merror[0m] [0m               <td>Sat May 09 00:00:00 IST 1992</td>[0m
+[0m[[31merror[0m] [0m               <td>Thu Jan 21 00:00:00 IST 2016</td>[0m
+[0m[[31merror[0m] [0m               <td>Software Consultant</td>[0m
+[0m[[31merror[0m] [0m           </tr>[0m
+[0m[[31merror[0m] [0m           [0m
+[0m[[31merror[0m] [0m           <tr>[0m
+[0m[[31merror[0m] [0m               <td><a href="/editEmployee/Pallavi">Pallavi</a></td>[0m
+[0m[[31merror[0m] [0m               <td>Ashok Vihar</td>[0m
+[0m[[31merror[0m] [0m               <td>Mon Mar 09 00:00:00 IST 1992</td>[0m
+[0m[[31merror[0m] [0m               <td>Thu Jan 21 00:00:00 IST 2016</td>[0m
+[0m[[31merror[0m] [0m               <td>Software Consultant</td>[0m
+[0m[[31merror[0m] [0m           </tr>[0m
+[0m[[31merror[0m] [0m           [0m
+[0m[[31merror[0m] [0m           </tbody>[0m
+[0m[[31merror[0m] [0m       </table>[0m
+[0m[[31merror[0m] [0m   </div>[0m
+[0m[[31merror[0m] [0m   [0m
+[0m[[31merror[0m] [0m   [0m
+[0m[[31merror[0m] [0m                   </div>[0m
+[0m[[31merror[0m] [0m                   <div class="panel-footer">created by Himani Arora and Pallavi Singh</div>[0m
+[0m[[31merror[0m] [0m               </div>[0m
+[0m[[31merror[0m] [0m   [0m
+[0m[[31merror[0m] [0m           </div>[0m
+[0m[[31merror[0m] [0m   [0m
+[0m[[31merror[0m] [0m   [0m
+[0m[[31merror[0m] [0m   [0m
+[0m[[31merror[0m] [0m       </body>[0m
+[0m[[31merror[0m] [0m   </html>[0m
+[0m[[31merror[0m] [0m   [0m
+[0m[[31merror[0m] [0m   [0m
+[0m[[31merror[0m] [0m   [0m
+[0m[[31merror[0m] [0m   [0m
+[0m[[31merror[0m] [0m   ' doesn't contain 'Your new application is ready.' (ApplicationSpec.scala:27)[0m
+[0m[[0minfo[0m] [0m[0m
+[0m[[0minfo[0m] [0m[0m
+[0m[[0minfo[0m] [0mTotal for specification ApplicationSpec[0m
+[0m[[0minfo[0m] [0m[36mFinished in 342 ms[0m[0m
+[0m[[0minfo[0m] [0m[36m[0m[36m2 examples, 1 failure, 0 error[0m[0m
+[0m[[0minfo[0m] [0m[0m
+[0m[[0mdebug[0m] [0m    Produced 0 nested tasks and 2 events.[0m
+[0m[[0mdebug[0m] [0m  Running TaskDef(DashBoardSpec, sbt.ForkMain$SubclassFingerscan@2a58fc72, false, [SuiteSelector])[0m
+[0m[[0minfo[0m] [0mDashBoardSpec[0m
+[0m[[0minfo[0m] [0m[0m
+[0m[[0minfo[0m] [0mDashBoardSpec should[0m
+[0m[[0minfo[0m] [0m  [32m+[0m get all Employee details[0m
+[0m[[0minfo[0m] [0m  [32m+[0m get specific employees details[0m
+[0m[[0minfo[0m] [0m  [32m+[0m when employee does not exists[0m
+[0m[[0minfo[0m] [0m  [32m+[0m get add employee form[0m
+[0m[[0minfo[0m] [0m  [32m+[0m saving an employee record with correct values[0m
+[0m[[0minfo[0m] [0m  [32m+[0m saving an employee record with incorrect values[0m
+[0m[[0minfo[0m] [0m  [32m+[0m get employee data to be updated in form[0m
+[0m[[0minfo[0m] [0m  [32m+[0m Update employee record[0m
+[0m[[0minfo[0m] [0m  [32m+[0m Delete an employee record[0m
+[0m[[0minfo[0m] [0m[0m
+[0m[[0minfo[0m] [0mTotal for specification DashBoardSpec[0m
+[0m[[0minfo[0m] [0m[36mFinished in 191 ms[0m[0m
+[0m[[0minfo[0m] [0m[36m[0m[36m9 examples, 0 failure, 0 error[0m[0m
+[0m[[0minfo[0m] [0m[0m
+[0m[[0mdebug[0m] [0m    Produced 0 nested tasks and 9 events.[0m
+[0m[[0mdebug[0m] [0m  Running TaskDef(IntegrationSpec, sbt.ForkMain$SubclassFingerscan@16e2b61b, false, [SuiteSelector])[0m
+[0m[[0minfo[0m] [0mIntegrationSpec[0m
+[0m[[0minfo[0m] [0m[0m
+[0m[[0minfo[0m] [0mApplication should[0m
+[0m[[31merror[0m] [0m  [31m![0m work from within a browser[0m
+[0m[[31merror[0m] [0m   com.gargoylesoftware.htmlunit.ScriptException: TypeError: Cannot find function addEventListener in object [object HTMLDocument]. (http://localhost:19001/webjars/jquery/2.1.4/jquery.min.js#2)[0m
+[0m[[31merror[0m] [0m   Build info: version: '2.44.0', revision: '76d78cf323ce037c5f92db6c1bba601c2ac43ad8', time: '2014-10-23 13:11:40'[0m
+[0m[[31merror[0m] [0m   System info: host: 'knoldus-Lenovo-G50-80', ip: '127.0.1.1', os.name: 'Linux', os.arch: 'amd64', os.version: '3.19.0-51-generic', java.version: '1.8.0_45-internal'[0m
+[0m[[31merror[0m] [0m   Driver info: driver.version: HtmlUnitDriver (HtmlUnitDriver.java:493)[0m
+[0m[[31merror[0m] [0morg.openqa.selenium.htmlunit.HtmlUnitDriver.get(HtmlUnitDriver.java:493)[0m
+[0m[[31merror[0m] [0morg.openqa.selenium.htmlunit.HtmlUnitDriver.get(HtmlUnitDriver.java:469)[0m
+[0m[[31merror[0m] [0morg.fluentlenium.core.Fluent.goTo(Fluent.java:336)[0m
+[0m[[31merror[0m] [0mIntegrationSpec$$anonfun$1$$anonfun$apply$1$$anon$1.delayedEndpoint$IntegrationSpec$$anonfun$1$$anonfun$apply$1$$anon$1$1(IntegrationSpec.scala:19)[0m
+[0m[[31merror[0m] [0mIntegrationSpec$$anonfun$1$$anonfun$apply$1$$anon$1$delayedInit$body.apply(IntegrationSpec.scala:17)[0m
+[0m[[31merror[0m] [0mplay.api.test.WithBrowser$$anonfun$around$4.apply(Specs.scala:89)[0m
+[0m[[31merror[0m] [0mplay.api.test.WithBrowser$$anonfun$around$4.apply(Specs.scala:89)[0m
+[0m[[31merror[0m] [0mplay.api.test.PlayRunners$class.running(Helpers.scala:56)[0m
+[0m[[31merror[0m] [0mplay.api.test.Helpers$.running(Helpers.scala:363)[0m
+[0m[[31merror[0m] [0mplay.api.test.WithBrowser.around(Specs.scala:89)[0m
+[0m[[31merror[0m] [0mplay.api.test.WithBrowser.delayedInit(Specs.scala:72)[0m
+[0m[[31merror[0m] [0mIntegrationSpec$$anonfun$1$$anonfun$apply$1$$anon$1.<init>(IntegrationSpec.scala:17)[0m
+[0m[[31merror[0m] [0mIntegrationSpec$$anonfun$1$$anonfun$apply$1.apply(IntegrationSpec.scala:17)[0m
+[0m[[31merror[0m] [0mIntegrationSpec$$anonfun$1$$anonfun$apply$1.apply(IntegrationSpec.scala:17)[0m
+[0m[[31merror[0m] [0mcom.gargoylesoftware.htmlunit.javascript.JavaScriptEngine$HtmlUnitContextAction.run(JavaScriptEngine.java:705)[0m
+[0m[[31merror[0m] [0mnet.sourceforge.htmlunit.corejs.javascript.Context.call(Context.java:620)[0m
+[0m[[31merror[0m] [0mnet.sourceforge.htmlunit.corejs.javascript.ContextFactory.call(ContextFactory.java:513)[0m
+[0m[[31merror[0m] [0mcom.gargoylesoftware.htmlunit.javascript.JavaScriptEngine.execute(JavaScriptEngine.java:591)[0m
+[0m[[31merror[0m] [0mcom.gargoylesoftware.htmlunit.html.HtmlPage.loadExternalJavaScriptFile(HtmlPage.java:1078)[0m
+[0m[[31merror[0m] [0mcom.gargoylesoftware.htmlunit.html.HtmlScript.executeScriptIfNeeded(HtmlScript.java:393)[0m
+[0m[[31merror[0m] [0mcom.gargoylesoftware.htmlunit.html.HtmlScript$3.execute(HtmlScript.java:268)[0m
+[0m[[31merror[0m] [0mcom.gargoylesoftware.htmlunit.html.HtmlScript.onAllChildrenAddedToPage(HtmlScript.java:288)[0m
+[0m[[31merror[0m] [0mcom.gargoylesoftware.htmlunit.html.HTMLParser$HtmlUnitDOMBuilder.endElement(HTMLParser.java:741)[0m
+[0m[[31merror[0m] [0morg.apache.xerces.parsers.AbstractSAXParser.endElement(Unknown Source)[0m
+[0m[[31merror[0m] [0mcom.gargoylesoftware.htmlunit.html.HTMLParser$HtmlUnitDOMBuilder.endElement(HTMLParser.java:701)[0m
+[0m[[31merror[0m] [0morg.cyberneko.html.HTMLTagBalancer.callEndElement(HTMLTagBalancer.java:1170)[0m
+[0m[[31merror[0m] [0morg.cyberneko.html.HTMLTagBalancer.endElement(HTMLTagBalancer.java:1072)[0m
+[0m[[31merror[0m] [0morg.cyberneko.html.filters.DefaultFilter.endElement(DefaultFilter.java:206)[0m
+[0m[[31merror[0m] [0morg.cyberneko.html.filters.NamespaceBinder.endElement(NamespaceBinder.java:330)[0m
+[0m[[31merror[0m] [0morg.cyberneko.html.HTMLScanner$ContentScanner.scanEndElement(HTMLScanner.java:3126)[0m
+[0m[[31merror[0m] [0morg.cyberneko.html.HTMLScanner$ContentScanner.scan(HTMLScanner.java:2093)[0m
+[0m[[31merror[0m] [0morg.cyberneko.html.HTMLScanner.scanDocument(HTMLScanner.java:920)[0m
+[0m[[31merror[0m] [0morg.cyberneko.html.HTMLConfiguration.parse(HTMLConfiguration.java:499)[0m
+[0m[[31merror[0m] [0morg.cyberneko.html.HTMLConfiguration.parse(HTMLConfiguration.java:452)[0m
+[0m[[31merror[0m] [0morg.apache.xerces.parsers.XMLParser.parse(Unknown Source)[0m
+[0m[[31merror[0m] [0mcom.gargoylesoftware.htmlunit.html.HTMLParser$HtmlUnitDOMBuilder.parse(HTMLParser.java:965)[0m
+[0m[[31merror[0m] [0mcom.gargoylesoftware.htmlunit.html.HTMLParser.parse(HTMLParser.java:247)[0m
+[0m[[31merror[0m] [0mcom.gargoylesoftware.htmlunit.html.HTMLParser.parseHtml(HTMLParser.java:193)[0m
+[0m[[31merror[0m] [0mcom.gargoylesoftware.htmlunit.DefaultPageCreator.createHtmlPage(DefaultPageCreator.java:268)[0m
+[0m[[31merror[0m] [0mcom.gargoylesoftware.htmlunit.DefaultPageCreator.createPage(DefaultPageCreator.java:156)[0m
+[0m[[31merror[0m] [0mcom.gargoylesoftware.htmlunit.WebClient.loadWebResponseInto(WebClient.java:468)[0m
+[0m[[31merror[0m] [0mcom.gargoylesoftware.htmlunit.WebClient.getPage(WebClient.java:342)[0m
+[0m[[31merror[0m] [0mcom.gargoylesoftware.htmlunit.WebClient.getPage(WebClient.java:407)[0m
+[0m[[31merror[0m] [0morg.openqa.selenium.htmlunit.HtmlUnitDriver.get(HtmlUnitDriver.java:480)[0m
+[0m[[31merror[0m] [0morg.openqa.selenium.htmlunit.HtmlUnitDriver.get(HtmlUnitDriver.java:469)[0m
+[0m[[31merror[0m] [0morg.fluentlenium.core.Fluent.goTo(Fluent.java:336)[0m
+[0m[[31merror[0m] [0mIntegrationSpec$$anonfun$1$$anonfun$apply$1$$anon$1.delayedEndpoint$IntegrationSpec$$anonfun$1$$anonfun$apply$1$$anon$1$1(IntegrationSpec.scala:19)[0m
+[0m[[31merror[0m] [0mIntegrationSpec$$anonfun$1$$anonfun$apply$1$$anon$1$delayedInit$body.apply(IntegrationSpec.scala:17)[0m
+[0m[[31merror[0m] [0mplay.api.test.WithBrowser$$anonfun$around$4.apply(Specs.scala:89)[0m
+[0m[[31merror[0m] [0mplay.api.test.WithBrowser$$anonfun$around$4.apply(Specs.scala:89)[0m
+[0m[[31merror[0m] [0mplay.api.test.PlayRunners$class.running(Helpers.scala:56)[0m
+[0m[[31merror[0m] [0mplay.api.test.Helpers$.running(Helpers.scala:363)[0m
+[0m[[31merror[0m] [0mplay.api.test.WithBrowser.around(Specs.scala:89)[0m
+[0m[[31merror[0m] [0mplay.api.test.WithBrowser.delayedInit(Specs.scala:72)[0m
+[0m[[31merror[0m] [0mIntegrationSpec$$anonfun$1$$anonfun$apply$1$$anon$1.<init>(IntegrationSpec.scala:17)[0m
+[0m[[31merror[0m] [0mIntegrationSpec$$anonfun$1$$anonfun$apply$1.apply(IntegrationSpec.scala:17)[0m
+[0m[[31merror[0m] [0mIntegrationSpec$$anonfun$1$$anonfun$apply$1.apply(IntegrationSpec.scala:17)[0m
+[0m[[31merror[0m] [0mnet.sourceforge.htmlunit.corejs.javascript.ScriptRuntime.constructError(ScriptRuntime.java:3629)[0m
+[0m[[31merror[0m] [0mnet.sourceforge.htmlunit.corejs.javascript.ScriptRuntime.constructError(ScriptRuntime.java:3613)[0m
+[0m[[31merror[0m] [0mnet.sourceforge.htmlunit.corejs.javascript.ScriptRuntime.typeError(ScriptRuntime.java:3634)[0m
+[0m[[31merror[0m] [0mnet.sourceforge.htmlunit.corejs.javascript.ScriptRuntime.typeError2(ScriptRuntime.java:3650)[0m
+[0m[[31merror[0m] [0mnet.sourceforge.htmlunit.corejs.javascript.ScriptRuntime.notFunctionError(ScriptRuntime.java:3714)[0m
+[0m[[31merror[0m] [0mnet.sourceforge.htmlunit.corejs.javascript.ScriptRuntime.getPropFunctionAndThisHelper(ScriptRuntime.java:2233)[0m
+[0m[[31merror[0m] [0mnet.sourceforge.htmlunit.corejs.javascript.ScriptRuntime.getPropFunctionAndThis(ScriptRuntime.java:2215)[0m
+[0m[[31merror[0m] [0mnet.sourceforge.htmlunit.corejs.javascript.Interpreter.interpretLoop(Interpreter.java:1333)[0m
+[0m[[31merror[0m] [0mnet.sourceforge.htmlunit.corejs.javascript.Interpreter.interpret(Interpreter.java:798)[0m
+[0m[[31merror[0m] [0mnet.sourceforge.htmlunit.corejs.javascript.InterpretedFunction.call(InterpretedFunction.java:105)[0m
+[0m[[31merror[0m] [0mnet.sourceforge.htmlunit.corejs.javascript.ContextFactory.doTopCall(ContextFactory.java:411)[0m
+[0m[[31merror[0m] [0mcom.gargoylesoftware.htmlunit.javascript.HtmlUnitContextFactory.doTopCall(HtmlUnitContextFactory.java:309)[0m
+[0m[[31merror[0m] [0mnet.sourceforge.htmlunit.corejs.javascript.ScriptRuntime.doTopCall(ScriptRuntime.java:3057)[0m
+[0m[[31merror[0m] [0mnet.sourceforge.htmlunit.corejs.javascript.InterpretedFunction.exec(InterpretedFunction.java:115)[0m
+[0m[[31merror[0m] [0mcom.gargoylesoftware.htmlunit.javascript.JavaScriptEngine$3.doRun(JavaScriptEngine.java:582)[0m
+[0m[[31merror[0m] [0mcom.gargoylesoftware.htmlunit.javascript.JavaScriptEngine$HtmlUnitContextAction.run(JavaScriptEngine.java:690)[0m
+[0m[[31merror[0m] [0mnet.sourceforge.htmlunit.corejs.javascript.Context.call(Context.java:620)[0m
+[0m[[31merror[0m] [0mnet.sourceforge.htmlunit.corejs.javascript.ContextFactory.call(ContextFactory.java:513)[0m
+[0m[[31merror[0m] [0mcom.gargoylesoftware.htmlunit.javascript.JavaScriptEngine.execute(JavaScriptEngine.java:591)[0m
+[0m[[31merror[0m] [0mcom.gargoylesoftware.htmlunit.html.HtmlPage.loadExternalJavaScriptFile(HtmlPage.java:1078)[0m
+[0m[[31merror[0m] [0mcom.gargoylesoftware.htmlunit.html.HtmlScript.executeScriptIfNeeded(HtmlScript.java:393)[0m
+[0m[[31merror[0m] [0mcom.gargoylesoftware.htmlunit.html.HtmlScript$3.execute(HtmlScript.java:268)[0m
+[0m[[31merror[0m] [0mcom.gargoylesoftware.htmlunit.html.HtmlScript.onAllChildrenAddedToPage(HtmlScript.java:288)[0m
+[0m[[31merror[0m] [0mcom.gargoylesoftware.htmlunit.html.HTMLParser$HtmlUnitDOMBuilder.endElement(HTMLParser.java:741)[0m
+[0m[[31merror[0m] [0morg.apache.xerces.parsers.AbstractSAXParser.endElement(Unknown Source)[0m
+[0m[[31merror[0m] [0mcom.gargoylesoftware.htmlunit.html.HTMLParser$HtmlUnitDOMBuilder.endElement(HTMLParser.java:701)[0m
+[0m[[31merror[0m] [0morg.cyberneko.html.HTMLTagBalancer.callEndElement(HTMLTagBalancer.java:1170)[0m
+[0m[[31merror[0m] [0morg.cyberneko.html.HTMLTagBalancer.endElement(HTMLTagBalancer.java:1072)[0m
+[0m[[31merror[0m] [0morg.cyberneko.html.filters.DefaultFilter.endElement(DefaultFilter.java:206)[0m
+[0m[[31merror[0m] [0morg.cyberneko.html.filters.NamespaceBinder.endElement(NamespaceBinder.java:330)[0m
+[0m[[31merror[0m] [0morg.cyberneko.html.HTMLScanner$ContentScanner.scanEndElement(HTMLScanner.java:3126)[0m
+[0m[[31merror[0m] [0morg.cyberneko.html.HTMLScanner$ContentScanner.scan(HTMLScanner.java:2093)[0m
+[0m[[31merror[0m] [0morg.cyberneko.html.HTMLScanner.scanDocument(HTMLScanner.java:920)[0m
+[0m[[31merror[0m] [0morg.cyberneko.html.HTMLConfiguration.parse(HTMLConfiguration.java:499)[0m
+[0m[[31merror[0m] [0morg.cyberneko.html.HTMLConfiguration.parse(HTMLConfiguration.java:452)[0m
+[0m[[31merror[0m] [0morg.apache.xerces.parsers.XMLParser.parse(Unknown Source)[0m
+[0m[[31merror[0m] [0mcom.gargoylesoftware.htmlunit.html.HTMLParser$HtmlUnitDOMBuilder.parse(HTMLParser.java:965)[0m
+[0m[[31merror[0m] [0mcom.gargoylesoftware.htmlunit.html.HTMLParser.parse(HTMLParser.java:247)[0m
+[0m[[31merror[0m] [0mcom.gargoylesoftware.htmlunit.html.HTMLParser.parseHtml(HTMLParser.java:193)[0m
+[0m[[31merror[0m] [0mcom.gargoylesoftware.htmlunit.DefaultPageCreator.createHtmlPage(DefaultPageCreator.java:268)[0m
+[0m[[31merror[0m] [0mcom.gargoylesoftware.htmlunit.DefaultPageCreator.createPage(DefaultPageCreator.java:156)[0m
+[0m[[31merror[0m] [0mcom.gargoylesoftware.htmlunit.WebClient.loadWebResponseInto(WebClient.java:468)[0m
+[0m[[31merror[0m] [0mcom.gargoylesoftware.htmlunit.WebClient.getPage(WebClient.java:342)[0m
+[0m[[31merror[0m] [0mcom.gargoylesoftware.htmlunit.WebClient.getPage(WebClient.java:407)[0m
+[0m[[31merror[0m] [0morg.openqa.selenium.htmlunit.HtmlUnitDriver.get(HtmlUnitDriver.java:480)[0m
+[0m[[31merror[0m] [0morg.openqa.selenium.htmlunit.HtmlUnitDriver.get(HtmlUnitDriver.java:469)[0m
+[0m[[31merror[0m] [0morg.fluentlenium.core.Fluent.goTo(Fluent.java:336)[0m
+[0m[[31merror[0m] [0mIntegrationSpec$$anonfun$1$$anonfun$apply$1$$anon$1.delayedEndpoint$IntegrationSpec$$anonfun$1$$anonfun$apply$1$$anon$1$1(IntegrationSpec.scala:19)[0m
+[0m[[31merror[0m] [0mIntegrationSpec$$anonfun$1$$anonfun$apply$1$$anon$1$delayedInit$body.apply(IntegrationSpec.scala:17)[0m
+[0m[[31merror[0m] [0mplay.api.test.WithBrowser$$anonfun$around$4.apply(Specs.scala:89)[0m
+[0m[[31merror[0m] [0mplay.api.test.WithBrowser$$anonfun$around$4.apply(Specs.scala:89)[0m
+[0m[[31merror[0m] [0mplay.api.test.PlayRunners$class.running(Helpers.scala:56)[0m
+[0m[[31merror[0m] [0mplay.api.test.Helpers$.running(Helpers.scala:363)[0m
+[0m[[31merror[0m] [0mplay.api.test.WithBrowser.around(Specs.scala:89)[0m
+[0m[[31merror[0m] [0mplay.api.test.WithBrowser.delayedInit(Specs.scala:72)[0m
+[0m[[31merror[0m] [0mIntegrationSpec$$anonfun$1$$anonfun$apply$1$$anon$1.<init>(IntegrationSpec.scala:17)[0m
+[0m[[31merror[0m] [0mIntegrationSpec$$anonfun$1$$anonfun$apply$1.apply(IntegrationSpec.scala:17)[0m
+[0m[[31merror[0m] [0mIntegrationSpec$$anonfun$1$$anonfun$apply$1.apply(IntegrationSpec.scala:17)[0m
+[0m[[0minfo[0m] [0m[0m
+[0m[[0minfo[0m] [0m[0m
+[0m[[0minfo[0m] [0mTotal for specification IntegrationSpec[0m
+[0m[[0minfo[0m] [0m[36mFinished in 1 second, 725 ms[0m[0m
+[0m[[0minfo[0m] [0m[36m[0m[36m1 example, 0 failure, 1 error[0m[0m
+[0m[[0minfo[0m] [0m[0m
+[0m[[0mdebug[0m] [0m    Produced 0 nested tasks and 1 events.[0m
+[0m[[0mdebug[0m] [0mRunner for com.novocode.junit.JUnitFramework produced 0 initial tasks for 0 tests.[0m
+[0m[[0mdebug[0m] [0mSummary for specs2 not available.[0m
+[0m[[0mdebug[0m] [0mSummary for JUnit not available.[0m
+[0m[[31merror[0m] [0mError: Total 14, Failed 2, Errors 1, Passed 11[0m
+[0m[[0mdebug[0m] [0mPassed tests:[0m
+[0m[[0mdebug[0m] [0m	DashBoardSpec[0m
+[0m[[31merror[0m] [0mFailed tests:[0m
+[0m[[31merror[0m] [0m	ApplicationSpec[0m
+[0m[[31merror[0m] [0m	EmployeeModelSpec[0m
+[0m[[31merror[0m] [0mError during tests:[0m
+[0m[[31merror[0m] [0m	IntegrationSpec[0m
+[0m[[31merror[0m] [0m(test:[31mtest[0m) sbt.TestsFailedException: Tests unsuccessful[0m

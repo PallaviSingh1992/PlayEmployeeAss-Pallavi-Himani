@@ -1,0 +1,280 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuite hostname="knoldus-Lenovo-G50-80" name="ApplicationSpec" tests="2" errors="0" failures="1" time="0.625">
+                     <properties>
+      <property name="jline.esc.timeout" value="0"/><property name="java.runtime.name" value="OpenJDK Runtime Environment"/><property name="sun.boot.library.path" value="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64"/><property name="java.vm.version" value="25.45-b02"/><property name="java.vm.vendor" value="Oracle Corporation"/><property name="java.vendor.url" value="http://java.oracle.com/"/><property name="path.separator" value=":"/><property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/><property name="file.encoding.pkg" value="sun.io"/><property name="user.country" value="IN"/><property name="sun.java.launcher" value="SUN_STANDARD"/><property name="sun.os.patch.level" value="unknown"/><property name="java.vm.specification.name" value="Java Virtual Machine Specification"/><property name="user.dir" value="/home/knoldus-pallavi/play2Rough"/><property name="java.runtime.version" value="1.8.0_45-internal-b14"/><property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/><property name="java.endorsed.dirs" value="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/endorsed"/><property name="os.arch" value="amd64"/><property name="java.io.tmpdir" value="/tmp"/><property name="line.separator" value="
+"/><property name="java.vm.specification.vendor" value="Oracle Corporation"/><property name="os.name" value="Linux"/><property name="sun.jnu.encoding" value="UTF-8"/><property name="java.library.path" value="/usr/java/packages/lib/amd64:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib"/><property name="java.specification.name" value="Java Platform API Specification"/><property name="java.class.version" value="52.0"/><property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/><property name="os.version" value="3.19.0-51-generic"/><property name="user.home" value="/home/knoldus-pallavi"/><property name="user.timezone" value="Asia/Kolkata"/><property name="java.awt.printerjob" value="sun.print.PSPrinterJob"/><property name="file.encoding" value="UTF-8"/><property name="java.specification.version" value="1.8"/><property name="java.class.path" value="/home/knoldus-pallavi/Desktop/sbt/bin/sbt-launch.jar"/><property name="user.name" value="knoldus-pallavi"/><property name="jline.shutdownhook" value="false"/><property name="java.vm.specification.version" value="1.8"/><property name="sun.java.command" value="/home/knoldus-pallavi/Desktop/sbt/bin/sbt-launch.jar clean coverage test"/><property name="java.home" value="/usr/lib/jvm/java-8-openjdk-amd64/jre"/><property name="sun.arch.data.model" value="64"/><property name="user.language" value="en"/><property name="java.specification.vendor" value="Oracle Corporation"/><property name="awt.toolkit" value="sun.awt.X11.XToolkit"/><property name="java.vm.info" value="mixed mode"/><property name="java.version" value="1.8.0_45-internal"/><property name="java.ext.dirs" value="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext:/usr/java/packages/lib/ext"/><property name="sun.boot.class.path" value="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/resources.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/sunrsasign.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jsse.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jce.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/charsets.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jfr.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/classes"/><property name="java.vendor" value="Oracle Corporation"/><property name="file.separator" value="/"/><property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/><property name="sun.io.unicode.encoding" value="UnicodeLittle"/><property name="sun.cpu.endian" value="little"/><property name="sun.desktop" value="gnome"/><property name="sun.cpu.isalist" value=""/>
+    </properties>
+                     <testcase classname="ApplicationSpec" name="Application should::send 404 on a bad request" time="0.283">
+                                                 
+                                               </testcase><testcase classname="ApplicationSpec" name="Application should::render the index page" time="0.342">
+                                                 <failure message="'
+
+
+
+&lt;!DOCTYPE html&gt;
+
+&lt;html lang=&quot;en&quot;&gt;
+    &lt;head&gt;
+        &lt;title&gt;DashBoard&lt;/title&gt;
+        &lt;link rel=&quot;stylesheet&quot; media=&quot;screen&quot; href=&quot;/assets/stylesheets/main.css&quot;&gt;
+        &lt;link rel=&quot;shortcut icon&quot; type=&quot;image/png&quot; href=&quot;/assets/images/favicon.png&quot;&gt;
+        &lt;script src=&quot;/assets/javascripts/hello.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+         &lt;link rel='stylesheet' href='/webjars/bootstrap/3.3.6/css/bootstrap.min.css'&gt;
+        &lt;script type='text/javascript' src='/webjars/jquery/2.1.4/jquery.min.js'&gt;&lt;/script&gt;
+        &lt;script src=&quot;https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js&quot;&gt;&lt;/script&gt;
+        &lt;script src=&quot;https://oss.maxcdn.com/respond/1.4.2/respond.min.js&quot;&gt;&lt;/script&gt;
+
+    &lt;/head&gt;
+    &lt;body&gt;
+
+        &lt;div class=&quot;jumbotron&quot; style=&quot;background-color:#660066;color:white;height:5%;width:100%&quot;&gt;
+            &lt;div class=&quot;container-fluid&quot;&gt;
+            &lt;h2&gt;PlayFrameWork Assignment&lt;/h2&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;&lt;!--Closing of Jumbotron--&gt;
+        &lt;div class=&quot;container&quot;&gt;
+            &lt;div class=&quot;panel panel-default&quot;&gt;
+                &lt;div class=&quot;panel-body&quot;&gt;
+                    
+&lt;div&gt;
+    &lt;span&gt;&lt;p&gt;
+        
+        
+        
+    &lt;/p&gt;&lt;/span&gt;
+
+
+     
+
+&lt;form action=&quot;/getByName&quot; method=&quot;GET&quot; display=&quot;inline&quot;&gt;
+    
+        
+
+
+
+
+
+
+
+
+
+&lt;dl class=&quot; &quot; id=&quot;name_field&quot;&gt;
+    
+    &lt;dt&gt;&lt;label for=&quot;name&quot;&gt;name&lt;/label&gt;&lt;/dt&gt;
+    
+    &lt;dd&gt;
+    &lt;input type=&quot;text&quot; id=&quot;name&quot; name=&quot;name&quot; value=&quot;&quot; placeholder=&quot;Filter by Employee name&quot;/&gt;
+&lt;/dd&gt;
+    
+    
+&lt;/dl&gt;
+
+
+
+        &lt;button type=&quot;submit&quot; class=&quot;btn btn-primary&quot; style=&quot;background-color:orange;color:white&quot;&gt;Filter by Name&lt;/button&gt;
+    
+&lt;/form&gt;
+
+
+    &lt;a href=&quot;/renderEmployeeForm &quot; class=&quot;btn btn-success pull-right&quot; role=&quot;button&quot;&gt;Add An Employee&lt;/a&gt;
+
+     &lt;br&gt;&lt;br&gt;
+    &lt;table class=&quot;table table-striped&quot;&gt;
+        &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Name&lt;/th&gt;
+            &lt;th&gt;Address&lt;/th&gt;
+            &lt;th&gt;Date Of Birth&lt;/th&gt;
+            &lt;th&gt;Joining Date&lt;/th&gt;
+            &lt;th&gt;Designation&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+        
+        &lt;tr&gt;
+            &lt;td&gt;&lt;a href=&quot;/editEmployee/Seema&quot;&gt;Seema&lt;/a&gt;&lt;/td&gt;
+            &lt;td&gt;Ashok Vihar&lt;/td&gt;
+            &lt;td&gt;Mon Mar 09 00:00:00 IST 1992&lt;/td&gt;
+            &lt;td&gt;Thu Jan 21 00:00:00 IST 2016&lt;/td&gt;
+            &lt;td&gt;Software Consultant&lt;/td&gt;
+        &lt;/tr&gt;
+        
+        &lt;tr&gt;
+            &lt;td&gt;&lt;a href=&quot;/editEmployee/Himani &quot;&gt;Himani &lt;/a&gt;&lt;/td&gt;
+            &lt;td&gt;Lakshmi Nagar&lt;/td&gt;
+            &lt;td&gt;Sat May 09 00:00:00 IST 1992&lt;/td&gt;
+            &lt;td&gt;Thu Jan 21 00:00:00 IST 2016&lt;/td&gt;
+            &lt;td&gt;Software Consultant&lt;/td&gt;
+        &lt;/tr&gt;
+        
+        &lt;tr&gt;
+            &lt;td&gt;&lt;a href=&quot;/editEmployee/Pallavi&quot;&gt;Pallavi&lt;/a&gt;&lt;/td&gt;
+            &lt;td&gt;Ashok Vihar&lt;/td&gt;
+            &lt;td&gt;Mon Mar 09 00:00:00 IST 1992&lt;/td&gt;
+            &lt;td&gt;Thu Jan 21 00:00:00 IST 2016&lt;/td&gt;
+            &lt;td&gt;Software Consultant&lt;/td&gt;
+        &lt;/tr&gt;
+        
+        &lt;/tbody&gt;
+    &lt;/table&gt;
+&lt;/div&gt;
+
+
+                &lt;/div&gt;
+                &lt;div class=&quot;panel-footer&quot;&gt;created by Himani Arora and Pallavi Singh&lt;/div&gt;
+            &lt;/div&gt;
+
+        &lt;/div&gt;
+
+
+
+    &lt;/body&gt;
+&lt;/html&gt;
+
+
+
+
+' doesn't contain 'Your new application is ready.'" type="sbt.ForkMain$ForkError">sbt.ForkMain$ForkError: '
+
+
+
+&lt;!DOCTYPE html&gt;
+
+&lt;html lang=&quot;en&quot;&gt;
+    &lt;head&gt;
+        &lt;title&gt;DashBoard&lt;/title&gt;
+        &lt;link rel=&quot;stylesheet&quot; media=&quot;screen&quot; href=&quot;/assets/stylesheets/main.css&quot;&gt;
+        &lt;link rel=&quot;shortcut icon&quot; type=&quot;image/png&quot; href=&quot;/assets/images/favicon.png&quot;&gt;
+        &lt;script src=&quot;/assets/javascripts/hello.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+         &lt;link rel='stylesheet' href='/webjars/bootstrap/3.3.6/css/bootstrap.min.css'&gt;
+        &lt;script type='text/javascript' src='/webjars/jquery/2.1.4/jquery.min.js'&gt;&lt;/script&gt;
+        &lt;script src=&quot;https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js&quot;&gt;&lt;/script&gt;
+        &lt;script src=&quot;https://oss.maxcdn.com/respond/1.4.2/respond.min.js&quot;&gt;&lt;/script&gt;
+
+    &lt;/head&gt;
+    &lt;body&gt;
+
+        &lt;div class=&quot;jumbotron&quot; style=&quot;background-color:#660066;color:white;height:5%;width:100%&quot;&gt;
+            &lt;div class=&quot;container-fluid&quot;&gt;
+            &lt;h2&gt;PlayFrameWork Assignment&lt;/h2&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;&lt;!--Closing of Jumbotron--&gt;
+        &lt;div class=&quot;container&quot;&gt;
+            &lt;div class=&quot;panel panel-default&quot;&gt;
+                &lt;div class=&quot;panel-body&quot;&gt;
+                    
+&lt;div&gt;
+    &lt;span&gt;&lt;p&gt;
+        
+        
+        
+    &lt;/p&gt;&lt;/span&gt;
+
+
+     
+
+&lt;form action=&quot;/getByName&quot; method=&quot;GET&quot; display=&quot;inline&quot;&gt;
+    
+        
+
+
+
+
+
+
+
+
+
+&lt;dl class=&quot; &quot; id=&quot;name_field&quot;&gt;
+    
+    &lt;dt&gt;&lt;label for=&quot;name&quot;&gt;name&lt;/label&gt;&lt;/dt&gt;
+    
+    &lt;dd&gt;
+    &lt;input type=&quot;text&quot; id=&quot;name&quot; name=&quot;name&quot; value=&quot;&quot; placeholder=&quot;Filter by Employee name&quot;/&gt;
+&lt;/dd&gt;
+    
+    
+&lt;/dl&gt;
+
+
+
+        &lt;button type=&quot;submit&quot; class=&quot;btn btn-primary&quot; style=&quot;background-color:orange;color:white&quot;&gt;Filter by Name&lt;/button&gt;
+    
+&lt;/form&gt;
+
+
+    &lt;a href=&quot;/renderEmployeeForm &quot; class=&quot;btn btn-success pull-right&quot; role=&quot;button&quot;&gt;Add An Employee&lt;/a&gt;
+
+     &lt;br&gt;&lt;br&gt;
+    &lt;table class=&quot;table table-striped&quot;&gt;
+        &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Name&lt;/th&gt;
+            &lt;th&gt;Address&lt;/th&gt;
+            &lt;th&gt;Date Of Birth&lt;/th&gt;
+            &lt;th&gt;Joining Date&lt;/th&gt;
+            &lt;th&gt;Designation&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+        
+        &lt;tr&gt;
+            &lt;td&gt;&lt;a href=&quot;/editEmployee/Seema&quot;&gt;Seema&lt;/a&gt;&lt;/td&gt;
+            &lt;td&gt;Ashok Vihar&lt;/td&gt;
+            &lt;td&gt;Mon Mar 09 00:00:00 IST 1992&lt;/td&gt;
+            &lt;td&gt;Thu Jan 21 00:00:00 IST 2016&lt;/td&gt;
+            &lt;td&gt;Software Consultant&lt;/td&gt;
+        &lt;/tr&gt;
+        
+        &lt;tr&gt;
+            &lt;td&gt;&lt;a href=&quot;/editEmployee/Himani &quot;&gt;Himani &lt;/a&gt;&lt;/td&gt;
+            &lt;td&gt;Lakshmi Nagar&lt;/td&gt;
+            &lt;td&gt;Sat May 09 00:00:00 IST 1992&lt;/td&gt;
+            &lt;td&gt;Thu Jan 21 00:00:00 IST 2016&lt;/td&gt;
+            &lt;td&gt;Software Consultant&lt;/td&gt;
+        &lt;/tr&gt;
+        
+        &lt;tr&gt;
+            &lt;td&gt;&lt;a href=&quot;/editEmployee/Pallavi&quot;&gt;Pallavi&lt;/a&gt;&lt;/td&gt;
+            &lt;td&gt;Ashok Vihar&lt;/td&gt;
+            &lt;td&gt;Mon Mar 09 00:00:00 IST 1992&lt;/td&gt;
+            &lt;td&gt;Thu Jan 21 00:00:00 IST 2016&lt;/td&gt;
+            &lt;td&gt;Software Consultant&lt;/td&gt;
+        &lt;/tr&gt;
+        
+        &lt;/tbody&gt;
+    &lt;/table&gt;
+&lt;/div&gt;
+
+
+                &lt;/div&gt;
+                &lt;div class=&quot;panel-footer&quot;&gt;created by Himani Arora and Pallavi Singh&lt;/div&gt;
+            &lt;/div&gt;
+
+        &lt;/div&gt;
+
+
+
+    &lt;/body&gt;
+&lt;/html&gt;
+
+
+
+
+' doesn't contain 'Your new application is ready.'
+	at ApplicationSpec$$anonfun$2$$anonfun$apply$4$$anon$2.delayedEndpoint$ApplicationSpec$$anonfun$2$$anonfun$apply$4$$anon$2$1(ApplicationSpec.scala:27)
+	at ApplicationSpec$$anonfun$2$$anonfun$apply$4$$anon$2$delayedInit$body.apply(ApplicationSpec.scala:22)
+	at play.api.test.WithApplication$$anonfun$around$2.apply(Specs.scala:39)
+	at play.api.test.WithApplication$$anonfun$around$2.apply(Specs.scala:39)
+	at play.api.test.PlayRunners$class.running(Helpers.scala:42)
+	at play.api.test.Helpers$.running(Helpers.scala:363)
+	at play.api.test.WithApplication.around(Specs.scala:39)
+	at play.api.test.WithApplication.delayedInit(Specs.scala:36)
+	at ApplicationSpec$$anonfun$2$$anonfun$apply$4$$anon$2.&lt;init&gt;(ApplicationSpec.scala:22)
+	at ApplicationSpec$$anonfun$2$$anonfun$apply$4.apply(ApplicationSpec.scala:22)
+	at ApplicationSpec$$anonfun$2$$anonfun$apply$4.apply(ApplicationSpec.scala:22)
+</failure>
+                                               </testcase>
+                     <system-out></system-out>
+                     <system-err></system-err>
+                   </testsuite>

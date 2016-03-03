@@ -1,0 +1,1969 @@
+<html>
+      <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title id="title">
+          views/html/dashBoard.template.scala.html
+        </title>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.20.1/css/theme.default.min.css" type="text/css"/><script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.20.1/js/jquery.tablesorter.min.js"></script><link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" type="text/css"/><script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script><script type="text/javascript">
+        $(document).ready(function() {$(".tablesorter").tablesorter();});
+      </script>
+        <style>
+          table.codegrid { font-family: monospace; font-size: 12px; width: auto!important; }table.statementlist { width: auto!important; font-size: 13px; } table.codegrid td { padding: 0!important; border: 0!important } table td.linenumber { width: 40px!important; } 
+        </style>
+      </head>
+      <body style="font-family: monospace;">
+        <ul class="nav nav-tabs">
+          <li>
+            <a href="#codegrid" data-toggle="tab">Codegrid</a>
+          </li>
+          <li>
+            <a href="#statementlist" data-toggle="tab">Statement List</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="codegrid">
+            <pre style='font-size: 12pt; font-family: courier;'>1 <span style=''>
+</span>2 <span style=''>package views.html
+</span>3 <span style=''>
+</span>4 <span style=''>import play.twirl.api._
+</span>5 <span style=''>import play.twirl.api.TemplateMagic._
+</span>6 <span style=''>
+</span>7 <span style=''>
+</span>8 <span style=''>     object dashBoard_Scope0 {
+</span>9 <span style=''>import models._
+</span>10 <span style=''>import controllers._
+</span>11 <span style=''>import play.api.i18n._
+</span>12 <span style=''>import views.html._
+</span>13 <span style=''>import play.api.templates.PlayMagic._
+</span>14 <span style=''>import play.api.mvc._
+</span>15 <span style=''>import play.api.data._
+</span>16 <span style=''>
+</span>17 <span style=''>class dashBoard extends BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with play.twirl.api.Template4[List[Employee],Form[String],Messages,Flash,play.twirl.api.HtmlFormat.Appendable] {
+</span>18 <span style=''>
+</span>19 <span style=''>  /**/
+</span>20 <span style=''>  def apply/*1.2*/(empList:List[Employee],filterForm:Form[(String)])(implicit messages:Messages,flash:Flash):play.twirl.api.HtmlFormat.Appendable = {
+</span>21 <span style=''>    </span><span style='background: #AEF1AE'>_display_ {
+</span>22 <span style=''></span><span style='background: #AEF1AE'>      {
+</span>23 <span style=''></span><span style='background: #AEF1AE'>
+</span>24 <span style=''></span><span style='background: #AEF1AE'>
+</span>25 <span style=''></span><span style='background: #AEF1AE'>Seq[Any](format.raw/*1.92*/("""
+</span>26 <span style=''></span><span style='background: #AEF1AE'>
+</span>27 <span style=''></span><span style='background: #AEF1AE'>"""),_display_(/*3.2*/views/*3.7*/.html.main("DashBoard")/*3.30*/{_display_(Seq[Any](format.raw/*3.31*/("""
+</span>28 <span style=''></span><span style='background: #AEF1AE'>"""),format.raw/*4.1*/("""<div>
+</span>29 <span style=''></span><span style='background: #AEF1AE'>    <span><p>
+</span>30 <span style=''></span><span style='background: #AEF1AE'>        """),_display_(/*6.10*/if(flash.get("success"))/*6.34*/ {</span><span style='background: #F0ADAD'>_display_(Seq[Any](format.raw/*6.36*/("""
+</span>31 <span style=''></span><span style='background: #F0ADAD'>        """),_display_(/*7.10*/flash/*7.15*/.get("success")),format.raw/*7.30*/("""
+</span>32 <span style=''></span><span style='background: #F0ADAD'>        """)))</span><span style='background: #AEF1AE'>}/*8.11*/else/*8.16*/{_display_(Seq[Any](format.raw/*8.17*/("""
+</span>33 <span style=''></span><span style='background: #AEF1AE'>        """),_display_(/*9.10*/flash/*9.15*/.get("error")),format.raw/*9.28*/("""
+</span>34 <span style=''></span><span style='background: #AEF1AE'>        """)))}),format.raw/*10.10*/("""
+</span>35 <span style=''></span><span style='background: #AEF1AE'>    """),format.raw/*11.5*/("""</p></span>
+</span>36 <span style=''></span><span style='background: #AEF1AE'>
+</span>37 <span style=''></span><span style='background: #AEF1AE'>
+</span>38 <span style=''></span><span style='background: #AEF1AE'>    """),_display_(/*14.6*/helper/*14.12*/.form(action=routes.DashBoardController.getByName,'display->"inline")/*14.81*/{_display_(Seq[Any](format.raw/*14.82*/("""
+</span>39 <span style=''></span><span style='background: #AEF1AE'>        """),_display_(/*15.10*/helper/*15.16*/.inputText(filterForm("name"),'placeholder->"Filter by Employee name")),format.raw/*15.86*/("""
+</span>40 <span style=''></span><span style='background: #AEF1AE'>        """),format.raw/*16.9*/("""<button type="submit" class="btn btn-primary" style="background-color:orange;color:white">Filter by Name</button>
+</span>41 <span style=''></span><span style='background: #AEF1AE'>    """)))}),format.raw/*17.6*/("""
+</span>42 <span style=''></span><span style='background: #AEF1AE'>
+</span>43 <span style=''></span><span style='background: #AEF1AE'>    """),format.raw/*19.5*/("""<a href="/renderEmployeeForm " class="btn btn-success pull-right" role="button">Add An Employee</a>
+</span>44 <span style=''></span><span style='background: #AEF1AE'>
+</span>45 <span style=''></span><span style='background: #AEF1AE'>     <br><br>
+</span>46 <span style=''></span><span style='background: #AEF1AE'>    <table class="table table-striped">
+</span>47 <span style=''></span><span style='background: #AEF1AE'>        <thead>
+</span>48 <span style=''></span><span style='background: #AEF1AE'>        <tr>
+</span>49 <span style=''></span><span style='background: #AEF1AE'>            <th>Name</th>
+</span>50 <span style=''></span><span style='background: #AEF1AE'>            <th>Address</th>
+</span>51 <span style=''></span><span style='background: #AEF1AE'>            <th>Date Of Birth</th>
+</span>52 <span style=''></span><span style='background: #AEF1AE'>            <th>Joining Date</th>
+</span>53 <span style=''></span><span style='background: #AEF1AE'>            <th>Designation</th>
+</span>54 <span style=''></span><span style='background: #AEF1AE'>        </tr>
+</span>55 <span style=''></span><span style='background: #AEF1AE'>        </thead>
+</span>56 <span style=''></span><span style='background: #AEF1AE'>        <tbody>
+</span>57 <span style=''></span><span style='background: #AEF1AE'>        """),_display_(/*33.10*/for(empVal<-empList) yield /*33.30*/{_display_(Seq[Any](format.raw/*33.31*/("""
+</span>58 <span style=''></span><span style='background: #AEF1AE'>        """),format.raw/*34.9*/("""<tr>
+</span>59 <span style=''></span><span style='background: #AEF1AE'>            <td><a href="/editEmployee/"""),_display_(/*35.41*/empVal/*35.47*/.name),format.raw/*35.52*/("""">"""),_display_(/*35.55*/empVal/*35.61*/.name),format.raw/*35.66*/("""</a></td>
+</span>60 <span style=''></span><span style='background: #AEF1AE'>            <td>"""),_display_(/*36.18*/empVal/*36.24*/.address),format.raw/*36.32*/("""</td>
+</span>61 <span style=''></span><span style='background: #AEF1AE'>            <td>"""),_display_(/*37.18*/empVal/*37.24*/.dob),format.raw/*37.28*/("""</td>
+</span>62 <span style=''></span><span style='background: #AEF1AE'>            <td>"""),_display_(/*38.18*/empVal/*38.24*/.doj),format.raw/*38.28*/("""</td>
+</span>63 <span style=''></span><span style='background: #AEF1AE'>            <td>"""),_display_(/*39.18*/empVal/*39.24*/.designation),format.raw/*39.36*/("""</td>
+</span>64 <span style=''></span><span style='background: #AEF1AE'>        </tr>
+</span>65 <span style=''></span><span style='background: #AEF1AE'>        """)))}),format.raw/*41.10*/("""
+</span>66 <span style=''></span><span style='background: #AEF1AE'>        """),format.raw/*42.9*/("""</tbody>
+</span>67 <span style=''></span><span style='background: #AEF1AE'>    </table>
+</span>68 <span style=''></span><span style='background: #AEF1AE'></div>
+</span>69 <span style=''></span><span style='background: #AEF1AE'>
+</span>70 <span style=''></span><span style='background: #AEF1AE'>""")))}),format.raw/*46.2*/("""
+</span>71 <span style=''></span><span style='background: #AEF1AE'>
+</span>72 <span style=''></span><span style='background: #AEF1AE'>
+</span>73 <span style=''></span><span style='background: #AEF1AE'>
+</span>74 <span style=''></span><span style='background: #AEF1AE'>"""))
+</span>75 <span style=''></span><span style='background: #AEF1AE'>      }
+</span>76 <span style=''></span><span style='background: #AEF1AE'>    }</span><span style=''>
+</span>77 <span style=''>  }
+</span>78 <span style=''>
+</span>79 <span style=''>  def render(empList:List[Employee],filterForm:Form[String],messages:Messages,flash:Flash): play.twirl.api.HtmlFormat.Appendable = </span><span style='background: #F0ADAD'>apply(empList,filterForm)(messages,flash)</span><span style=''>
+</span>80 <span style=''>
+</span>81 <span style=''>  def f:((List[Employee],Form[String]) => (Messages,Flash) => play.twirl.api.HtmlFormat.Appendable) = (empList,filterForm) => (messages,flash) => </span><span style='background: #F0ADAD'>apply(empList,filterForm)(messages,flash)</span><span style=''>
+</span>82 <span style=''>
+</span>83 <span style=''>  def ref: this.type = this
+</span>84 <span style=''>
+</span>85 <span style=''>}
+</span>86 <span style=''>
+</span>87 <span style=''>
+</span>88 <span style=''>}
+</span>89 <span style=''>
+</span>90 <span style=''>/**/
+</span>91 <span style=''>object dashBoard extends dashBoard_Scope0.dashBoard
+</span>92 <span style=''>              /*
+</span>93 <span style=''>                  -- GENERATED --
+</span>94 <span style=''>                  DATE: Fri Mar 04 00:21:53 IST 2016
+</span>95 <span style=''>                  SOURCE: /home/knoldus-pallavi/play2Rough/app/views/dashBoard.scala.html
+</span>96 <span style=''>                  HASH: 7953a7a10830d20032309cd2c7ef3cee8556d72c
+</span>97 <span style=''>                  MATRIX: 571->1|756->91|784->94|796->99|827->122|865->123|892->124|947->153|979->177|1018->179|1054->189|1067->194|1102->209|1130->220|1142->225|1180->226|1216->236|1229->241|1262->254|1303->264|1335->269|1380->288|1395->294|1473->363|1512->364|1549->374|1564->380|1655->450|1691->459|1840->578|1873->584|2297->981|2333->1001|2372->1002|2408->1011|2480->1056|2495->1062|2521->1067|2551->1070|2566->1076|2592->1081|2646->1108|2661->1114|2690->1122|2740->1145|2755->1151|2780->1155|2830->1178|2845->1184|2870->1188|2920->1211|2935->1217|2968->1229|3028->1258|3064->1267|3125->1298
+</span>98 <span style=''>                  LINES: 20->1|25->1|27->3|27->3|27->3|27->3|28->4|30->6|30->6|30->6|31->7|31->7|31->7|32->8|32->8|32->8|33->9|33->9|33->9|34->10|35->11|38->14|38->14|38->14|38->14|39->15|39->15|39->15|40->16|41->17|43->19|57->33|57->33|57->33|58->34|59->35|59->35|59->35|59->35|59->35|59->35|60->36|60->36|60->36|61->37|61->37|61->37|62->38|62->38|62->38|63->39|63->39|63->39|65->41|66->42|70->46
+</span>99 <span style=''>                  -- GENERATED --
+</span>100 <span style=''>              */
+</span>101 <span style=''>          
+</span></pre>
+          </div>
+          <div class="tab-pane" id="statementlist">
+            <table cellspacing="0" cellpadding="0" class="table statementlist">
+      <tr>
+        <th>Line</th>
+        <th>Stmt Id</th>
+        <th>Pos</th>
+        <th>Tree</th>
+        <th>Symbol</th>
+        <th>Code</th>
+      </tr><tr>
+        <td>
+          21
+        </td>
+        <td>
+          741
+        </td>
+        <td>
+          707
+          -
+          3152
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n\n&quot;), dashBoard.this._display_(views.html.main.apply(&quot;DashBoard&quot;)(dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n&quot;), dashBoard.this.format.raw(&quot;&lt;div&gt;\n    &lt;span&gt;&lt;p&gt;\n        &quot;), dashBoard.this._display_(if (play.twirl.api.TemplateMagic.optionToBoolean(flash.get(&quot;success&quot;)))
+  dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this._display_(flash.get(&quot;success&quot;))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;\n        &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))
+else
+  dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this._display_(flash.get(&quot;error&quot;))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;\n        &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))), dashBoard.this.format.raw(&quot;\n    &quot;), dashBoard.this.format.raw(&quot;&lt;/p&gt;&lt;/span&gt;\n\n\n    &quot;), dashBoard.this._display_(views.html.helper.form.apply(controllers.routes.DashBoardController.getByName(), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;display&quot;)).-&gt;[String](&quot;inline&quot;))(dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this._display_(views.html.helper.inputText.apply(filterForm.apply(&quot;name&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;placeholder&quot;)).-&gt;[String](&quot;Filter by Employee name&quot;))(helper.this.FieldConstructor.defaultField, messages)), dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this.format.raw(&quot;&lt;button type=\&quot;submit\&quot; class=\&quot;btn btn-primary\&quot; style=\&quot;background-color:orange;color:white\&quot;&gt;Filter by Name&lt;/button&gt;\n    &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))), dashBoard.this.format.raw(&quot;\n\n    &quot;), dashBoard.this.format.raw(&quot;&lt;a href=\&quot;/renderEmployeeForm \&quot; class=\&quot;btn btn-success pull-right\&quot; role=\&quot;button\&quot;&gt;Add An Employee&lt;/a&gt;\n\n     &lt;br&gt;&lt;br&gt;\n    &lt;table class=\&quot;table table-striped\&quot;&gt;\n        &lt;thead&gt;\n        &lt;tr&gt;\n            &lt;th&gt;Name&lt;/th&gt;\n            &lt;th&gt;Address&lt;/th&gt;\n            &lt;th&gt;Date Of Birth&lt;/th&gt;\n            &lt;th&gt;Joining Date&lt;/th&gt;\n            &lt;th&gt;Designation&lt;/th&gt;\n        &lt;/tr&gt;\n        &lt;/thead&gt;\n        &lt;tbody&gt;\n        &quot;), dashBoard.this._display_(empList.map[play.twirl.api.HtmlFormat.Appendable, List[play.twirl.api.HtmlFormat.Appendable]](((empVal: models.Employee) =&gt; dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this.format.raw(&quot;&lt;tr&gt;\n            &lt;td&gt;&lt;a href=\&quot;/editEmployee/&quot;), dashBoard.this._display_(empVal.name), dashBoard.this.format.raw(&quot;\&quot;&gt;&quot;), dashBoard.this._display_(empVal.name), dashBoard.this.format.raw(&quot;&lt;/a&gt;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.address), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.dob)(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.doj)(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.designation), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n        &lt;/tr&gt;\n        &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))))(immutable.this.List.canBuildFrom[play.twirl.api.HtmlFormat.Appendable]))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this.format.raw(&quot;&lt;/tbody&gt;\n    &lt;/table&gt;\n&lt;/div&gt;\n\n&quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))), dashBoard.this.format.raw(&quot;\n\n\n\n&quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))
+        </td>
+      </tr><tr>
+        <td>
+          21
+        </td>
+        <td>
+          740
+        </td>
+        <td>
+          717
+          -
+          717
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.reflect.ManifestFactory.classType
+        </td>
+        <td style="background: #AEF1AE">
+          reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])
+        </td>
+      </tr><tr>
+        <td>
+          25
+        </td>
+        <td>
+          658
+        </td>
+        <td>
+          738
+          -
+          766
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this.format.raw(&quot;\n\n&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          25
+        </td>
+        <td>
+          739
+        </td>
+        <td>
+          729
+          -
+          3138
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.generic.GenericCompanion.apply
+        </td>
+        <td style="background: #AEF1AE">
+          collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n\n&quot;), dashBoard.this._display_(views.html.main.apply(&quot;DashBoard&quot;)(dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n&quot;), dashBoard.this.format.raw(&quot;&lt;div&gt;\n    &lt;span&gt;&lt;p&gt;\n        &quot;), dashBoard.this._display_(if (play.twirl.api.TemplateMagic.optionToBoolean(flash.get(&quot;success&quot;)))
+  dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this._display_(flash.get(&quot;success&quot;))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;\n        &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))
+else
+  dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this._display_(flash.get(&quot;error&quot;))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;\n        &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))), dashBoard.this.format.raw(&quot;\n    &quot;), dashBoard.this.format.raw(&quot;&lt;/p&gt;&lt;/span&gt;\n\n\n    &quot;), dashBoard.this._display_(views.html.helper.form.apply(controllers.routes.DashBoardController.getByName(), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;display&quot;)).-&gt;[String](&quot;inline&quot;))(dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this._display_(views.html.helper.inputText.apply(filterForm.apply(&quot;name&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;placeholder&quot;)).-&gt;[String](&quot;Filter by Employee name&quot;))(helper.this.FieldConstructor.defaultField, messages)), dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this.format.raw(&quot;&lt;button type=\&quot;submit\&quot; class=\&quot;btn btn-primary\&quot; style=\&quot;background-color:orange;color:white\&quot;&gt;Filter by Name&lt;/button&gt;\n    &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))), dashBoard.this.format.raw(&quot;\n\n    &quot;), dashBoard.this.format.raw(&quot;&lt;a href=\&quot;/renderEmployeeForm \&quot; class=\&quot;btn btn-success pull-right\&quot; role=\&quot;button\&quot;&gt;Add An Employee&lt;/a&gt;\n\n     &lt;br&gt;&lt;br&gt;\n    &lt;table class=\&quot;table table-striped\&quot;&gt;\n        &lt;thead&gt;\n        &lt;tr&gt;\n            &lt;th&gt;Name&lt;/th&gt;\n            &lt;th&gt;Address&lt;/th&gt;\n            &lt;th&gt;Date Of Birth&lt;/th&gt;\n            &lt;th&gt;Joining Date&lt;/th&gt;\n            &lt;th&gt;Designation&lt;/th&gt;\n        &lt;/tr&gt;\n        &lt;/thead&gt;\n        &lt;tbody&gt;\n        &quot;), dashBoard.this._display_(empList.map[play.twirl.api.HtmlFormat.Appendable, List[play.twirl.api.HtmlFormat.Appendable]](((empVal: models.Employee) =&gt; dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this.format.raw(&quot;&lt;tr&gt;\n            &lt;td&gt;&lt;a href=\&quot;/editEmployee/&quot;), dashBoard.this._display_(empVal.name), dashBoard.this.format.raw(&quot;\&quot;&gt;&quot;), dashBoard.this._display_(empVal.name), dashBoard.this.format.raw(&quot;&lt;/a&gt;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.address), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.dob)(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.doj)(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.designation), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n        &lt;/tr&gt;\n        &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))))(immutable.this.List.canBuildFrom[play.twirl.api.HtmlFormat.Appendable]))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this.format.raw(&quot;&lt;/tbody&gt;\n    &lt;/table&gt;\n&lt;/div&gt;\n\n&quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))), dashBoard.this.format.raw(&quot;\n\n\n\n&quot;))
+        </td>
+      </tr><tr>
+        <td>
+          27
+        </td>
+        <td>
+          660
+        </td>
+        <td>
+          847
+          -
+          874
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this.format.raw(&quot;\n&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          27
+        </td>
+        <td>
+          735
+        </td>
+        <td>
+          828
+          -
+          3104
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n&quot;), dashBoard.this.format.raw(&quot;&lt;div&gt;\n    &lt;span&gt;&lt;p&gt;\n        &quot;), dashBoard.this._display_(if (play.twirl.api.TemplateMagic.optionToBoolean(flash.get(&quot;success&quot;)))
+  dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this._display_(flash.get(&quot;success&quot;))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;\n        &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))
+else
+  dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this._display_(flash.get(&quot;error&quot;))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;\n        &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))), dashBoard.this.format.raw(&quot;\n    &quot;), dashBoard.this.format.raw(&quot;&lt;/p&gt;&lt;/span&gt;\n\n\n    &quot;), dashBoard.this._display_(views.html.helper.form.apply(controllers.routes.DashBoardController.getByName(), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;display&quot;)).-&gt;[String](&quot;inline&quot;))(dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this._display_(views.html.helper.inputText.apply(filterForm.apply(&quot;name&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;placeholder&quot;)).-&gt;[String](&quot;Filter by Employee name&quot;))(helper.this.FieldConstructor.defaultField, messages)), dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this.format.raw(&quot;&lt;button type=\&quot;submit\&quot; class=\&quot;btn btn-primary\&quot; style=\&quot;background-color:orange;color:white\&quot;&gt;Filter by Name&lt;/button&gt;\n    &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))), dashBoard.this.format.raw(&quot;\n\n    &quot;), dashBoard.this.format.raw(&quot;&lt;a href=\&quot;/renderEmployeeForm \&quot; class=\&quot;btn btn-success pull-right\&quot; role=\&quot;button\&quot;&gt;Add An Employee&lt;/a&gt;\n\n     &lt;br&gt;&lt;br&gt;\n    &lt;table class=\&quot;table table-striped\&quot;&gt;\n        &lt;thead&gt;\n        &lt;tr&gt;\n            &lt;th&gt;Name&lt;/th&gt;\n            &lt;th&gt;Address&lt;/th&gt;\n            &lt;th&gt;Date Of Birth&lt;/th&gt;\n            &lt;th&gt;Joining Date&lt;/th&gt;\n            &lt;th&gt;Designation&lt;/th&gt;\n        &lt;/tr&gt;\n        &lt;/thead&gt;\n        &lt;tbody&gt;\n        &quot;), dashBoard.this._display_(empList.map[play.twirl.api.HtmlFormat.Appendable, List[play.twirl.api.HtmlFormat.Appendable]](((empVal: models.Employee) =&gt; dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this.format.raw(&quot;&lt;tr&gt;\n            &lt;td&gt;&lt;a href=\&quot;/editEmployee/&quot;), dashBoard.this._display_(empVal.name), dashBoard.this.format.raw(&quot;\&quot;&gt;&quot;), dashBoard.this._display_(empVal.name), dashBoard.this.format.raw(&quot;&lt;/a&gt;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.address), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.dob)(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.doj)(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.designation), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n        &lt;/tr&gt;\n        &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))))(immutable.this.List.canBuildFrom[play.twirl.api.HtmlFormat.Appendable]))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this.format.raw(&quot;&lt;/tbody&gt;\n    &lt;/table&gt;\n&lt;/div&gt;\n\n&quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))
+        </td>
+      </tr><tr>
+        <td>
+          27
+        </td>
+        <td>
+          737
+        </td>
+        <td>
+          767
+          -
+          3106
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this._display_(views.html.main.apply(&quot;DashBoard&quot;)(dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n&quot;), dashBoard.this.format.raw(&quot;&lt;div&gt;\n    &lt;span&gt;&lt;p&gt;\n        &quot;), dashBoard.this._display_(if (play.twirl.api.TemplateMagic.optionToBoolean(flash.get(&quot;success&quot;)))
+  dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this._display_(flash.get(&quot;success&quot;))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;\n        &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))
+else
+  dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this._display_(flash.get(&quot;error&quot;))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;\n        &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))), dashBoard.this.format.raw(&quot;\n    &quot;), dashBoard.this.format.raw(&quot;&lt;/p&gt;&lt;/span&gt;\n\n\n    &quot;), dashBoard.this._display_(views.html.helper.form.apply(controllers.routes.DashBoardController.getByName(), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;display&quot;)).-&gt;[String](&quot;inline&quot;))(dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this._display_(views.html.helper.inputText.apply(filterForm.apply(&quot;name&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;placeholder&quot;)).-&gt;[String](&quot;Filter by Employee name&quot;))(helper.this.FieldConstructor.defaultField, messages)), dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this.format.raw(&quot;&lt;button type=\&quot;submit\&quot; class=\&quot;btn btn-primary\&quot; style=\&quot;background-color:orange;color:white\&quot;&gt;Filter by Name&lt;/button&gt;\n    &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))), dashBoard.this.format.raw(&quot;\n\n    &quot;), dashBoard.this.format.raw(&quot;&lt;a href=\&quot;/renderEmployeeForm \&quot; class=\&quot;btn btn-success pull-right\&quot; role=\&quot;button\&quot;&gt;Add An Employee&lt;/a&gt;\n\n     &lt;br&gt;&lt;br&gt;\n    &lt;table class=\&quot;table table-striped\&quot;&gt;\n        &lt;thead&gt;\n        &lt;tr&gt;\n            &lt;th&gt;Name&lt;/th&gt;\n            &lt;th&gt;Address&lt;/th&gt;\n            &lt;th&gt;Date Of Birth&lt;/th&gt;\n            &lt;th&gt;Joining Date&lt;/th&gt;\n            &lt;th&gt;Designation&lt;/th&gt;\n        &lt;/tr&gt;\n        &lt;/thead&gt;\n        &lt;tbody&gt;\n        &quot;), dashBoard.this._display_(empList.map[play.twirl.api.HtmlFormat.Appendable, List[play.twirl.api.HtmlFormat.Appendable]](((empVal: models.Employee) =&gt; dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this.format.raw(&quot;&lt;tr&gt;\n            &lt;td&gt;&lt;a href=\&quot;/editEmployee/&quot;), dashBoard.this._display_(empVal.name), dashBoard.this.format.raw(&quot;\&quot;&gt;&quot;), dashBoard.this._display_(empVal.name), dashBoard.this.format.raw(&quot;&lt;/a&gt;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.address), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.dob)(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.doj)(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.designation), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n        &lt;/tr&gt;\n        &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))))(immutable.this.List.canBuildFrom[play.twirl.api.HtmlFormat.Appendable]))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this.format.raw(&quot;&lt;/tbody&gt;\n    &lt;/table&gt;\n&lt;/div&gt;\n\n&quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))))
+        </td>
+      </tr><tr>
+        <td>
+          27
+        </td>
+        <td>
+          659
+        </td>
+        <td>
+          807
+          -
+          818
+        </td>
+        <td>
+          Literal
+        </td>
+        <td>
+          &lt;nosymbol&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;DashBoard&quot;
+        </td>
+      </tr><tr>
+        <td>
+          27
+        </td>
+        <td>
+          734
+        </td>
+        <td>
+          837
+          -
+          837
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.reflect.ManifestFactory.classType
+        </td>
+        <td style="background: #AEF1AE">
+          reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])
+        </td>
+      </tr><tr>
+        <td>
+          27
+        </td>
+        <td>
+          733
+        </td>
+        <td>
+          838
+          -
+          3103
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.generic.GenericCompanion.apply
+        </td>
+        <td style="background: #AEF1AE">
+          collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n&quot;), dashBoard.this.format.raw(&quot;&lt;div&gt;\n    &lt;span&gt;&lt;p&gt;\n        &quot;), dashBoard.this._display_(if (play.twirl.api.TemplateMagic.optionToBoolean(flash.get(&quot;success&quot;)))
+  dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this._display_(flash.get(&quot;success&quot;))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;\n        &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))
+else
+  dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this._display_(flash.get(&quot;error&quot;))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;\n        &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))), dashBoard.this.format.raw(&quot;\n    &quot;), dashBoard.this.format.raw(&quot;&lt;/p&gt;&lt;/span&gt;\n\n\n    &quot;), dashBoard.this._display_(views.html.helper.form.apply(controllers.routes.DashBoardController.getByName(), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;display&quot;)).-&gt;[String](&quot;inline&quot;))(dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this._display_(views.html.helper.inputText.apply(filterForm.apply(&quot;name&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;placeholder&quot;)).-&gt;[String](&quot;Filter by Employee name&quot;))(helper.this.FieldConstructor.defaultField, messages)), dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this.format.raw(&quot;&lt;button type=\&quot;submit\&quot; class=\&quot;btn btn-primary\&quot; style=\&quot;background-color:orange;color:white\&quot;&gt;Filter by Name&lt;/button&gt;\n    &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))), dashBoard.this.format.raw(&quot;\n\n    &quot;), dashBoard.this.format.raw(&quot;&lt;a href=\&quot;/renderEmployeeForm \&quot; class=\&quot;btn btn-success pull-right\&quot; role=\&quot;button\&quot;&gt;Add An Employee&lt;/a&gt;\n\n     &lt;br&gt;&lt;br&gt;\n    &lt;table class=\&quot;table table-striped\&quot;&gt;\n        &lt;thead&gt;\n        &lt;tr&gt;\n            &lt;th&gt;Name&lt;/th&gt;\n            &lt;th&gt;Address&lt;/th&gt;\n            &lt;th&gt;Date Of Birth&lt;/th&gt;\n            &lt;th&gt;Joining Date&lt;/th&gt;\n            &lt;th&gt;Designation&lt;/th&gt;\n        &lt;/tr&gt;\n        &lt;/thead&gt;\n        &lt;tbody&gt;\n        &quot;), dashBoard.this._display_(empList.map[play.twirl.api.HtmlFormat.Appendable, List[play.twirl.api.HtmlFormat.Appendable]](((empVal: models.Employee) =&gt; dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this.format.raw(&quot;&lt;tr&gt;\n            &lt;td&gt;&lt;a href=\&quot;/editEmployee/&quot;), dashBoard.this._display_(empVal.name), dashBoard.this.format.raw(&quot;\&quot;&gt;&quot;), dashBoard.this._display_(empVal.name), dashBoard.this.format.raw(&quot;&lt;/a&gt;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.address), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.dob)(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.doj)(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.designation), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n        &lt;/tr&gt;\n        &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))))(immutable.this.List.canBuildFrom[play.twirl.api.HtmlFormat.Appendable]))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this.format.raw(&quot;&lt;/tbody&gt;\n    &lt;/table&gt;\n&lt;/div&gt;\n\n&quot;))
+        </td>
+      </tr><tr>
+        <td>
+          27
+        </td>
+        <td>
+          736
+        </td>
+        <td>
+          784
+          -
+          3105
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          views.html.main_Scope0.main.apply
+        </td>
+        <td style="background: #AEF1AE">
+          views.html.main.apply(&quot;DashBoard&quot;)(dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n&quot;), dashBoard.this.format.raw(&quot;&lt;div&gt;\n    &lt;span&gt;&lt;p&gt;\n        &quot;), dashBoard.this._display_(if (play.twirl.api.TemplateMagic.optionToBoolean(flash.get(&quot;success&quot;)))
+  dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this._display_(flash.get(&quot;success&quot;))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;\n        &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))
+else
+  dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this._display_(flash.get(&quot;error&quot;))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;\n        &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))), dashBoard.this.format.raw(&quot;\n    &quot;), dashBoard.this.format.raw(&quot;&lt;/p&gt;&lt;/span&gt;\n\n\n    &quot;), dashBoard.this._display_(views.html.helper.form.apply(controllers.routes.DashBoardController.getByName(), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;display&quot;)).-&gt;[String](&quot;inline&quot;))(dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this._display_(views.html.helper.inputText.apply(filterForm.apply(&quot;name&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;placeholder&quot;)).-&gt;[String](&quot;Filter by Employee name&quot;))(helper.this.FieldConstructor.defaultField, messages)), dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this.format.raw(&quot;&lt;button type=\&quot;submit\&quot; class=\&quot;btn btn-primary\&quot; style=\&quot;background-color:orange;color:white\&quot;&gt;Filter by Name&lt;/button&gt;\n    &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))), dashBoard.this.format.raw(&quot;\n\n    &quot;), dashBoard.this.format.raw(&quot;&lt;a href=\&quot;/renderEmployeeForm \&quot; class=\&quot;btn btn-success pull-right\&quot; role=\&quot;button\&quot;&gt;Add An Employee&lt;/a&gt;\n\n     &lt;br&gt;&lt;br&gt;\n    &lt;table class=\&quot;table table-striped\&quot;&gt;\n        &lt;thead&gt;\n        &lt;tr&gt;\n            &lt;th&gt;Name&lt;/th&gt;\n            &lt;th&gt;Address&lt;/th&gt;\n            &lt;th&gt;Date Of Birth&lt;/th&gt;\n            &lt;th&gt;Joining Date&lt;/th&gt;\n            &lt;th&gt;Designation&lt;/th&gt;\n        &lt;/tr&gt;\n        &lt;/thead&gt;\n        &lt;tbody&gt;\n        &quot;), dashBoard.this._display_(empList.map[play.twirl.api.HtmlFormat.Appendable, List[play.twirl.api.HtmlFormat.Appendable]](((empVal: models.Employee) =&gt; dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this.format.raw(&quot;&lt;tr&gt;\n            &lt;td&gt;&lt;a href=\&quot;/editEmployee/&quot;), dashBoard.this._display_(empVal.name), dashBoard.this.format.raw(&quot;\&quot;&gt;&quot;), dashBoard.this._display_(empVal.name), dashBoard.this.format.raw(&quot;&lt;/a&gt;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.address), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.dob)(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.doj)(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.designation), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n        &lt;/tr&gt;\n        &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))))(immutable.this.List.canBuildFrom[play.twirl.api.HtmlFormat.Appendable]))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this.format.raw(&quot;&lt;/tbody&gt;\n    &lt;/table&gt;\n&lt;/div&gt;\n\n&quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))
+        </td>
+      </tr><tr>
+        <td>
+          28
+        </td>
+        <td>
+          661
+        </td>
+        <td>
+          875
+          -
+          928
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this.format.raw(&quot;&lt;div&gt;\n    &lt;span&gt;&lt;p&gt;\n        &quot;)
+        </td>
+      </tr><tr>
+        <td>
+          30
+        </td>
+        <td>
+          669
+        </td>
+        <td>
+          991
+          -
+          1120
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.generic.GenericCompanion.apply
+        </td>
+        <td style="background: #F0ADAD">
+          collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this._display_(flash.get(&quot;success&quot;))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;\n        &quot;))
+        </td>
+      </tr><tr>
+        <td>
+          30
+        </td>
+        <td>
+          672
+        </td>
+        <td>
+          981
+          -
+          1121
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td style="background: #F0ADAD">
+          dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this._display_(flash.get(&quot;success&quot;))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;\n        &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))
+        </td>
+      </tr><tr>
+        <td>
+          30
+        </td>
+        <td>
+          663
+        </td>
+        <td>
+          950
+          -
+          970
+        </td>
+        <td>
+          ApplyImplicitView
+        </td>
+        <td>
+          play.twirl.api.TemplateMagic.optionToBoolean
+        </td>
+        <td style="background: #AEF1AE">
+          play.twirl.api.TemplateMagic.optionToBoolean(flash.get(&quot;success&quot;))
+        </td>
+      </tr><tr>
+        <td>
+          30
+        </td>
+        <td>
+          671
+        </td>
+        <td>
+          981
+          -
+          1121
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td style="background: #F0ADAD">
+          dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this._display_(flash.get(&quot;success&quot;))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;\n        &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))
+        </td>
+      </tr><tr>
+        <td>
+          30
+        </td>
+        <td>
+          662
+        </td>
+        <td>
+          950
+          -
+          970
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.api.mvc.Flash.get
+        </td>
+        <td style="background: #AEF1AE">
+          flash.get(&quot;success&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          30
+        </td>
+        <td>
+          682
+        </td>
+        <td>
+          929
+          -
+          1283
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this._display_(if (play.twirl.api.TemplateMagic.optionToBoolean(flash.get(&quot;success&quot;)))
+  dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this._display_(flash.get(&quot;success&quot;))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;\n        &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))
+else
+  dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this._display_(flash.get(&quot;error&quot;))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;\n        &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))
+        </td>
+      </tr><tr>
+        <td>
+          30
+        </td>
+        <td>
+          664
+        </td>
+        <td>
+          1000
+          -
+          1035
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #F0ADAD">
+          dashBoard.this.format.raw(&quot;\n        &quot;)
+        </td>
+      </tr><tr>
+        <td>
+          30
+        </td>
+        <td>
+          670
+        </td>
+        <td>
+          990
+          -
+          990
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.reflect.ManifestFactory.classType
+        </td>
+        <td style="background: #F0ADAD">
+          reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])
+        </td>
+      </tr><tr>
+        <td>
+          31
+        </td>
+        <td>
+          666
+        </td>
+        <td>
+          1045
+          -
+          1045
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.reflect.ManifestFactory.classType
+        </td>
+        <td style="background: #F0ADAD">
+          reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])
+        </td>
+      </tr><tr>
+        <td>
+          31
+        </td>
+        <td>
+          668
+        </td>
+        <td>
+          1084
+          -
+          1119
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #F0ADAD">
+          dashBoard.this.format.raw(&quot;\n        &quot;)
+        </td>
+      </tr><tr>
+        <td>
+          31
+        </td>
+        <td>
+          665
+        </td>
+        <td>
+          1054
+          -
+          1082
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.api.mvc.Flash.get
+        </td>
+        <td style="background: #F0ADAD">
+          flash.get(&quot;success&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          31
+        </td>
+        <td>
+          667
+        </td>
+        <td>
+          1036
+          -
+          1083
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td style="background: #F0ADAD">
+          dashBoard.this._display_(flash.get(&quot;success&quot;))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))
+        </td>
+      </tr><tr>
+        <td>
+          32
+        </td>
+        <td>
+          678
+        </td>
+        <td>
+          1153
+          -
+          1280
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.generic.GenericCompanion.apply
+        </td>
+        <td style="background: #AEF1AE">
+          collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this._display_(flash.get(&quot;error&quot;))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;\n        &quot;))
+        </td>
+      </tr><tr>
+        <td>
+          32
+        </td>
+        <td>
+          681
+        </td>
+        <td>
+          1143
+          -
+          1281
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this._display_(flash.get(&quot;error&quot;))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;\n        &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))
+        </td>
+      </tr><tr>
+        <td>
+          32
+        </td>
+        <td>
+          680
+        </td>
+        <td>
+          1143
+          -
+          1281
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this._display_(flash.get(&quot;error&quot;))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;\n        &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))
+        </td>
+      </tr><tr>
+        <td>
+          32
+        </td>
+        <td>
+          673
+        </td>
+        <td>
+          1162
+          -
+          1197
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this.format.raw(&quot;\n        &quot;)
+        </td>
+      </tr><tr>
+        <td>
+          32
+        </td>
+        <td>
+          679
+        </td>
+        <td>
+          1152
+          -
+          1152
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.reflect.ManifestFactory.classType
+        </td>
+        <td style="background: #AEF1AE">
+          reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])
+        </td>
+      </tr><tr>
+        <td>
+          33
+        </td>
+        <td>
+          675
+        </td>
+        <td>
+          1207
+          -
+          1207
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.reflect.ManifestFactory.classType
+        </td>
+        <td style="background: #AEF1AE">
+          reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])
+        </td>
+      </tr><tr>
+        <td>
+          33
+        </td>
+        <td>
+          677
+        </td>
+        <td>
+          1244
+          -
+          1279
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this.format.raw(&quot;\n        &quot;)
+        </td>
+      </tr><tr>
+        <td>
+          33
+        </td>
+        <td>
+          674
+        </td>
+        <td>
+          1216
+          -
+          1242
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.api.mvc.Flash.get
+        </td>
+        <td style="background: #AEF1AE">
+          flash.get(&quot;error&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          33
+        </td>
+        <td>
+          676
+        </td>
+        <td>
+          1198
+          -
+          1243
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this._display_(flash.get(&quot;error&quot;))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))
+        </td>
+      </tr><tr>
+        <td>
+          34
+        </td>
+        <td>
+          683
+        </td>
+        <td>
+          1284
+          -
+          1316
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this.format.raw(&quot;\n    &quot;)
+        </td>
+      </tr><tr>
+        <td>
+          35
+        </td>
+        <td>
+          684
+        </td>
+        <td>
+          1317
+          -
+          1361
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this.format.raw(&quot;&lt;/p&gt;&lt;/span&gt;\n\n\n    &quot;)
+        </td>
+      </tr><tr>
+        <td>
+          38
+        </td>
+        <td>
+          687
+        </td>
+        <td>
+          1493
+          -
+          1529
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this.format.raw(&quot;\n        &quot;)
+        </td>
+      </tr><tr>
+        <td>
+          38
+        </td>
+        <td>
+          696
+        </td>
+        <td>
+          1483
+          -
+          1483
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.reflect.ManifestFactory.classType
+        </td>
+        <td style="background: #AEF1AE">
+          reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])
+        </td>
+      </tr><tr>
+        <td>
+          38
+        </td>
+        <td>
+          699
+        </td>
+        <td>
+          1362
+          -
+          1821
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this._display_(views.html.helper.form.apply(controllers.routes.DashBoardController.getByName(), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;display&quot;)).-&gt;[String](&quot;inline&quot;))(dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this._display_(views.html.helper.inputText.apply(filterForm.apply(&quot;name&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;placeholder&quot;)).-&gt;[String](&quot;Filter by Employee name&quot;))(helper.this.FieldConstructor.defaultField, messages)), dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this.format.raw(&quot;&lt;button type=\&quot;submit\&quot; class=\&quot;btn btn-primary\&quot; style=\&quot;background-color:orange;color:white\&quot;&gt;Filter by Name&lt;/button&gt;\n    &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))))
+        </td>
+      </tr><tr>
+        <td>
+          38
+        </td>
+        <td>
+          686
+        </td>
+        <td>
+          1445
+          -
+          1463
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;display&quot;)).-&gt;[String](&quot;inline&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          38
+        </td>
+        <td>
+          695
+        </td>
+        <td>
+          1484
+          -
+          1818
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.generic.GenericCompanion.apply
+        </td>
+        <td style="background: #AEF1AE">
+          collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this._display_(views.html.helper.inputText.apply(filterForm.apply(&quot;name&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;placeholder&quot;)).-&gt;[String](&quot;Filter by Employee name&quot;))(helper.this.FieldConstructor.defaultField, messages)), dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this.format.raw(&quot;&lt;button type=\&quot;submit\&quot; class=\&quot;btn btn-primary\&quot; style=\&quot;background-color:orange;color:white\&quot;&gt;Filter by Name&lt;/button&gt;\n    &quot;))
+        </td>
+      </tr><tr>
+        <td>
+          38
+        </td>
+        <td>
+          698
+        </td>
+        <td>
+          1380
+          -
+          1820
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          views.html.helper.form_Scope0.form.apply
+        </td>
+        <td style="background: #AEF1AE">
+          views.html.helper.form.apply(controllers.routes.DashBoardController.getByName(), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;display&quot;)).-&gt;[String](&quot;inline&quot;))(dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this._display_(views.html.helper.inputText.apply(filterForm.apply(&quot;name&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;placeholder&quot;)).-&gt;[String](&quot;Filter by Employee name&quot;))(helper.this.FieldConstructor.defaultField, messages)), dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this.format.raw(&quot;&lt;button type=\&quot;submit\&quot; class=\&quot;btn btn-primary\&quot; style=\&quot;background-color:orange;color:white\&quot;&gt;Filter by Name&lt;/button&gt;\n    &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])))
+        </td>
+      </tr><tr>
+        <td>
+          38
+        </td>
+        <td>
+          697
+        </td>
+        <td>
+          1474
+          -
+          1819
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this._display_(views.html.helper.inputText.apply(filterForm.apply(&quot;name&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;placeholder&quot;)).-&gt;[String](&quot;Filter by Employee name&quot;))(helper.this.FieldConstructor.defaultField, messages)), dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this.format.raw(&quot;&lt;button type=\&quot;submit\&quot; class=\&quot;btn btn-primary\&quot; style=\&quot;background-color:orange;color:white\&quot;&gt;Filter by Name&lt;/button&gt;\n    &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))
+        </td>
+      </tr><tr>
+        <td>
+          38
+        </td>
+        <td>
+          685
+        </td>
+        <td>
+          1408
+          -
+          1444
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          controllers.ReverseDashBoardController.getByName
+        </td>
+        <td style="background: #AEF1AE">
+          controllers.routes.DashBoardController.getByName()
+        </td>
+      </tr><tr>
+        <td>
+          39
+        </td>
+        <td>
+          690
+        </td>
+        <td>
+          1574
+          -
+          1574
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          views.html.helper.FieldConstructor.defaultField
+        </td>
+        <td style="background: #AEF1AE">
+          helper.this.FieldConstructor.defaultField
+        </td>
+      </tr><tr>
+        <td>
+          39
+        </td>
+        <td>
+          693
+        </td>
+        <td>
+          1636
+          -
+          1672
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this.format.raw(&quot;\n        &quot;)
+        </td>
+      </tr><tr>
+        <td>
+          39
+        </td>
+        <td>
+          692
+        </td>
+        <td>
+          1530
+          -
+          1635
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this._display_(views.html.helper.inputText.apply(filterForm.apply(&quot;name&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;placeholder&quot;)).-&gt;[String](&quot;Filter by Employee name&quot;))(helper.this.FieldConstructor.defaultField, messages))
+        </td>
+      </tr><tr>
+        <td>
+          39
+        </td>
+        <td>
+          689
+        </td>
+        <td>
+          1594
+          -
+          1633
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.ArrowAssoc.-&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;placeholder&quot;)).-&gt;[String](&quot;Filter by Employee name&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          39
+        </td>
+        <td>
+          691
+        </td>
+        <td>
+          1549
+          -
+          1634
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          views.html.helper.inputText_Scope0.inputText.apply
+        </td>
+        <td style="background: #AEF1AE">
+          views.html.helper.inputText.apply(filterForm.apply(&quot;name&quot;), scala.this.Predef.ArrowAssoc[Symbol](scala.Symbol.apply(&quot;placeholder&quot;)).-&gt;[String](&quot;Filter by Employee name&quot;))(helper.this.FieldConstructor.defaultField, messages)
+        </td>
+      </tr><tr>
+        <td>
+          39
+        </td>
+        <td>
+          688
+        </td>
+        <td>
+          1575
+          -
+          1593
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.api.data.Form.apply
+        </td>
+        <td style="background: #AEF1AE">
+          filterForm.apply(&quot;name&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          40
+        </td>
+        <td>
+          694
+        </td>
+        <td>
+          1673
+          -
+          1817
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this.format.raw(&quot;&lt;button type=\&quot;submit\&quot; class=\&quot;btn btn-primary\&quot; style=\&quot;background-color:orange;color:white\&quot;&gt;Filter by Name&lt;/button&gt;\n    &quot;)
+        </td>
+      </tr><tr>
+        <td>
+          41
+        </td>
+        <td>
+          700
+        </td>
+        <td>
+          1822
+          -
+          1854
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this.format.raw(&quot;\n\n    &quot;)
+        </td>
+      </tr><tr>
+        <td>
+          43
+        </td>
+        <td>
+          701
+        </td>
+        <td>
+          1855
+          -
+          2277
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this.format.raw(&quot;&lt;a href=\&quot;/renderEmployeeForm \&quot; class=\&quot;btn btn-success pull-right\&quot; role=\&quot;button\&quot;&gt;Add An Employee&lt;/a&gt;\n\n     &lt;br&gt;&lt;br&gt;\n    &lt;table class=\&quot;table table-striped\&quot;&gt;\n        &lt;thead&gt;\n        &lt;tr&gt;\n            &lt;th&gt;Name&lt;/th&gt;\n            &lt;th&gt;Address&lt;/th&gt;\n            &lt;th&gt;Date Of Birth&lt;/th&gt;\n            &lt;th&gt;Joining Date&lt;/th&gt;\n            &lt;th&gt;Designation&lt;/th&gt;\n        &lt;/tr&gt;\n        &lt;/thead&gt;\n        &lt;tbody&gt;\n        &quot;)
+        </td>
+      </tr><tr>
+        <td>
+          57
+        </td>
+        <td>
+          729
+        </td>
+        <td>
+          2287
+          -
+          2287
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.reflect.ManifestFactory.classType
+        </td>
+        <td style="background: #AEF1AE">
+          reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])
+        </td>
+      </tr><tr>
+        <td>
+          57
+        </td>
+        <td>
+          726
+        </td>
+        <td>
+          2334
+          -
+          3006
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this.format.raw(&quot;&lt;tr&gt;\n            &lt;td&gt;&lt;a href=\&quot;/editEmployee/&quot;), dashBoard.this._display_(empVal.name), dashBoard.this.format.raw(&quot;\&quot;&gt;&quot;), dashBoard.this._display_(empVal.name), dashBoard.this.format.raw(&quot;&lt;/a&gt;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.address), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.dob)(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.doj)(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.designation), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n        &lt;/tr&gt;\n        &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))
+        </td>
+      </tr><tr>
+        <td>
+          57
+        </td>
+        <td>
+          702
+        </td>
+        <td>
+          2353
+          -
+          2389
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this.format.raw(&quot;\n        &quot;)
+        </td>
+      </tr><tr>
+        <td>
+          57
+        </td>
+        <td>
+          728
+        </td>
+        <td>
+          2297
+          -
+          3006
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          scala.collection.immutable.List.map
+        </td>
+        <td style="background: #AEF1AE">
+          empList.map[play.twirl.api.HtmlFormat.Appendable, List[play.twirl.api.HtmlFormat.Appendable]](((empVal: models.Employee) =&gt; dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this.format.raw(&quot;&lt;tr&gt;\n            &lt;td&gt;&lt;a href=\&quot;/editEmployee/&quot;), dashBoard.this._display_(empVal.name), dashBoard.this.format.raw(&quot;\&quot;&gt;&quot;), dashBoard.this._display_(empVal.name), dashBoard.this.format.raw(&quot;&lt;/a&gt;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.address), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.dob)(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.doj)(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.designation), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n        &lt;/tr&gt;\n        &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))))(immutable.this.List.canBuildFrom[play.twirl.api.HtmlFormat.Appendable])
+        </td>
+      </tr><tr>
+        <td>
+          57
+        </td>
+        <td>
+          725
+        </td>
+        <td>
+          2343
+          -
+          2343
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.reflect.ManifestFactory.classType
+        </td>
+        <td style="background: #AEF1AE">
+          reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])
+        </td>
+      </tr><tr>
+        <td>
+          57
+        </td>
+        <td>
+          724
+        </td>
+        <td>
+          2344
+          -
+          3005
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.generic.GenericCompanion.apply
+        </td>
+        <td style="background: #AEF1AE">
+          collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this.format.raw(&quot;&lt;tr&gt;\n            &lt;td&gt;&lt;a href=\&quot;/editEmployee/&quot;), dashBoard.this._display_(empVal.name), dashBoard.this.format.raw(&quot;\&quot;&gt;&quot;), dashBoard.this._display_(empVal.name), dashBoard.this.format.raw(&quot;&lt;/a&gt;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.address), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.dob)(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.doj)(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.designation), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n        &lt;/tr&gt;\n        &quot;))
+        </td>
+      </tr><tr>
+        <td>
+          57
+        </td>
+        <td>
+          727
+        </td>
+        <td>
+          2307
+          -
+          2307
+        </td>
+        <td>
+          TypeApply
+        </td>
+        <td>
+          scala.collection.immutable.List.canBuildFrom
+        </td>
+        <td style="background: #AEF1AE">
+          immutable.this.List.canBuildFrom[play.twirl.api.HtmlFormat.Appendable]
+        </td>
+      </tr><tr>
+        <td>
+          57
+        </td>
+        <td>
+          730
+        </td>
+        <td>
+          2278
+          -
+          3008
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this._display_(empList.map[play.twirl.api.HtmlFormat.Appendable, List[play.twirl.api.HtmlFormat.Appendable]](((empVal: models.Employee) =&gt; dashBoard.this._display_(collection.this.Seq.apply[Any](dashBoard.this.format.raw(&quot;\n        &quot;), dashBoard.this.format.raw(&quot;&lt;tr&gt;\n            &lt;td&gt;&lt;a href=\&quot;/editEmployee/&quot;), dashBoard.this._display_(empVal.name), dashBoard.this.format.raw(&quot;\&quot;&gt;&quot;), dashBoard.this._display_(empVal.name), dashBoard.this.format.raw(&quot;&lt;/a&gt;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.address), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.dob)(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.doj)(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n            &lt;td&gt;&quot;), dashBoard.this._display_(empVal.designation), dashBoard.this.format.raw(&quot;&lt;/td&gt;\n        &lt;/tr&gt;\n        &quot;)))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))))(immutable.this.List.canBuildFrom[play.twirl.api.HtmlFormat.Appendable]))(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))
+        </td>
+      </tr><tr>
+        <td>
+          58
+        </td>
+        <td>
+          703
+        </td>
+        <td>
+          2390
+          -
+          2460
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this.format.raw(&quot;&lt;tr&gt;\n            &lt;td&gt;&lt;a href=\&quot;/editEmployee/&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          59
+        </td>
+        <td>
+          705
+        </td>
+        <td>
+          2461
+          -
+          2501
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this._display_(empVal.name)
+        </td>
+      </tr><tr>
+        <td>
+          59
+        </td>
+        <td>
+          708
+        </td>
+        <td>
+          2532
+          -
+          2572
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this._display_(empVal.name)
+        </td>
+      </tr><tr>
+        <td>
+          59
+        </td>
+        <td>
+          704
+        </td>
+        <td>
+          2480
+          -
+          2500
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          models.Employee.name
+        </td>
+        <td style="background: #AEF1AE">
+          empVal.name
+        </td>
+      </tr><tr>
+        <td>
+          59
+        </td>
+        <td>
+          707
+        </td>
+        <td>
+          2551
+          -
+          2571
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          models.Employee.name
+        </td>
+        <td style="background: #AEF1AE">
+          empVal.name
+        </td>
+      </tr><tr>
+        <td>
+          59
+        </td>
+        <td>
+          706
+        </td>
+        <td>
+          2502
+          -
+          2531
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this.format.raw(&quot;\&quot;&gt;&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          59
+        </td>
+        <td>
+          709
+        </td>
+        <td>
+          2573
+          -
+          2626
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this.format.raw(&quot;&lt;/a&gt;&lt;/td&gt;\n            &lt;td&gt;&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          60
+        </td>
+        <td>
+          711
+        </td>
+        <td>
+          2627
+          -
+          2670
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this._display_(empVal.address)
+        </td>
+      </tr><tr>
+        <td>
+          60
+        </td>
+        <td>
+          710
+        </td>
+        <td>
+          2646
+          -
+          2669
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          models.Employee.address
+        </td>
+        <td style="background: #AEF1AE">
+          empVal.address
+        </td>
+      </tr><tr>
+        <td>
+          60
+        </td>
+        <td>
+          712
+        </td>
+        <td>
+          2671
+          -
+          2720
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this.format.raw(&quot;&lt;/td&gt;\n            &lt;td&gt;&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          61
+        </td>
+        <td>
+          714
+        </td>
+        <td>
+          2730
+          -
+          2730
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.reflect.ManifestFactory.classType
+        </td>
+        <td style="background: #AEF1AE">
+          reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])
+        </td>
+      </tr><tr>
+        <td>
+          61
+        </td>
+        <td>
+          713
+        </td>
+        <td>
+          2740
+          -
+          2759
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          models.Employee.dob
+        </td>
+        <td style="background: #AEF1AE">
+          empVal.dob
+        </td>
+      </tr><tr>
+        <td>
+          61
+        </td>
+        <td>
+          716
+        </td>
+        <td>
+          2761
+          -
+          2810
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this.format.raw(&quot;&lt;/td&gt;\n            &lt;td&gt;&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          61
+        </td>
+        <td>
+          715
+        </td>
+        <td>
+          2721
+          -
+          2760
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this._display_(empVal.dob)(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))
+        </td>
+      </tr><tr>
+        <td>
+          62
+        </td>
+        <td>
+          720
+        </td>
+        <td>
+          2851
+          -
+          2900
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this.format.raw(&quot;&lt;/td&gt;\n            &lt;td&gt;&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          62
+        </td>
+        <td>
+          717
+        </td>
+        <td>
+          2830
+          -
+          2849
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          models.Employee.doj
+        </td>
+        <td style="background: #AEF1AE">
+          empVal.doj
+        </td>
+      </tr><tr>
+        <td>
+          62
+        </td>
+        <td>
+          719
+        </td>
+        <td>
+          2811
+          -
+          2850
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this._display_(empVal.doj)(reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]))
+        </td>
+      </tr><tr>
+        <td>
+          62
+        </td>
+        <td>
+          718
+        </td>
+        <td>
+          2820
+          -
+          2820
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.reflect.ManifestFactory.classType
+        </td>
+        <td style="background: #AEF1AE">
+          reflect.this.ManifestFactory.classType[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html])
+        </td>
+      </tr><tr>
+        <td>
+          63
+        </td>
+        <td>
+          723
+        </td>
+        <td>
+          2949
+          -
+          3004
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this.format.raw(&quot;&lt;/td&gt;\n        &lt;/tr&gt;\n        &quot;)
+        </td>
+      </tr><tr>
+        <td>
+          63
+        </td>
+        <td>
+          722
+        </td>
+        <td>
+          2901
+          -
+          2948
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this._display_(empVal.designation)
+        </td>
+      </tr><tr>
+        <td>
+          63
+        </td>
+        <td>
+          721
+        </td>
+        <td>
+          2920
+          -
+          2947
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          models.Employee.designation
+        </td>
+        <td style="background: #AEF1AE">
+          empVal.designation
+        </td>
+      </tr><tr>
+        <td>
+          65
+        </td>
+        <td>
+          731
+        </td>
+        <td>
+          3009
+          -
+          3045
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this.format.raw(&quot;\n        &quot;)
+        </td>
+      </tr><tr>
+        <td>
+          66
+        </td>
+        <td>
+          732
+        </td>
+        <td>
+          3046
+          -
+          3102
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this.format.raw(&quot;&lt;/tbody&gt;\n    &lt;/table&gt;\n&lt;/div&gt;\n\n&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          70
+        </td>
+        <td>
+          738
+        </td>
+        <td>
+          3107
+          -
+          3137
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td style="background: #AEF1AE">
+          dashBoard.this.format.raw(&quot;\n\n\n\n&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          79
+        </td>
+        <td>
+          742
+        </td>
+        <td>
+          3289
+          -
+          3330
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          views.html.dashBoard_Scope0.dashBoard.apply
+        </td>
+        <td style="background: #F0ADAD">
+          dashBoard.this.apply(empList, filterForm)(messages, flash)
+        </td>
+      </tr><tr>
+        <td>
+          81
+        </td>
+        <td>
+          743
+        </td>
+        <td>
+          3478
+          -
+          3519
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          views.html.dashBoard_Scope0.dashBoard.apply
+        </td>
+        <td style="background: #F0ADAD">
+          dashBoard.this.apply(empList, filterForm)(messages, flash)
+        </td>
+      </tr>
+    </table>
+          </div>
+        </div>
+      </body>
+    </html>
